@@ -3,7 +3,7 @@ state("Dolphin") {}
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	vars.Helper.GameName = "My Friendly Neighborhood";
+	vars.Helper.GameName = "Dolphin Spirit: Ocean Mission";
 	vars.Helper.LoadSceneManager = true;
 	vars.Helper.AlertLoadless();
 }
