@@ -22,5 +22,5 @@ reset
 
 split
 {
-	return (current.positionY >= 245f);
+	return (current.positionY >= 246f);
 }
