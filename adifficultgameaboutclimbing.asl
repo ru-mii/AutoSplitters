@@ -17,7 +17,7 @@ start
 
 reset
 {
-	return (!current.listenToInput && current.positionY < 10f);
+	return (!current.listenToInput && current.positionY < -3f);
 }
 
 split
