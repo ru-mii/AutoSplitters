@@ -25,13 +25,13 @@ startup
 
 	settings.Add("group_Splits", true, "Splits");
 	
-	settings.Add("split_Jungle", false, "Jungle", "group_Splits");
-	settings.Add("split_Gears", false, "Gears", "group_Splits");
-	settings.Add("split_Pool", false, "Pool", "group_Splits");
-	settings.Add("split_Construction", false, "Construction", "group_Splits");
-	settings.Add("split_Cave", false, "Cave", "group_Splits");
-	settings.Add("split_Ice", false, "Ice", "group_Splits");
-	settings.Add("split_Credits", false, "Credits", "group_Splits");
+	settings.Add("split_Jungle", true, "Jungle", "group_Splits");
+	settings.Add("split_Gears", true, "Gears", "group_Splits");
+	settings.Add("split_Pool", true, "Pool", "group_Splits");
+	settings.Add("split_Construction", true, "Construction", "group_Splits");
+	settings.Add("split_Cave", true, "Cave", "group_Splits");
+	settings.Add("split_Ice", true, "Ice", "group_Splits");
+	settings.Add("split_Credits", true, "Credits", "group_Splits");
 }
 
 init {}
