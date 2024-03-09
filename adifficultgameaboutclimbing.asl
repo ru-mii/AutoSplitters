@@ -21,7 +21,7 @@ startup
 	vars.split_Flags = new bool[vars.list_Segments.Length];
 	
 	for (int i = 0; i < vars.split_Flags.Length; i++)
-		vars.split_Flags[i] = false;
+		vars.split_Flags[i] = true;
 
 	settings.Add("group_Splits", true, "Splits");
 	
