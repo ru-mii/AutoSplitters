@@ -11,7 +11,6 @@ state("A Difficult Game About Climbing")
 startup
 {
 	refreshRate = 60;
-	vars.currSplit = 0;
 
 	vars.list_Segments = new string[]
 	{
