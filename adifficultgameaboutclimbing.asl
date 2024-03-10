@@ -118,5 +118,6 @@ split
 		}
 	}
 
-	return (current.positionY > 246f);
+	if (current.positionY > 246f)
+		return true;
 }
