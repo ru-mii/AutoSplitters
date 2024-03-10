@@ -6,7 +6,7 @@ state("A Difficult Game About Climbing")
 	float positionX : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE0;
 	float positionY : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE4;
 	
-	bool listenToInput : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4;
+	bool listenToInput : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4;;
 }
 
 startup
@@ -119,6 +119,6 @@ split
 		}
 	}
 
-	if (current.positionY > 246f)
+	if (current.positionY > 247f)
 		return true;
 }
