@@ -14,7 +14,7 @@ startup
 
 	vars.list_Segments = new string[]
 	{
-		"Jungle", "Gears", "Pool", "Construction", "Cave", "Ice", "Credits"
+		"Jungle", "Gears", "Pool", "Construction", "Cave", "Ice", "Sky"
 	};
 	
 	vars.split_Flags = new bool[vars.list_Segments.Length];
@@ -30,7 +30,7 @@ startup
 	settings.Add("split_Construction", true, "Construction", "group_Splits");
 	settings.Add("split_Cave", true, "Cave", "group_Splits");
 	settings.Add("split_Ice", true, "Ice", "group_Splits");
-	settings.Add("split_Credits", true, "Credits", "group_Splits");
+	settings.Add("split_Sky", true, "Sky", "group_Splits");
 }
 
 init {}
@@ -109,7 +109,7 @@ split
 		}
 	}
 	
-	if (settings["split_Credits"] && !vars.split_Flags[6])
+	if (settings["split_Sky"] && !vars.split_Flags[6])
 	{
 		if (current.positionY > 204f && current.positionX < 47f)
 		{
