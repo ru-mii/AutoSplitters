@@ -5,6 +5,7 @@ state("A Difficult Game About Climbing")
 	
 	float positionX : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE0;
 	float positionY : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE4;
+	float positionYBackup : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24;
 	
 	bool listenToInput : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4;;
 }
@@ -51,7 +52,7 @@ start
 
 reset
 {
-	return (!current.listenToInput && current.positionY < -3f);
+	return ((!current.listenToInput) && (current.positionY < -3f || current.positionYBackup < -3f));
 }
 
 split
