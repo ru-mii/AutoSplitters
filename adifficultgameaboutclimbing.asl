@@ -1,7 +1,7 @@
 state("A Difficult Game About Climbing")
 {
-	long leftHandGrabbedSurface : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA98;
-	long rightHandGrabbedSurface : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8;
+	long leftHandGrabbedSurface : "UnityPlayer.dll", 0x1B1E670, 0x50, 0x20, 0x70, 0x28, 0x18, 0x20, 0x98;
+	long rightHandGrabbedSurface : "UnityPlayer.dll", 0x1B1E670, 0x50, 0x20, 0x70, 0x28, 0x18, 0x20, 0x1D8;
 	
 	float positionX : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE0;
 	float positionY : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE4;
@@ -13,6 +13,7 @@ state("A Difficult Game About Climbing")
 startup
 {
 	refreshRate = 60;
+	vars.startedFlag = false;
 
 	vars.list_Segments = new string[]
 	{
@@ -40,11 +41,12 @@ init {}
 start
 {
 	if ((old.leftHandGrabbedSurface == 0 && current.leftHandGrabbedSurface != 0) ||
-	(old.rightHandGrabbedSurface == 0 && current.rightHandGrabbedSurface != 0) &&
-	current.positionYBackup < 2f)
+	(old.rightHandGrabbedSurface == 0 && current.rightHandGrabbedSurface != 0) && !vars.startedFlag)
 	{
 		for (int i = 0; i < vars.split_Flags.Length; i++)
 		vars.split_Flags[i] = false;
+		
+		vars.startedFlag = true;
 		
 		return true;
 	}
@@ -52,7 +54,11 @@ start
 
 reset
 {
-	return ((!current.listenToInput) && (current.positionY < -3f || current.positionYBackup < -3f));
+	if ((!current.listenToInput) && (current.positionY < -3f || current.positionYBackup < -3f))
+	{
+		vars.startedFlag = false;
+		return true;
+	}
 }
 
 split
