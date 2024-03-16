@@ -80,8 +80,8 @@ start
 
 reset
 {
-	bool check1 = ((current.position1_Y == -4f && current.position1_Z == -0.5f) ||
-	(current.position2_Y == -4f && current.position2_Z == -0.5f));
+	bool check1 = ((current.position1_Y < -3f && current.position1_Z == -0.5f) ||
+	(current.position2_Y < -3f && current.position2_Z == -0.5f));
 
 	bool check2 = ((current.leftHand1_Strength == 75f && current.leftHand1_Force == 0 && current.leftHand1_Listen == 0) ||
 	(current.leftHand2_Strength == 75f && current.leftHand2_Force == 0 && current.leftHand2_Listen == 0));
