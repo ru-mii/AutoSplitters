@@ -2,7 +2,10 @@ state("A Difficult Game About Climbing")
 {
 	long leftHand1_GrabbedSurface  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8;
 	long rightHand1_GrabbedSurface  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008;
+	
 	float leftHand1_Strength  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8;
+	float leftHand1_Force  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0;
+	float leftHand1_Listen  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24;
 	
 	float position1_X : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20;
 	float position1_Y : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24;
@@ -12,7 +15,10 @@ state("A Difficult Game About Climbing")
 	
 	long leftHand2_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x98;
 	long rightHand2_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8;
+	
 	float leftHand2_Strength  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8;
+	float leftHand2_Force  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0;
+	float leftHand2_Listen  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4;
 	
 	float position2_X : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0;
 	float position2_Y : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4;
@@ -74,11 +80,13 @@ start
 
 reset
 {
-	bool position1_Resetable = (current.position1_Y == -4f && current.position1_Z == -0.5f);
-	bool position2_Resetable = (current.position2_Y == -4f && current.position2_Z == -0.5f);
-	bool position_Resetable = (position1_Resetable || position2_Resetable);
+	bool check1 = ((current.position1_Y == -4f && current.position1_Z == -0.5f) ||
+	(current.position2_Y == -4f && current.position2_Z == -0.5f));
 
-	return position_Resetable;
+	bool check2 = ((current.leftHand1_Strength == 75f && current.leftHand1_Force == 0 && current.leftHand1_Listen == 0) ||
+	(current.leftHand2_Strength == 75f && current.leftHand2_Force == 0 && current.leftHand2_Listen == 0));
+	
+	return (check1 || check2);
 }
 
 split
