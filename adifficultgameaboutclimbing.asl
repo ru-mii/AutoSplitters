@@ -4,7 +4,7 @@ state("A Difficult Game About Climbing")
 	long rightHand1_GrabbedSurface  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008;
 	
 	float leftHand1_Strength  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8;
-	float leftHand1_Force  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0;
+	long leftHand1_Force  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0;
 	float leftHand1_Listen  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24;
 	
 	float position1_X : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20;
@@ -17,12 +17,21 @@ state("A Difficult Game About Climbing")
 	long rightHand2_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8;
 	
 	float leftHand2_Strength  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8;
-	float leftHand2_Force  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0;
+	long leftHand2_Force  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0;
 	float leftHand2_Listen  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4;
 	
 	float position2_X : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0;
 	float position2_Y : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4;
 	float position2_Z : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE8;
+	
+	// -----------------------------------
+	
+	long leftHand3_GrabbedSurface  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x98;
+	long rightHand3_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x238;
+	
+	float leftHand3_Strength  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8;
+	long leftHand3_Force  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0;
+	float leftHand3_Listen  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4;
 }
 
 startup
@@ -60,7 +69,10 @@ start
 	bool hand2_GrabbedSomething = ((old.leftHand2_GrabbedSurface == 0 && current.leftHand2_GrabbedSurface != 0) ||
 	(old.rightHand2_GrabbedSurface == 0 && current.rightHand2_GrabbedSurface != 0)) && current.leftHand2_Strength == 75f;
 	
-	bool hand_GrabbedSomething = (hand1_GrabbedSomething || hand2_GrabbedSomething);
+	bool hand3_GrabbedSomething = ((old.leftHand3_GrabbedSurface == 0 && current.leftHand3_GrabbedSurface != 0) ||
+	(old.rightHand3_GrabbedSurface == 0 && current.rightHand3_GrabbedSurface != 0)) && current.leftHand3_Strength == 75f;
+	
+	bool hand_GrabbedSomething = (hand1_GrabbedSomething || hand2_GrabbedSomething || hand3_GrabbedSomething);
 	
 	// -----------------------------------
 	
@@ -84,7 +96,8 @@ reset
 	(current.position2_Y == -4f && current.position2_Z == -0.5f));
 
 	bool check2 = ((current.leftHand1_Strength == 75f && current.leftHand1_Force == 0 && current.leftHand1_Listen == 0) ||
-	(current.leftHand2_Strength == 75f && current.leftHand2_Force == 0 && current.leftHand2_Listen == 0));
+	(current.leftHand2_Strength == 75f && current.leftHand2_Force == 0 && current.leftHand2_Listen == 0) ||
+	(current.leftHand3_Strength == 75f && current.leftHand3_Force == 0 && current.leftHand3_Listen == 0));
 	
 	return (check1 || check2);
 }
