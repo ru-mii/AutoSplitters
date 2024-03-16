@@ -1,7 +1,7 @@
 state("A Difficult Game About Climbing")
 {
-	long leftHandGrabbedSurface : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA98;
-	long rightHandGrabbedSurface : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8;
+	long leftHandGrabbedSurface : "mono-2.0-bdwgc.dll", 0x72B200, 0x90, 0x1E0, 0xEC8;
+	long rightHandGrabbedSurface : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8, 0x1008;
 	
 	float positionX : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE0;
 	float positionY : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE4;
