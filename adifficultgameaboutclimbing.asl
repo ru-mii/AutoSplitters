@@ -45,8 +45,7 @@ update
 start
 {
 	if ((old.leftHandGrabbedSurface == 0 && current.leftHandGrabbedSurface != 0) ||
-	(old.rightHandGrabbedSurface == 0 && current.rightHandGrabbedSurface != 0) &&
-	current.positionYBackup < 2f)
+	(old.rightHandGrabbedSurface == 0 && current.rightHandGrabbedSurface != 0))
 	{
 		for (int i = 0; i < vars.split_Flags.Length; i++)
 		vars.split_Flags[i] = false;
