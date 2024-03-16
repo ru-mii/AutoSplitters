@@ -92,8 +92,8 @@ split
 	float positionX = 0, positionY = 0;
 	if (current.position3_Z == -0.5f)
 	{
-	positionX = current.position3_X;
-	positionY = current.position3_Y;
+		positionX = current.position3_X;
+		positionY = current.position3_Y;
 	}
 
 	// -----------------------------------
