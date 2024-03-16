@@ -17,6 +17,12 @@ state("A Difficult Game About Climbing")
 	float position2_X : "UnityPlayer.dll", 0x1B1B068, 0x48, 0x370, 0x70, 0x1D0, 0x48;
 	float position2_Y : "UnityPlayer.dll", 0x1B1B068, 0x48, 0x370, 0x70, 0x1D0, 0x4C;
 	float position2_Z : "UnityPlayer.dll", 0x1B1B068, 0x48, 0x370, 0x70, 0x1D0, 0x50;
+	
+	// -----------------------------------
+	
+	float position3_X : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE0;
+	float position3_Y : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE4;
+	float position3_Z : "mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA88, 0x30, 0x10, 0xE8;
 }
 
 startup
@@ -84,18 +90,12 @@ reset
 split
 {
 	float positionX = 0, positionY = 0;
+	if (current.position3_Z == -0.5f)
+	{
+	positionX = current.position3_X;
+	positionY = current.position3_Y;
+	}
 
-	if (current.position1_Z == -0.5f)
-	{
-		positionX = current.position1_X;
-		positionY = current.position1_Y;
-	}
-	else if (current.position2_Z == -0.5f)
-	{
-		positionX = current.position2_X;
-		positionY = current.position2_Y;
-	}
-	
 	// -----------------------------------
 	
 	if (settings["split_Jungle"] && !vars.split_Flags[0])
