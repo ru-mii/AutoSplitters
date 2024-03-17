@@ -1,46 +1,25 @@
-state("A Difficult Game About Climbing")
-{
-	long leftHand1_GrabbedSurface  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8;
-	long rightHand1_GrabbedSurface  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008;
-	
-	float leftHand1_Strength  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8;
-	long leftHand1_Force  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0;
-	float leftHand1_Listen  : "mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24;
-	
-	float position1_X : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20;
-	float position1_Y : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24;
-	float position1_Z : "UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x28;
-	
-	// -----------------------------------
-	
-	long leftHand2_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x98;
-	long rightHand2_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8;
-	
-	float leftHand2_Strength  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8;
-	long leftHand2_Force  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0;
-	float leftHand2_Listen  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4;
-	
-	float position2_X : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0;
-	float position2_Y : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4;
-	float position2_Z : "UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE8;
-	
-	// -----------------------------------
-	
-	long leftHand3_GrabbedSurface  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x98;
-	long rightHand3_GrabbedSurface  : "UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x238;
-	
-	float leftHand3_Strength  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8;
-	long leftHand3_Force  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0;
-	float leftHand3_Listen  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4;
-	
-	float position3_X : "UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78 ,0xC8, 0x30, 0x30, 0x48, 0xE0;
-	float position3_Y : "UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78 ,0xC8, 0x30, 0x30, 0x48, 0xE4;
-	float position3_Z : "UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78 ,0xC8, 0x30, 0x30, 0x48, 0xE8;
-}
+state("A Difficult Game About Climbing") {}
 
 startup
 {
 	refreshRate = 60;
+	
+	// -----------------------------------
+	
+	vars.leftHandGrabbed = new long[4];
+	vars.rightHandGrabbed = new long[4];
+	vars.leftHandStrength = new float[4];
+	vars.leftHandForce = new long[4];
+	vars.leftHandListen = new bool[4];
+	
+	vars.positionX = new float[3];
+	vars.positionY = new float[3];
+	vars.positionZ = new float[3];
+	
+	vars.indexHand = 0;
+	vars.indexPosition = 0;
+	
+	// -----------------------------------
 
 	vars.list_Segments = new string[]
 	{
@@ -52,8 +31,9 @@ startup
 	for (int i = 0; i < vars.split_Flags.Length; i++)
 		vars.split_Flags[i] = true;
 
+	// -----------------------------------
+
 	settings.Add("group_Splits", true, "Splits");
-	
 	settings.Add("split_Jungle", true, "Jungle", "group_Splits");
 	settings.Add("split_Gears", true, "Gears", "group_Splits");
 	settings.Add("split_Pool", true, "Pool", "group_Splits");
@@ -65,30 +45,82 @@ startup
 
 init {}
 
+update
+{
+	vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
+	vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008).Deref<long>(game);
+	vars.leftHandStrength[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8).Deref<float>(game);
+	vars.leftHandForce[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0).Deref<long>(game);
+	vars.leftHandListen[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24).Deref<bool>(game);
+	
+	vars.positionX[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20).Deref<float>(game);
+	vars.positionY[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24).Deref<float>(game);
+	vars.positionZ[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x28).Deref<float>(game);
+	
+	// -----------------------------------
+	
+	vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x98).Deref<long>(game);
+	vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8).Deref<long>(game);
+	vars.leftHandStrength[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8).Deref<float>(game);
+	vars.leftHandForce[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0).Deref<long>(game);
+	vars.leftHandListen[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4).Deref<bool>(game);
+	
+	vars.positionX[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0).Deref<float>(game);
+	vars.positionY[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4).Deref<float>(game);
+	vars.positionZ[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE8).Deref<float>(game);
+	
+	// -----------------------------------
+	
+	vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x98).Deref<long>(game);
+	vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1D8).Deref<long>(game);
+	vars.leftHandStrength[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8).Deref<float>(game);
+	vars.leftHandForce[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0).Deref<long>(game);
+	vars.leftHandListen[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4).Deref<bool>(game);
+	
+	vars.positionX[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE0).Deref<float>(game);
+	vars.positionY[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE4).Deref<float>(game);
+	vars.positionZ[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE8).Deref<float>(game);
+	
+	// -----------------------------------
+	
+	vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA98).Deref<long>(game);
+	vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8).Deref<long>(game);
+	vars.leftHandStrength[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAB8).Deref<float>(game);
+	vars.leftHandForce[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC0).Deref<long>(game);
+	vars.leftHandListen[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4).Deref<bool>(game);
+	
+	// -----------------------------------
+	
+	for (int i = 0; i < 4; i++)
+	{
+		if (vars.leftHandStrength[i] == 75f)
+		{
+			vars.indexHand = i;
+			break;
+		}
+	}
+	
+	for (int i = 0; i < 3; i++)
+	{
+		if (vars.positionZ[i] == -0.5f)
+		{
+			vars.indexPosition = i;
+			break;
+		}
+	}
+}
+
 start
 {
-	bool hand1_GrabbedSomething = ((old.leftHand1_GrabbedSurface == 0 && current.leftHand1_GrabbedSurface != 0) ||
-	(old.rightHand1_GrabbedSurface == 0 && current.rightHand1_GrabbedSurface != 0)) && current.leftHand1_Strength == 75f;
-	
-	bool hand2_GrabbedSomething = ((old.leftHand2_GrabbedSurface == 0 && current.leftHand2_GrabbedSurface != 0) ||
-	(old.rightHand2_GrabbedSurface == 0 && current.rightHand2_GrabbedSurface != 0)) && current.leftHand2_Strength == 75f;
-	
-	bool hand3_GrabbedSomething = ((old.leftHand3_GrabbedSurface == 0 && current.leftHand3_GrabbedSurface != 0) ||
-	(old.rightHand3_GrabbedSurface == 0 && current.rightHand3_GrabbedSurface != 0)) && current.leftHand3_Strength == 75f;
-	
-	bool hand_GrabbedSomething = (hand1_GrabbedSomething || hand2_GrabbedSomething || hand3_GrabbedSomething);
-	
-	// -----------------------------------
-	
-	bool positionStartable = !((current.position1_Y > 2f && current.position1_Z == -0.5f) ||
-	(current.position2_Y > 2f && current.position2_Z == -0.5f));
+	bool grabbingSomething = (vars.leftHandGrabbed[vars.indexHand] != 0 || vars.rightHandGrabbed[vars.indexHand] != 0);
+	bool positionStartable = !((vars.positionY[vars.indexPosition] > 2f && vars.positionZ[vars.indexPosition] == -0.5f));
 
 	// -----------------------------------
 
-	if (hand_GrabbedSomething && positionStartable)
+	if (grabbingSomething && positionStartable)
 	{
 		for (int i = 0; i < vars.split_Flags.Length; i++)
-		vars.split_Flags[i] = false;
+		vars.split_Flags[i] = false;;
 		
 		return true;
 	}
@@ -96,41 +128,20 @@ start
 
 reset
 {
-	bool check1 = ((current.position1_Y == -4f && current.position1_Z == -0.5f) ||
-	(current.position2_Y == -4f && current.position2_Z == -0.5f));
-
-	bool check2 = ((current.leftHand1_Strength == 75f && current.leftHand1_Force == 0 && current.leftHand1_Listen == 0) ||
-	(current.leftHand2_Strength == 75f && current.leftHand2_Force == 0 && current.leftHand2_Listen == 0) ||
-	(current.leftHand3_Strength == 75f && current.leftHand3_Force == 0 && current.leftHand3_Listen == 0));
+	bool positionFlag = (vars.positionY[vars.indexPosition] == -4f);
+	bool handFlag = (vars.leftHandStrength[vars.indexHand] == 75f && vars.leftHandForce[vars.indexHand] == 0 &&
+		vars.leftHandListen[vars.indexHand] == 0);
 	
-	return (check1 || check2);
+	// -----------------------------------
+	
+	return (positionFlag || handFlag);
 }
 
 split
 {
-	float positionX = 0, positionY = 0;
-
-	if (current.position1_Z == -0.5f)
-	{
-		positionX = current.position1_X;
-		positionY = current.position1_Y;
-	}
-	else if (current.position2_Z == -0.5f)
-	{
-		positionX = current.position2_X;
-		positionY = current.position2_Y;
-	}
-	else if (current.position3_Z == -0.5f)
-	{
-		positionX = current.position3_X;
-		positionY = current.position3_Y;
-	}
-	
-	// -----------------------------------
-	
 	if (settings["split_Jungle"] && !vars.split_Flags[0])
 	{
-		if (positionY > 31f)
+		if (vars.positionY[vars.indexPosition] > 31f)
 		{
 			vars.split_Flags[0] = true;
 			return true;
@@ -139,7 +150,7 @@ split
 	
 	if (settings["split_Gears"] && !vars.split_Flags[1])
 	{
-		if (positionY > 55f && positionX < 0f)
+		if (vars.positionY[vars.indexPosition] > 55f && vars.positionX[vars.indexPosition] < 0f)
 		{
 			vars.split_Flags[1] = true;
 			return true;
@@ -148,7 +159,7 @@ split
 	
 	if (settings["split_Pool"] && !vars.split_Flags[2])
 	{
-		if (positionY > 80f && positionY < 87f && positionX > 8f)
+		if (vars.positionY[vars.indexPosition] > 80f && vars.positionY[vars.indexPosition] < 87f && vars.positionX[vars.indexPosition] > 8f)
 		{
 			vars.split_Flags[2] = true;
 			return true;
@@ -157,7 +168,7 @@ split
 	
 	if (settings["split_Construction"] && !vars.split_Flags[3])
 	{
-		if (positionY > 109f && positionX < 20f)
+		if (vars.positionY[vars.indexPosition] > 109f && vars.positionX[vars.indexPosition] < 20f)
 		{
 			vars.split_Flags[3] = true;
 			return true;
@@ -166,7 +177,7 @@ split
 	
 	if (settings["split_Cave"] && !vars.split_Flags[4])
 	{
-		if (positionY > 135f)
+		if (vars.positionY[vars.indexPosition] > 135f)
 		{
 			vars.split_Flags[4] = true;
 			return true;
@@ -175,7 +186,7 @@ split
 	
 	if (settings["split_Ice"] && !vars.split_Flags[5])
 	{
-		if (positionY > 152f)
+		if (vars.positionY[vars.indexPosition] > 152f)
 		{
 			vars.split_Flags[5] = true;
 			return true;
@@ -184,13 +195,13 @@ split
 	
 	if (settings["split_Ending"] && !vars.split_Flags[6])
 	{
-		if (positionY > 204f && positionX < 47f)
+		if (vars.positionY[vars.indexPosition] > 204f && vars.positionX[vars.indexPosition] < 47f)
 		{
 			vars.split_Flags[6] = true;
 			return true;
 		}
 	}
 
-	if (positionY > 247f)
+	if (vars.positionY[vars.indexPosition] > 247f)
 		return true;
 }
