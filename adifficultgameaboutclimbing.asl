@@ -32,6 +32,10 @@ state("A Difficult Game About Climbing")
 	float leftHand3_Strength  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8;
 	long leftHand3_Force  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0;
 	float leftHand3_Listen  : "UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4;
+	
+	float position3_X : "UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78 ,0xC8, 0x30, 0x30, 0x48, 0xE0;
+	float position3_Y : "UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78 ,0xC8, 0x30, 0x30, 0x48, 0xE4;
+	float position3_Z : "UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78 ,0xC8, 0x30, 0x30, 0x48, 0xE8;
 }
 
 startup
@@ -115,6 +119,11 @@ split
 	{
 		positionX = current.position2_X;
 		positionY = current.position2_Y;
+	}
+	else if (current.position3_Z == -0.5f)
+	{
+		positionX = current.position3_X;
+		positionY = current.position3_Y;
 	}
 	
 	// -----------------------------------
