@@ -129,8 +129,7 @@ start
 reset
 {
 	bool positionFlag = (vars.positionY[vars.indexPosition] == -4f);
-	bool handFlag = (vars.leftHandStrength[vars.indexHand] == 75f && vars.leftHandForce[vars.indexHand] == 0 &&
-		vars.leftHandListen[vars.indexHand] == 0);
+	bool handFlag = (vars.leftHandForce[vars.indexHand] == 0 && vars.leftHandListen[vars.indexHand] == 0);
 	
 	// -----------------------------------
 	
