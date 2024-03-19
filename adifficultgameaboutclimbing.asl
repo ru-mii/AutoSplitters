@@ -16,8 +16,8 @@ startup
 	vars.positionY = new float[3];
 	vars.positionZ = new float[3];
 	
-	vars.indexHand = 0;
-	vars.indexPosition = 0;
+	vars.dxHand = 0;
+	vars.dxPosition = 0;
 	
 	// -----------------------------------
 
@@ -91,20 +91,22 @@ update
 	
 	// -----------------------------------
 	
+	vars.dxHand = -1;
 	for (int i = 0; i < 4; i++)
 	{
 		if (vars.leftHandStrength[i] == 75f)
 		{
-			vars.indexHand = i;
+			vars.dxHand = i;
 			break;
 		}
 	}
 	
+	vars.dxPosition = -1;
 	for (int i = 0; i < 3; i++)
 	{
 		if (vars.positionZ[i] == -0.5f)
 		{
-			vars.indexPosition = i;
+			vars.dxPosition = i;
 			break;
 		}
 	}
@@ -112,95 +114,105 @@ update
 
 start
 {
-	bool grabbingSomething = (vars.leftHandGrabbed[vars.indexHand] != 0 || vars.rightHandGrabbed[vars.indexHand] != 0);
-	bool positionStartable = !((vars.positionY[vars.indexPosition] > 2f && vars.positionZ[vars.indexPosition] == -0.5f));
-
-	// -----------------------------------
-
-	if (grabbingSomething && positionStartable)
+	if (vars.dxHand != -1 && vars.dxPosition != -1)
 	{
-		for (int i = 0; i < vars.split_Flags.Length; i++)
-		vars.split_Flags[i] = false;;
-		
-		return true;
+		bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] != 0 || vars.rightHandGrabbed[vars.dxHand] != 0);
+		bool positionStartable = !((vars.positionY[vars.dxPosition] > 2f && vars.positionZ[vars.dxPosition] == -0.5f));
+		bool inputsAllowed = vars.leftHandListen[vars.dxHand];
+
+		// -----------------------------------
+
+		if (grabbingSomething && positionStartable && inputsAllowed)
+		{
+			for (int i = 0; i < vars.split_Flags.Length; i++)
+			vars.split_Flags[i] = false;;
+			
+			return true;
+		}
 	}
 }
 
 reset
 {
-	bool positionFlag = (vars.positionY[vars.indexPosition] == -4f);
-	bool handFlag = (vars.leftHandForce[vars.indexHand] == 0 && vars.leftHandListen[vars.indexHand] == 0);
-	
-	// -----------------------------------
-	
-	return (positionFlag || handFlag);
+	if (vars.dxHand != -1 && vars.dxPosition != -1)
+	{
+		bool positionFlag = (vars.positionY[vars.dxPosition] == -4f);
+		bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && vars.leftHandListen[vars.dxHand] == 0);
+		
+		// -----------------------------------
+		
+		return (positionFlag || handFlag);
+	}
 }
 
 split
 {
-	if (settings["split_Jungle"] && !vars.split_Flags[0])
+	if (vars.dxHand != -1 && vars.dxPosition != -1 && vars.positionY[vars.dxHand] < 260f)
 	{
-		if (vars.positionY[vars.indexPosition] > 31f)
+			if (settings["split_Jungle"] && !vars.split_Flags[0])
 		{
-			vars.split_Flags[0] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 31f)
+			{
+				vars.split_Flags[0] = true;
+				return true;
+			}
 		}
-	}
-	
-	if (settings["split_Gears"] && !vars.split_Flags[1])
-	{
-		if (vars.positionY[vars.indexPosition] > 55f && vars.positionX[vars.indexPosition] < 0f)
+		
+		if (settings["split_Gears"] && !vars.split_Flags[1])
 		{
-			vars.split_Flags[1] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 55f && vars.positionX[vars.dxPosition] < 0f)
+			{
+				vars.split_Flags[1] = true;
+				return true;
+			}
 		}
-	}
-	
-	if (settings["split_Pool"] && !vars.split_Flags[2])
-	{
-		if (vars.positionY[vars.indexPosition] > 80f && vars.positionY[vars.indexPosition] < 87f && vars.positionX[vars.indexPosition] > 8f)
+		
+		if (settings["split_Pool"] && !vars.split_Flags[2])
 		{
-			vars.split_Flags[2] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 80f && vars.positionY[vars.dxPosition] < 87f && vars.positionX[vars.dxPosition] > 8f)
+			{
+				vars.split_Flags[2] = true;
+				return true;
+			}
 		}
-	}
-	
-	if (settings["split_Construction"] && !vars.split_Flags[3])
-	{
-		if (vars.positionY[vars.indexPosition] > 109f && vars.positionX[vars.indexPosition] < 20f)
+		
+		if (settings["split_Construction"] && !vars.split_Flags[3])
 		{
-			vars.split_Flags[3] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 109f && vars.positionX[vars.dxPosition] < 20f)
+			{
+				vars.split_Flags[3] = true;
+				return true;
+			}
 		}
-	}
-	
-	if (settings["split_Cave"] && !vars.split_Flags[4])
-	{
-		if (vars.positionY[vars.indexPosition] > 135f)
+		
+		if (settings["split_Cave"] && !vars.split_Flags[4])
 		{
-			vars.split_Flags[4] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 135f)
+			{
+				vars.split_Flags[4] = true;
+				return true;
+			}
 		}
-	}
-	
-	if (settings["split_Ice"] && !vars.split_Flags[5])
-	{
-		if (vars.positionY[vars.indexPosition] > 152f)
+		
+		if (settings["split_Ice"] && !vars.split_Flags[5])
 		{
-			vars.split_Flags[5] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 152f)
+			{
+				vars.split_Flags[5] = true;
+				return true;
+			}
 		}
-	}
-	
-	if (settings["split_Ending"] && !vars.split_Flags[6])
-	{
-		if (vars.positionY[vars.indexPosition] > 204f && vars.positionX[vars.indexPosition] < 47f)
+		
+		if (settings["split_Ending"] && !vars.split_Flags[6])
 		{
-			vars.split_Flags[6] = true;
-			return true;
+			if (vars.positionY[vars.dxPosition] > 204f && vars.positionX[vars.dxPosition] < 47f)
+			{
+				vars.split_Flags[6] = true;
+				return true;
+			}
 		}
-	}
 
-	if (vars.positionY[vars.indexPosition] > 247f)
-		return true;
+		if (vars.positionY[vars.dxPosition] > 247f && vars.leftHandGrabbed[vars.dxHand] == 0 && vars.rightHandGrabbed[vars.dxHand] == 0)
+			return true;
+	}
 }
