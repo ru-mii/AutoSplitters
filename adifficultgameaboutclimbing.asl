@@ -47,8 +47,8 @@ startup
 init
 {
 	vars.helperActive = false;
-	vars.helperDelay = 4;
-	vars.helperIterations = 2;
+	vars.helperDelay = 8;
+	vars.helperIterations = 1;
 	vars.helperCounter = 0;
 	vars.helperFinished = false;
 	vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
@@ -61,6 +61,7 @@ update
 	{
 		var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
 		vars.helperActive = vars.Helper.ScanPages(true, 0, bytes) != IntPtr.Zero;
+		print("ITERATION: " + vars.helperCounter);;;
 		
 		if (vars.helperActive)
 		{
