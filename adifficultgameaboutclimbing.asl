@@ -52,7 +52,6 @@ init
 	vars.helperCounter = 0;
 	vars.helperFinished = false;
 	vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
-
 	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono => {vars.monoGlobal = mono; return true; });
 }
 
