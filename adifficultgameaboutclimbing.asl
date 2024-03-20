@@ -72,8 +72,6 @@ init
 
 update
 {
-	print (vars.helperActive.ToString());
-
 	if (!vars.helperActive)
 	{
 		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
