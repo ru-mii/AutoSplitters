@@ -147,7 +147,7 @@ update
 
 start
 {
-	if (!vars.helperActive && vars.helperCounter >= vars.helperIterations)
+	if (!vars.helperActive && vars.helperFinished)
 	{
 		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
