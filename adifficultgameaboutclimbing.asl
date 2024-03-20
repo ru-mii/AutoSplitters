@@ -4,7 +4,6 @@ startup
 {
 	refreshRate = 60;
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	vars.helperActive = false;
 	
 	// -----------------------------------
 	
