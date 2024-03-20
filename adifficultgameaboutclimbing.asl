@@ -147,36 +147,33 @@ update
 
 start
 {
-	if (vars.helperFinished)
+	if (!vars.helperActive)
 	{
-		if (!vars.helperActive)
+		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
-			if (vars.dxHand != -1 && vars.dxPosition != -1)
-			{
-				bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] != 0 || vars.rightHandGrabbed[vars.dxHand] != 0);
-				bool positionStartable = !((vars.positionY[vars.dxPosition] > 2f && vars.positionZ[vars.dxPosition] == -0.5f));
-				bool inputsAllowed = vars.leftHandListen[vars.dxHand];
+			bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] != 0 || vars.rightHandGrabbed[vars.dxHand] != 0);
+			bool positionStartable = !((vars.positionY[vars.dxPosition] > 2f && vars.positionZ[vars.dxPosition] == -0.5f));
+			bool inputsAllowed = vars.leftHandListen[vars.dxHand];
 
-				// -----------------------------------
+			// -----------------------------------
 
-				if (grabbingSomething && positionStartable && inputsAllowed)
-				{
-					for (int i = 0; i < vars.split_Flags.Length; i++)
-					vars.split_Flags[i] = false;;
-					
-					return true;
-				}
-			}
-		}
-		else
-		{
-			if (current.position[1] < 2f && (current.leftHandGrabbed || current.rightHandGrabbed))
+			if (grabbingSomething && positionStartable && inputsAllowed)
 			{
 				for (int i = 0; i < vars.split_Flags.Length; i++)
-					vars.split_Flags[i] = false;;
-					
+				vars.split_Flags[i] = false;;
+				
 				return true;
 			}
+		}
+	}
+	else
+	{
+		if (current.position[1] < 2f && (current.leftHandGrabbed || current.rightHandGrabbed))
+		{
+			for (int i = 0; i < vars.split_Flags.Length; i++)
+				vars.split_Flags[i] = false;;
+				
+			return true;
 		}
 	}
 }
