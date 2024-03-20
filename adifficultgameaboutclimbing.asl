@@ -47,31 +47,38 @@ startup
 
 init
 {
-	vars.testing = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + 10;
-	
-	while (vars.testing > DateTimeOffset.UtcNow.ToUnixTimeSeconds()) {}
-	
-	// LiveSplitHelper mod is loaded
-	var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
-	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
-	{
-		vars.helperActive = vars.Helper.ScanPages(true, 0, bytes) != IntPtr.Zero;
-		
-		if (vars.helperActive)
-		{
-			vars.ls = mono["LiveSplitHelper", "LiveSplitHelper"];
-			
-			vars.Helper["leftHandGrabbed"] = vars.ls.Make<bool>("leftHandGrabbed");
-			vars.Helper["rightHandGrabbed"] = vars.ls.Make<bool>("rightHandGrabbed");
-			vars.Helper["position"] = vars.ls.MakeArray<float>("position");
-		}
-		
-		return true;
-	});
+	vars.helperActive = false;
+	vars.helperDelay = 3;
+	vars.helperIterations = 2;
+	vars.helperCounter = 0;
+	vars.helperFinished = false;
+	vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
+
+	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono => {vars.monoGlobal = mono; return true; });
 }
 
 update
 {
+	if (!vars.helperFinished && vars.helperCatchTime <= DateTimeOffset.UtcNow.ToUnixTimeSeconds())
+	{
+		var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
+		vars.helperActive = vars.Helper.ScanPages(true, 0, bytes) != IntPtr.Zero;
+		print("ITERATION: " + vars.helperCounter);
+		
+		if (vars.helperActive)
+		{
+			var classic = vars.monoGlobal["LiveSplitHelper", "LiveSplitHelper"];
+			vars.Helper["leftHandGrabbed"] = classic.Make<bool>("leftHandGrabbed");
+			vars.Helper["rightHandGrabbed"] = classic.Make<bool>("rightHandGrabbed");
+			vars.Helper["position"] = classic.MakeArray<float>("position");
+			vars.helperFinished = true;
+		}
+		
+		vars.helperCounter += 1;
+		vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
+		if (vars.helperCounter == vars.helperIterations) vars.helperFinished = true;
+	}
+	
 	if (!vars.helperActive)
 	{
 		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
@@ -142,7 +149,7 @@ update
 
 start
 {
-	if (!vars.helperActive)
+	if (!vars.helperActive && vars.helperCounter >= vars.helperIterations)
 	{
 		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
