@@ -4,6 +4,7 @@ startup
 {
 	refreshRate = 60;
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
+	vars.helperActive = false;
 	
 	// -----------------------------------
 	
@@ -46,6 +47,10 @@ startup
 
 init
 {
+	vars.testing = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + 10;
+	
+	while (vars.testing > DateTimeOffset.UtcNow.ToUnixTimeSeconds()) {}
+	
 	// LiveSplitHelper mod is loaded
 	var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
 	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
@@ -54,11 +59,11 @@ init
 		
 		if (vars.helperActive)
 		{
-			var ls = mono["LiveSplitHelper", "LiveSplitHelper"];
+			vars.ls = mono["LiveSplitHelper", "LiveSplitHelper"];
 			
-			vars.Helper["leftHandGrabbed"] = ls.Make<bool>("leftHandGrabbed");
-			vars.Helper["rightHandGrabbed"] = ls.Make<bool>("rightHandGrabbed");
-			vars.Helper["position"] = ls.MakeArray<float>("position");
+			vars.Helper["leftHandGrabbed"] = vars.ls.Make<bool>("leftHandGrabbed");
+			vars.Helper["rightHandGrabbed"] = vars.ls.Make<bool>("rightHandGrabbed");
+			vars.Helper["position"] = vars.ls.MakeArray<float>("position");
 		}
 		
 		return true;
@@ -67,6 +72,8 @@ init
 
 update
 {
+	print (vars.helperActive.ToString());
+
 	if (!vars.helperActive)
 	{
 		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
