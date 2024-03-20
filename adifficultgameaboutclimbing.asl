@@ -3,6 +3,7 @@ state("A Difficult Game About Climbing") {}
 startup
 {
 	refreshRate = 60;
+	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
 	
 	// -----------------------------------
 	
@@ -43,90 +44,125 @@ startup
 	settings.Add("split_Ending", true, "Ending", "group_Splits");
 }
 
-init {}
+init
+{
+	// LiveSplitHelper mod is loaded
+	var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
+	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
+	{
+		vars.helperActive = vars.Helper.ScanPages(true, 0, bytes) != IntPtr.Zero;
+		
+		if (vars.helperActive)
+		{
+			var ls = mono["LiveSplitHelper", "LiveSplitHelper"];
+			
+			vars.Helper["leftHandGrabbed"] = ls.Make<bool>("leftHandGrabbed");
+			vars.Helper["rightHandGrabbed"] = ls.Make<bool>("rightHandGrabbed");
+			vars.Helper["position"] = ls.MakeArray<float>("position");
+		}
+		
+		return true;
+	});
+}
 
 update
 {
-	vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
-	vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008).Deref<long>(game);
-	vars.leftHandStrength[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8).Deref<float>(game);
-	vars.leftHandForce[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0).Deref<long>(game);
-	vars.leftHandListen[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24).Deref<bool>(game);
-	
-	vars.positionX[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20).Deref<float>(game);
-	vars.positionY[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24).Deref<float>(game);
-	vars.positionZ[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x28).Deref<float>(game);
-	
-	// -----------------------------------
-	
-	vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x98).Deref<long>(game);
-	vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8).Deref<long>(game);
-	vars.leftHandStrength[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8).Deref<float>(game);
-	vars.leftHandForce[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0).Deref<long>(game);
-	vars.leftHandListen[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4).Deref<bool>(game);
-	
-	vars.positionX[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0).Deref<float>(game);
-	vars.positionY[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4).Deref<float>(game);
-	vars.positionZ[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE8).Deref<float>(game);
-	
-	// -----------------------------------
-	
-	vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x98).Deref<long>(game);
-	vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1D8).Deref<long>(game);
-	vars.leftHandStrength[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8).Deref<float>(game);
-	vars.leftHandForce[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0).Deref<long>(game);
-	vars.leftHandListen[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4).Deref<bool>(game);
-	
-	vars.positionX[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE0).Deref<float>(game);
-	vars.positionY[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE4).Deref<float>(game);
-	vars.positionZ[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE8).Deref<float>(game);
-	
-	// -----------------------------------
-	
-	vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA98).Deref<long>(game);
-	vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8).Deref<long>(game);
-	vars.leftHandStrength[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAB8).Deref<float>(game);
-	vars.leftHandForce[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC0).Deref<long>(game);
-	vars.leftHandListen[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4).Deref<bool>(game);
-	
-	// -----------------------------------
-	
-	vars.dxHand = -1;
-	for (int i = 0; i < 4; i++)
+	if (!vars.helperActive)
 	{
-		if (vars.leftHandStrength[i] == 75f)
+		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
+		vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008).Deref<long>(game);
+		vars.leftHandStrength[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8).Deref<float>(game);
+		vars.leftHandForce[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0).Deref<long>(game);
+		vars.leftHandListen[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24).Deref<bool>(game);
+		
+		vars.positionX[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20).Deref<float>(game);
+		vars.positionY[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24).Deref<float>(game);
+		vars.positionZ[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x28).Deref<float>(game);
+		
+		// -----------------------------------
+		
+		vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x98).Deref<long>(game);
+		vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8).Deref<long>(game);
+		vars.leftHandStrength[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8).Deref<float>(game);
+		vars.leftHandForce[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0).Deref<long>(game);
+		vars.leftHandListen[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4).Deref<bool>(game);
+		
+		vars.positionX[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0).Deref<float>(game);
+		vars.positionY[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4).Deref<float>(game);
+		vars.positionZ[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE8).Deref<float>(game);
+		
+		// -----------------------------------
+		
+		vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x98).Deref<long>(game);
+		vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1D8).Deref<long>(game);
+		vars.leftHandStrength[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8).Deref<float>(game);
+		vars.leftHandForce[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0).Deref<long>(game);
+		vars.leftHandListen[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4).Deref<bool>(game);
+		
+		vars.positionX[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE0).Deref<float>(game);
+		vars.positionY[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE4).Deref<float>(game);
+		vars.positionZ[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE8).Deref<float>(game);
+		
+		// -----------------------------------
+		
+		vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA98).Deref<long>(game);
+		vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8).Deref<long>(game);
+		vars.leftHandStrength[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAB8).Deref<float>(game);
+		vars.leftHandForce[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC0).Deref<long>(game);
+		vars.leftHandListen[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4).Deref<bool>(game);
+		
+		// -----------------------------------
+		
+		vars.dxHand = -1;
+		for (int i = 0; i < 4; i++)
 		{
-			vars.dxHand = i;
-			break;
+			if (vars.leftHandStrength[i] == 75f)
+			{
+				vars.dxHand = i;
+				break;
+			}
 		}
-	}
-	
-	vars.dxPosition = -1;
-	for (int i = 0; i < 3; i++)
-	{
-		if (vars.positionZ[i] == -0.5f)
+		
+		vars.dxPosition = -1;
+		for (int i = 0; i < 3; i++)
 		{
-			vars.dxPosition = i;
-			break;
+			if (vars.positionZ[i] == -0.5f)
+			{
+				vars.dxPosition = i;
+				break;
+			}
 		}
 	}
 }
 
 start
 {
-	if (vars.dxHand != -1 && vars.dxPosition != -1)
+	if (!vars.helperActive)
 	{
-		bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] != 0 || vars.rightHandGrabbed[vars.dxHand] != 0);
-		bool positionStartable = !((vars.positionY[vars.dxPosition] > 2f && vars.positionZ[vars.dxPosition] == -0.5f));
-		bool inputsAllowed = vars.leftHandListen[vars.dxHand];
+		if (vars.dxHand != -1 && vars.dxPosition != -1)
+		{
+			bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] != 0 || vars.rightHandGrabbed[vars.dxHand] != 0);
+			bool positionStartable = !((vars.positionY[vars.dxPosition] > 2f && vars.positionZ[vars.dxPosition] == -0.5f));
+			bool inputsAllowed = vars.leftHandListen[vars.dxHand];
 
-		// -----------------------------------
+			// -----------------------------------
 
-		if (grabbingSomething && positionStartable && inputsAllowed)
+			if (grabbingSomething && positionStartable && inputsAllowed)
+			{
+				for (int i = 0; i < vars.split_Flags.Length; i++)
+				vars.split_Flags[i] = false;;
+				
+				return true;
+			}
+		}
+	}
+	else
+	{
+		if (current.position[1] < 2f && (current.leftHandGrabbed || current.rightHandGrabbed))
 		{
 			for (int i = 0; i < vars.split_Flags.Length; i++)
-			vars.split_Flags[i] = false;;
-			
+				vars.split_Flags[i] = false;;
+				
 			return true;
 		}
 	}
@@ -134,24 +170,46 @@ start
 
 reset
 {
-	if (vars.dxHand != -1 && vars.dxPosition != -1)
+	if (!vars.helperActive)
 	{
-		bool positionFlag = (vars.positionY[vars.dxPosition] == -4f);
-		bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && vars.leftHandListen[vars.dxHand] == 0);
-		
-		// -----------------------------------
-		
-		return (positionFlag || handFlag);
+		if (vars.dxHand != -1 && vars.dxPosition != -1)
+		{
+			bool positionFlag = (vars.positionY[vars.dxPosition] == -4f);
+			bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && vars.leftHandListen[vars.dxHand] == 0);
+			
+			// -----------------------------------
+			
+			return (positionFlag || handFlag);
+		}
 	}
+	else return current.position[1] == -4f;
 }
 
 split
 {
-	if (vars.dxHand != -1 && vars.dxPosition != -1 && vars.positionY[vars.dxHand] < 260f)
+	float posX = 0, posY = 0;
+	bool goodToRead = false;
+
+	if (!vars.helperActive)
 	{
-			if (settings["split_Jungle"] && !vars.split_Flags[0])
+		goodToRead = (vars.dxHand != -1 && vars.dxPosition != -1 && vars.positionY[vars.dxHand] < 260f);
+		if (goodToRead)
 		{
-			if (vars.positionY[vars.dxPosition] > 31f)
+			posX = vars.positionX[vars.dxPosition];
+			posY = vars.positionY[vars.dxPosition];
+		}
+	}
+	else
+	{
+		posX = current.position[0];
+		posY = current.position[1];
+	}
+
+	if ((!vars.helperActive && goodToRead) || vars.helperActive)
+	{
+		if (settings["split_Jungle"] && !vars.split_Flags[0])
+		{
+			if (posY > 31f)
 			{
 				vars.split_Flags[0] = true;
 				return true;
@@ -160,7 +218,7 @@ split
 		
 		if (settings["split_Gears"] && !vars.split_Flags[1])
 		{
-			if (vars.positionY[vars.dxPosition] > 55f && vars.positionX[vars.dxPosition] < 0f)
+			if (posY > 55f && posX < 0f)
 			{
 				vars.split_Flags[1] = true;
 				return true;
@@ -169,7 +227,7 @@ split
 		
 		if (settings["split_Pool"] && !vars.split_Flags[2])
 		{
-			if (vars.positionY[vars.dxPosition] > 80f && vars.positionY[vars.dxPosition] < 87f && vars.positionX[vars.dxPosition] > 8f)
+			if (posY > 80f && posY < 87f && posX > 8f)
 			{
 				vars.split_Flags[2] = true;
 				return true;
@@ -178,7 +236,7 @@ split
 		
 		if (settings["split_Construction"] && !vars.split_Flags[3])
 		{
-			if (vars.positionY[vars.dxPosition] > 109f && vars.positionX[vars.dxPosition] < 20f)
+			if (posY > 109f && posX < 20f)
 			{
 				vars.split_Flags[3] = true;
 				return true;
@@ -187,7 +245,7 @@ split
 		
 		if (settings["split_Cave"] && !vars.split_Flags[4])
 		{
-			if (vars.positionY[vars.dxPosition] > 135f)
+			if (posY > 135f)
 			{
 				vars.split_Flags[4] = true;
 				return true;
@@ -196,7 +254,7 @@ split
 		
 		if (settings["split_Ice"] && !vars.split_Flags[5])
 		{
-			if (vars.positionY[vars.dxPosition] > 152f)
+			if (posY > 152f)
 			{
 				vars.split_Flags[5] = true;
 				return true;
@@ -205,14 +263,17 @@ split
 		
 		if (settings["split_Ending"] && !vars.split_Flags[6])
 		{
-			if (vars.positionY[vars.dxPosition] > 204f && vars.positionX[vars.dxPosition] < 47f)
+			if (posY > 204f && posX < 47f)
 			{
 				vars.split_Flags[6] = true;
 				return true;
 			}
 		}
 
-		if (vars.positionY[vars.dxPosition] > 247f && vars.leftHandGrabbed[vars.dxHand] == 0 && vars.rightHandGrabbed[vars.dxHand] == 0)
-			return true;
+		if (posY > 247f)
+		{
+			if (!vars.helperActive) return (vars.leftHandGrabbed[vars.dxHand] == 0 && vars.rightHandGrabbed[vars.dxHand] == 0);
+			else return (!current.leftHandGrabbed && !current.rightHandGrabbed);
+		}
 	}
 }
