@@ -59,6 +59,8 @@ init
 
 update
 {
+	print(vars.helperActive.ToString());
+
 	if (!vars.helperFinished && vars.helperCatchTime <= DateTimeOffset.UtcNow.ToUnixTimeSeconds())
 	{
 		var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
@@ -185,7 +187,7 @@ reset
 	{
 		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
-			bool positionFlag = (vars.positionY[vars.dxPosition] == -4f);
+			bool positionFlag = (vars.positionY[vars.dxPosition] < -3f);
 			bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && vars.leftHandListen[vars.dxHand] == 0);
 			
 			// -----------------------------------
@@ -193,7 +195,7 @@ reset
 			return (positionFlag || handFlag);
 		}
 	}
-	else return current.position[1] == -4f;
+	else return current.position[1] < -3f;
 }
 
 split
