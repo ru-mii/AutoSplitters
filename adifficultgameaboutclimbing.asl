@@ -59,8 +59,6 @@ init
 
 update
 {
-	print(vars.helperActive.ToString());
-
 	if (!vars.helperFinished && vars.helperCatchTime <= DateTimeOffset.UtcNow.ToUnixTimeSeconds())
 	{
 		var bytes = "85 1E A7 85 C5 33 A3 AF 50 BC";
