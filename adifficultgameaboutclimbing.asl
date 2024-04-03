@@ -82,11 +82,11 @@ update
 	
 	if (!vars.helperActive)
 	{
-		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEC8).Deref<long>(game);
-		vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1008).Deref<long>(game);
-		vars.leftHandStrength[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEE8).Deref<float>(game);
-		vars.leftHandForce[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0).Deref<long>(game);
-		vars.leftHandListen[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF24).Deref<bool>(game);
+		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xED0).Deref<long>(game);
+		vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1020).Deref<long>(game);
+		vars.leftHandStrength[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0).Deref<float>(game);
+		vars.leftHandForce[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF8).Deref<long>(game);
+		vars.leftHandListen[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF2C).Deref<bool>(game);
 		
 		vars.positionX[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x20).Deref<float>(game);
 		vars.positionY[0] = new DeepPointer("UnityPlayer.dll", 0x1B2ACB0, 0x20, 0x5E0, 0x28, 0x270, 0xC8, 0x4C, 0x20, 0x10, 0x24).Deref<float>(game);
@@ -94,11 +94,11 @@ update
 		
 		// -----------------------------------
 		
-		vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x98).Deref<long>(game);
-		vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1D8).Deref<long>(game);
-		vars.leftHandStrength[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xB8).Deref<float>(game);
-		vars.leftHandForce[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0).Deref<long>(game);
-		vars.leftHandListen[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xF4).Deref<bool>(game);
+		vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xA0).Deref<long>(game);
+		vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1F0).Deref<long>(game);
+		vars.leftHandStrength[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0).Deref<float>(game);
+		vars.leftHandForce[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC8).Deref<long>(game);
+		vars.leftHandListen[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xFC).Deref<bool>(game);
 		
 		vars.positionX[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE0).Deref<float>(game);
 		vars.positionY[1] = new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x8, 0x20, 0x0, 0x58, 0xE4).Deref<float>(game);
@@ -106,11 +106,11 @@ update
 		
 		// -----------------------------------
 		
-		vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x98).Deref<long>(game);
-		vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1D8).Deref<long>(game);
-		vars.leftHandStrength[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xB8).Deref<float>(game);
-		vars.leftHandForce[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0).Deref<long>(game);
-		vars.leftHandListen[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xF4).Deref<bool>(game);
+		vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xA0).Deref<long>(game);
+		vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1F0).Deref<long>(game);
+		vars.leftHandStrength[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0).Deref<float>(game);
+		vars.leftHandForce[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC8).Deref<long>(game);
+		vars.leftHandListen[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xFC).Deref<bool>(game);
 		
 		vars.positionX[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE0).Deref<float>(game);
 		vars.positionY[2] = new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE4).Deref<float>(game);
@@ -118,11 +118,11 @@ update
 		
 		// -----------------------------------
 		
-		vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xA98).Deref<long>(game);
-		vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBD8).Deref<long>(game);
-		vars.leftHandStrength[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAB8).Deref<float>(game);
-		vars.leftHandForce[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC0).Deref<long>(game);
-		vars.leftHandListen[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAF4).Deref<bool>(game);
+		vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAA0).Deref<long>(game);
+		vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBF0).Deref<long>(game);
+		vars.leftHandStrength[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC0).Deref<float>(game);
+		vars.leftHandForce[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC8).Deref<long>(game);
+		vars.leftHandListen[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAFC).Deref<bool>(game);
 		
 		// -----------------------------------
 		
