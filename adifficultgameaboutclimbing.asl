@@ -80,8 +80,8 @@ update
 	
 	if (!vars.helperActive)
 	{
-		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xED0).Deref<long>(game);
-		vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1020).Deref<long>(game);
+		vars.leftHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xED0, 0x34).Deref<long>(game);
+		vars.rightHandGrabbed[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0x1020, 0x34).Deref<long>(game);
 		vars.leftHandStrength[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF0).Deref<float>(game);
 		vars.leftHandForce[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xEF8).Deref<long>(game);
 		vars.leftHandListen[0] = new DeepPointer("mono-2.0-bdwgc.dll", 0x72B200, 0xE90, 0x1E0, 0xF2C).Deref<bool>(game);
@@ -92,8 +92,8 @@ update
 		
 		// -----------------------------------
 		
-		vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xA0).Deref<long>(game);
-		vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1F0).Deref<long>(game);
+		vars.leftHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xA0, 0x34).Deref<long>(game);
+		vars.rightHandGrabbed[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0x1F0, 0x34).Deref<long>(game);
 		vars.leftHandStrength[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC0).Deref<float>(game);
 		vars.leftHandForce[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xC8).Deref<long>(game);
 		vars.leftHandListen[1] = new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xB0, 0x60, 0x20, 0xFC).Deref<bool>(game);
@@ -104,8 +104,8 @@ update
 		
 		// -----------------------------------
 		
-		vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xA0).Deref<long>(game);
-		vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1F0).Deref<long>(game);
+		vars.leftHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xA0, 0x34).Deref<long>(game);
+		vars.rightHandGrabbed[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0x1F0, 0x34).Deref<long>(game);
 		vars.leftHandStrength[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC0).Deref<float>(game);
 		vars.leftHandForce[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xC8).Deref<long>(game);
 		vars.leftHandListen[2] = new DeepPointer("UnityPlayer.dll", 0x1B366B0, 0xD0, 0x8, 0x18, 0x48, 0x20, 0xFC).Deref<bool>(game);
@@ -116,8 +116,8 @@ update
 		
 		// -----------------------------------
 		
-		vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAA0).Deref<long>(game);
-		vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBF0).Deref<long>(game);
+		vars.leftHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAA0, 0x34).Deref<long>(game);
+		vars.rightHandGrabbed[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xBF0, 0x34).Deref<long>(game);
 		vars.leftHandStrength[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC0).Deref<float>(game);
 		vars.leftHandForce[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAC8).Deref<long>(game);
 		vars.leftHandListen[3] = new DeepPointer("mono-2.0-bdwgc.dll", 0x7280F8, 0xA0, 0xAFC).Deref<bool>(game);
@@ -152,7 +152,7 @@ start
 	{
 		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
-			bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] != 0 || vars.rightHandGrabbed[vars.dxHand] != 0);
+			bool grabbingSomething = (vars.leftHandGrabbed[vars.dxHand] == 1 || vars.rightHandGrabbed[vars.dxHand] == 1);
 			bool positionStartable = !((vars.positionY[vars.dxPosition] > 2f && vars.positionZ[vars.dxPosition] == -0.5f));
 			bool inputsAllowed = vars.leftHandListen[vars.dxHand];
 
@@ -186,7 +186,7 @@ reset
 		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
 			bool positionFlag = (vars.positionY[vars.dxPosition] < -3f);
-			bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && vars.leftHandListen[vars.dxHand] == 0);
+			bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && !vars.leftHandListen[vars.dxHand]);
 			
 			// -----------------------------------
 			
