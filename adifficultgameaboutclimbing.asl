@@ -185,7 +185,7 @@ reset
 	{
 		if (vars.dxHand != -1 && vars.dxPosition != -1)
 		{
-			bool positionFlag = (vars.positionY[vars.dxPosition] < -3f);
+			bool positionFlag = (vars.positionY[vars.dxPosition] == -4f);
 			bool handFlag = (vars.leftHandForce[vars.dxHand] == 0 && !vars.leftHandListen[vars.dxHand]);
 			
 			// -----------------------------------
