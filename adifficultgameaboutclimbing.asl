@@ -99,8 +99,8 @@ update
 
 				// -----------------------------------
 
-				vars.finalLeftIsGrabbed = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xA0, 0x34).Deref<bool>(game);
-				vars.finalRightIsGrabbed = new DeepPointer((IntPtr)animControlInstance + 0x18, 0xA0, 0x34).Deref<bool>(game);
+				vars.finalLeftIsGrabbed = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xA0, 0x34).Deref<int>(game);
+				vars.finalRightIsGrabbed = new DeepPointer((IntPtr)animControlInstance + 0x18, 0xA0, 0x34).Deref<int>(game);
 				vars.finalLeftStrength = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xC0).Deref<float>(game);
 				vars.finalLeftForce = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xC8).Deref<ulong>(game);
 				vars.finalLeftListen = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xFC).Deref<bool>(game);
@@ -122,7 +122,7 @@ start
 {
 	if (vars.pointerFound && !vars.helperActive)
     {
-		bool grabbingSomething = (vars.finalLeftIsGrabbed || vars.finalRightIsGrabbed);
+		bool grabbingSomething = (vars.finalLeftIsGrabbed == 1 || vars.finalRightIsGrabbed == 1);
 		bool positionStartable = (vars.finalPosition.Y < 2f);
 		bool inputsAllowed = vars.finalLeftListen;
 
@@ -246,7 +246,7 @@ split
 
 		if (posY > 247f)
 		{
-			if (vars.pointerFound && !vars.helperActive) return (!vars.finalLeftIsGrabbed && !vars.finalRightIsGrabbed);
+			if (vars.pointerFound && !vars.helperActive) return (vars.finalLeftIsGrabbed == 0 && vars.finalRightIsGrabbed == 0);
 			else if (vars.helperActive) return (!current.leftHandGrabbed && !current.rightHandGrabbed);
 		}
 	}
