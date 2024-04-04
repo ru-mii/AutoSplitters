@@ -172,7 +172,6 @@ split
 			posX = vars.finalPosition.X;
 			posY = vars.finalPosition.Y;
         }
-		;
 	}
 	else if (vars.helperActive)
     {
