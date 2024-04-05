@@ -8,16 +8,20 @@
         vars.leftHandStrength       = AnimControl -> armLeft -> strength (float)
         vars.leftHandForce          = AnimControl -> armLeft -> force (ulong)
         vars.leftHandListen         = AnimControl -> armLeft -> listenToInput (bool)
-        vars.positionX              = AnimControl -> m_CachedPtr -> position -> x (float)
-        vars.positionY              = AnimControl -> m_CachedPtr -> position -> y (float)
-        vars.positionZ              = AnimControl -> m_CachedPtr -> position -> z (float)
 
-        How to find AnimControl (INSTANCE)?
+        How to find?
             
             AnimControl:Update+12(?)
             mov rcx,[rsi+18] -> AnimControl in RSI
             48 81 EC D0 00 00 00 48 89 75 F8 48 8B F1 48
             Check: image1.JPG
+
+    Climber_Hero_Body_Prefab (?)as positionObject (in .asl)
+
+        vars.finalPosition           = PlayerSpawner/Climber5(Clone)/Climber_Hero_Body_Prefab -> transform -> position
+
+        How to find?
+            AnimControl -> 0x10 -> 0x250 (Vector3), (should almost always be there)
 
 ------------------------------
 
