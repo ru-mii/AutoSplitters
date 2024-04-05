@@ -129,7 +129,6 @@ update
 	if (settings["debug_All"])
     {
 		string fullLog = "";
-
 		if (vars.pointerFound)
 		{
 			fullLog = "---------------------" + "\n" +
@@ -142,7 +141,9 @@ update
 			"finalPosition: " + vars.finalPosition + "\n" +
 			"---------------------";
 		}
-		else fullLog = "validatedPointer: None";
+		else fullLog = "---------------------" + "\n" +
+				"validatedPointer: None" + "\n" +
+				"---------------------";
 
 		print(fullLog);
 	}
