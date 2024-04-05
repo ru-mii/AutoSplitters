@@ -44,14 +44,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\A Difficult Game About Climbing\image1.JPG" />
+    <Content Include="Games\A Difficult Game About Climbing\image1.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="scripts\A Difficult Game About Climbing\README.md" />
-    <None Include="scripts\A Difficult Game About Climbing\script.asl" />
-    <None Include="scripts\Capybro\script.asl" />
-    <None Include="scripts\Dolphin Spirit Ocean Mission\script.asl" />
-    <None Include="scripts\Thunder Ray\script.asl" />
+    <None Include="Games\A Difficult Game About Climbing\README.md" />
+    <None Include="Games\A Difficult Game About Climbing\script.asl" />
+    <None Include="Games\Capybro\script.asl" />
+    <None Include="Games\Dolphin Spirit Ocean Mission\script.asl" />
+    <None Include="Games\Thunder Ray\script.asl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
