@@ -153,14 +153,16 @@ start
 {
 	if (vars.pointerFound && !vars.helperActive)
     {
-		bool grabbingSomething = (vars.finalLeftIsGrabbed == 1 || vars.finalRightIsGrabbed == 1);
+		bool grabbingSomething = (vars.finalLeftIsGrabbed == 1 || vars.finalLeftIsGrabbed == 2 || 
+			vars.finalRightIsGrabbed == 1 || vars.finalRightIsGrabbed == 2);
+
 		bool positionStartable = (vars.finalPosition.Y < 2f);
 		bool inputsAllowed = vars.finalLeftListen;
 
 		if (grabbingSomething && positionStartable && inputsAllowed)
         {
 			for (int i = 0; i < vars.split_Flags.Length; i++)
-				vars.split_Flags[i] = false; ;
+				vars.split_Flags[i] = false;
 
 			return true;
 		}
