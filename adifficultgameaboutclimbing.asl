@@ -43,6 +43,9 @@ startup
 	settings.Add("split_Cave", true, "Cave", "group_Splits");
 	settings.Add("split_Ice", true, "Ice", "group_Splits");
 	settings.Add("split_Ending", true, "Ending", "group_Splits");
+
+	settings.Add("group_Other", false, "Other");
+	settings.Add("debug_All", false, "Log debug", "group_Other");
 }
 
 init
@@ -88,12 +91,14 @@ update
 
 	if (!vars.helperActive)
     {
+		vars.passCounter = 0;
 		foreach (KeyValuePair<DeepPointer, int> animControlPointer in vars.animControlPList)
 		{
 			ulong animControlInstance = animControlPointer.Key.Deref<ulong>(game) + (ulong)animControlPointer.Value;
 			float leftStrength = new DeepPointer((IntPtr)animControlInstance + 0x20, 0x18, 0x18, 0x18, 0xC0).Deref<float>(game);
+			float zCoordinate = new DeepPointer((IntPtr)animControlInstance + 0x10, 0x258).Deref<float>(game);
 
-			if (leftStrength == 75f)
+			if (leftStrength == 75f && zCoordinate == -0.5f)
 			{
 				vars.pointerFound = true;
 
@@ -114,7 +119,32 @@ update
 
 				break;
 			}
+
+			vars.passCounter += 1;
 		}
+	}
+
+	// -----------------------------------
+
+	if (settings["debug_All"])
+    {
+		string fullLog = "";
+
+		if (vars.pointerFound)
+		{
+			fullLog = "---------------------" + "\n" +
+			"validatedPointer: " + vars.passCounter + "\n" +
+			"finalLeftIsGrabbed: " + vars.finalLeftIsGrabbed + "\n" +
+			"finalRightIsGrabbed: " + vars.finalRightIsGrabbed + "\n" +
+			"finalLeftStrength: " + vars.finalLeftStrength + "\n" +
+			"finalLeftForce: " + (vars.finalLeftForce > 0) + "\n" +
+			"finalLeftListen: " + vars.finalLeftListen + "\n" +
+			"finalPosition: " + vars.finalPosition + "\n" +
+			"---------------------";
+		}
+		else fullLog = "validatedPointer: None";
+
+		print(fullLog);
 	}
 }
 
