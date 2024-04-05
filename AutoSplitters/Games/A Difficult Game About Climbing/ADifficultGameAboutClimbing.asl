@@ -7,7 +7,7 @@ startup
 	
 	// -----------------------------------
 
-	vars.pointerFound = false;
+	vars.pointersFound = false;
 	vars.animControlPList = new Dictionary<DeepPointer, int> {
 		{ new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x0, 0x10, 0x30, 0x38, 0x28), 0x0 },
 		{ new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x50, 0x168, 0x30, 0x78, 0x30, 0x38, 0x28), 0x0 },
@@ -19,6 +19,19 @@ startup
 		{ new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0x10, 0x30, 0x30, 0x38, 0x28), 0x0 },
 		{ new DeepPointer("UnityPlayer.dll", 0x1AD81C8, 0x40, 0xD78, 0xC8, 0x298, 0x150, 0x68, 0x68, 0x38, 0x28), 0x0 },
 		{ new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x5F8, 0x3B0, 0x0, 0x10, 0x30, 0x158, 0x48, 0x28), 0x0 },
+	};
+
+	vars.positionObjectPList = new Dictionary<DeepPointer, int> {
+		{ new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48), 0x0 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x0, 0x10, 0x30, 0x48, 0x90), 0x0 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x140, 0x30, 0x30, 0x48), 0x0 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1AD8388, 0x0, 0x3A0, 0x0, 0x10, 0x30, 0x168, 0x80), 0x0 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0x90), 0x0 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0x328, 0x78, 0xC8, 0x30, 0x30, 0x48, 0x90), 0x0 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1B15160, 0x8, 0x8, 0x28, 0x0, 0xA0, 0x18, 0x0), 0x10 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1B15168, 0x8, 0x48, 0x28, 0x0, 0xA0, 0x18, 0x0), 0x10 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1B1AAF8, 0x0, 0x88, 0x28, 0x0, 0xA0, 0x18, 0x0), 0x10 },
+		{ new DeepPointer("UnityPlayer.dll", 0x1A8C3C0, 0xF0, 0xE8, 0x78, 0xC8, 0x30, 0x30, 0x48, 0xE0), 0x0 },
 	};
 
 	// -----------------------------------
@@ -62,7 +75,7 @@ init
 
 update
 {
-	vars.pointerFound = false;
+	vars.pointersFound = false;
 
 	if (!vars.helperFinished && vars.helperCatchTime <= DateTimeOffset.UtcNow.ToUnixTimeSeconds())
 	{
@@ -91,36 +104,46 @@ update
 
 	if (!vars.helperActive)
     {
-		vars.passCounter = 0;
+		bool firstPassed = false;
+		vars.passCounterHand = 0;
+		vars.passCounterPosition = 0;
+
 		foreach (KeyValuePair<DeepPointer, int> animControlPointer in vars.animControlPList)
 		{
 			ulong animControlInstance = animControlPointer.Key.Deref<ulong>(game) + (ulong)animControlPointer.Value;
 			float leftStrength = new DeepPointer((IntPtr)animControlInstance + 0x20, 0x18, 0x18, 0x18, 0xC0).Deref<float>(game);
-			float zCoordinate = new DeepPointer((IntPtr)animControlInstance + 0x10, 0x258).Deref<float>(game);
 
-			if (leftStrength == 75f && zCoordinate == -0.5f)
+			if (leftStrength == 75f)
 			{
-				vars.pointerFound = true;
-
-				// -----------------------------------
-
 				vars.finalLeftIsGrabbed = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xA0, 0x34).Deref<int>(game);
 				vars.finalRightIsGrabbed = new DeepPointer((IntPtr)animControlInstance + 0x18, 0xA0, 0x34).Deref<int>(game);
 				vars.finalLeftStrength = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xC0).Deref<float>(game);
 				vars.finalLeftForce = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xC8).Deref<ulong>(game);
 				vars.finalLeftListen = new DeepPointer((IntPtr)animControlInstance + 0x20, 0xFC).Deref<bool>(game);
-
-				vars.finalPosition = new Vector3f(
-					new DeepPointer((IntPtr)animControlInstance + 0x10, 0x250).Deref<float>(game),
-					new DeepPointer((IntPtr)animControlInstance + 0x10, 0x254).Deref<float>(game),
-					new DeepPointer((IntPtr)animControlInstance + 0x10, 0x258).Deref<float>(game));
-
-				// -----------------------------------
-
+				firstPassed = true;
 				break;
 			}
 
-			vars.passCounter += 1;
+			vars.passCounterHand += 1;
+		}
+
+		// -----------------------------------
+
+		if (firstPassed)
+        {
+			foreach (KeyValuePair<DeepPointer, int> positionObjectPointer in vars.positionObjectPList)
+			{
+				ulong positionObject = positionObjectPointer.Key.Deref<ulong>(game) + (ulong)positionObjectPointer.Value;
+
+				if (memory.ReadValue<float>((IntPtr)(positionObject + 0xE8)) == -0.5f)
+				{
+					vars.finalPosition = memory.ReadValue<Vector3f>((IntPtr)(positionObject + 0xE0));
+					vars.pointersFound = true;
+					break;
+				}
+
+				vars.passCounterPosition += 1;
+			}
 		}
 	}
 
@@ -129,10 +152,11 @@ update
 	if (settings["debug_All"])
     {
 		string fullLog = "";
-		if (vars.pointerFound)
+		if (vars.pointersFound)
 		{
 			fullLog = "---------------------" + "\n" +
-			"validatedPointer: " + vars.passCounter + "\n" +
+			"handValidatedPointer: " + vars.passCounterHand + "\n" +
+			"positionValidatedPointer: " + vars.passCounterPosition + "\n" +
 			"finalLeftIsGrabbed: " + vars.finalLeftIsGrabbed + "\n" +
 			"finalRightIsGrabbed: " + vars.finalRightIsGrabbed + "\n" +
 			"finalLeftStrength: " + vars.finalLeftStrength + "\n" +
@@ -151,7 +175,7 @@ update
 
 start
 {
-	if (vars.pointerFound && !vars.helperActive)
+	if (vars.pointersFound && !vars.helperActive)
     {
 		bool grabbingSomething = (vars.finalLeftIsGrabbed == 1 || vars.finalLeftIsGrabbed == 2 || 
 			vars.finalRightIsGrabbed == 1 || vars.finalRightIsGrabbed == 2);
@@ -181,7 +205,7 @@ start
 
 reset
 {
-	if (vars.pointerFound && !vars.helperActive)
+	if (vars.pointersFound && !vars.helperActive)
     {
 		bool positionFlag = vars.finalPosition.Y < -3f;
 		bool handFlag = (vars.finalLeftForce == 0 && !vars.finalLeftListen);
@@ -196,7 +220,7 @@ split
 	float posX = 0, posY = 0;
 	bool goodToRead = false;
 
-	if (vars.pointerFound && !vars.helperActive)
+	if (vars.pointersFound && !vars.helperActive)
     {
 		goodToRead = vars.finalPosition.Y < 260f;
 
@@ -279,7 +303,7 @@ split
 
 		if (posY > 247f)
 		{
-			if (vars.pointerFound && !vars.helperActive) return (vars.finalLeftIsGrabbed == 0 && vars.finalRightIsGrabbed == 0);
+			if (vars.pointersFound && !vars.helperActive) return (vars.finalLeftIsGrabbed == 0 && vars.finalRightIsGrabbed == 0);
 			else if (vars.helperActive) return (!current.leftHandGrabbed && !current.rightHandGrabbed);
 		}
 	}
