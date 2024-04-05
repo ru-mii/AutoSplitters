@@ -48,10 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Games\A Difficult Game About Climbing\README.md" />
-    <None Include="Games\A Difficult Game About Climbing\script.asl" />
-    <None Include="Games\Capybro\script.asl" />
-    <None Include="Games\Dolphin Spirit Ocean Mission\script.asl" />
-    <None Include="Games\Thunder Ray\script.asl" />
+    <None Include="Games\A Difficult Game About Climbing\ADifficultGameAboutClimbing.asl" />
+    <None Include="Games\Capybro\Capybro.asl" />
+    <None Include="Games\Dolphin Spirit Ocean Mission\DolphinSpiritOceanMission.asl" />
+    <None Include="Games\Thunder Ray\ThunderRay.asl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
