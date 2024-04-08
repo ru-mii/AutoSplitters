@@ -146,8 +146,7 @@ update
 					float xDifference = Math.Abs(vars.holderVector.X - vars.finalPosition.X);
 					float yDifference = Math.Abs(vars.holderVector.Y - vars.finalPosition.Y);
 
-					if (xDifference > 5 || yDifference > 5)
-						vars.allowedToSplit = false;
+					if (xDifference > 5 || yDifference > 5) vars.allowedToSplit = false;
 
 					// assign position
 					vars.finalPosition = vars.holderVector;
@@ -233,7 +232,7 @@ reset
 split
 {
 	if (vars.allowedToSplit)
-    {
+	{
 		float posX = 0, posY = 0;
 		bool goodToRead = false;
 
