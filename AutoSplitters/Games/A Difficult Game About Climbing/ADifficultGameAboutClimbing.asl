@@ -46,6 +46,9 @@ startup
 	for (int i = 0; i < vars.split_Flags.Length; i++)
 		vars.split_Flags[i] = true;
 
+	vars.allowedToSplit = true;
+	vars.finalPosition = new Vector3f(0, 0, 0);
+
 	// -----------------------------------
 
 	settings.Add("group_Splits", true, "Splits");
@@ -137,7 +140,17 @@ update
 
 				if (memory.ReadValue<float>((IntPtr)(positionObject + 0xE8)) == -0.5f)
 				{
-					vars.finalPosition = memory.ReadValue<Vector3f>((IntPtr)(positionObject + 0xE0));
+					vars.holderVector = memory.ReadValue<Vector3f>((IntPtr)(positionObject + 0xE0));
+
+					// check if splitting should be disabled due to teleport
+					float xDifference = Math.Abs(vars.holderVector.X - vars.finalPosition.X);
+					float yDifference = Math.Abs(vars.holderVector.Y - vars.finalPosition.Y);
+
+					if (xDifference > 5 || yDifference > 5)
+						vars.allowedToSplit = false;
+
+					// assign position
+					vars.finalPosition = vars.holderVector;
 					vars.pointersFound = true;
 					break;
 				}
@@ -188,6 +201,7 @@ start
 			for (int i = 0; i < vars.split_Flags.Length; i++)
 				vars.split_Flags[i] = false;
 
+			vars.allowedToSplit = true;
 			return true;
 		}
 	}
@@ -198,6 +212,7 @@ start
 			for (int i = 0; i < vars.split_Flags.Length; i++)
 				vars.split_Flags[i] = false; ;
 
+			vars.allowedToSplit = true;
 			return true;
 		}
 	}
@@ -217,94 +232,97 @@ reset
 
 split
 {
-	float posX = 0, posY = 0;
-	bool goodToRead = false;
-
-	if (vars.pointersFound && !vars.helperActive)
+	if (vars.allowedToSplit)
     {
-		goodToRead = vars.finalPosition.Y < 260f;
+		float posX = 0, posY = 0;
+		bool goodToRead = false;
 
-		if (goodToRead)
-        {
-			posX = vars.finalPosition.X;
-			posY = vars.finalPosition.Y;
-        }
-	}
-	else if (vars.helperActive)
-    {
-		posX = current.position[0];
-		posY = current.position[1];
-	}
-
-	if ((!vars.helperActive && goodToRead) || vars.helperActive)
-    {
-		if (settings["split_Jungle"] && !vars.split_Flags[0])
+		if (vars.pointersFound && !vars.helperActive)
 		{
-			if (posY > 31f)
+			goodToRead = vars.finalPosition.Y < 260f;
+
+			if (goodToRead)
 			{
-				vars.split_Flags[0] = true;
-				return true;
+				posX = vars.finalPosition.X;
+				posY = vars.finalPosition.Y;
 			}
 		}
-
-		if (settings["split_Gears"] && !vars.split_Flags[1])
+		else if (vars.helperActive)
 		{
-			if (posY > 55f && posX < 0f)
-			{
-				vars.split_Flags[1] = true;
-				return true;
-			}
+			posX = current.position[0];
+			posY = current.position[1];
 		}
 
-		if (settings["split_Pool"] && !vars.split_Flags[2])
+		if ((!vars.helperActive && goodToRead) || vars.helperActive)
 		{
-			if (posY > 80f && posY < 87f && posX > 8f)
+			if (settings["split_Jungle"] && !vars.split_Flags[0])
 			{
-				vars.split_Flags[2] = true;
-				return true;
+				if (posY > 31f)
+				{
+					vars.split_Flags[0] = true;
+					return true;
+				}
 			}
-		}
 
-		if (settings["split_Construction"] && !vars.split_Flags[3])
-		{
-			if (posY > 109f && posX < 20f)
+			if (settings["split_Gears"] && !vars.split_Flags[1])
 			{
-				vars.split_Flags[3] = true;
-				return true;
+				if (posY > 55f && posX < 0f)
+				{
+					vars.split_Flags[1] = true;
+					return true;
+				}
 			}
-		}
 
-		if (settings["split_Cave"] && !vars.split_Flags[4])
-		{
-			if (posY > 135f)
+			if (settings["split_Pool"] && !vars.split_Flags[2])
 			{
-				vars.split_Flags[4] = true;
-				return true;
+				if (posY > 80f && posY < 87f && posX > 8f)
+				{
+					vars.split_Flags[2] = true;
+					return true;
+				}
 			}
-		}
 
-		if (settings["split_Ice"] && !vars.split_Flags[5])
-		{
-			if (posY > 152f)
+			if (settings["split_Construction"] && !vars.split_Flags[3])
 			{
-				vars.split_Flags[5] = true;
-				return true;
+				if (posY > 109f && posX < 20f)
+				{
+					vars.split_Flags[3] = true;
+					return true;
+				}
 			}
-		}
 
-		if (settings["split_Ending"] && !vars.split_Flags[6])
-		{
-			if (posY > 204f && posX < 47f)
+			if (settings["split_Cave"] && !vars.split_Flags[4])
 			{
-				vars.split_Flags[6] = true;
-				return true;
+				if (posY > 135f)
+				{
+					vars.split_Flags[4] = true;
+					return true;
+				}
 			}
-		}
 
-		if (posY > 247f)
-		{
-			if (vars.pointersFound && !vars.helperActive) return (vars.finalLeftIsGrabbed == 0 && vars.finalRightIsGrabbed == 0);
-			else if (vars.helperActive) return (!current.leftHandGrabbed && !current.rightHandGrabbed);
+			if (settings["split_Ice"] && !vars.split_Flags[5])
+			{
+				if (posY > 152f)
+				{
+					vars.split_Flags[5] = true;
+					return true;
+				}
+			}
+
+			if (settings["split_Ending"] && !vars.split_Flags[6])
+			{
+				if (posY > 204f && posX < 47f)
+				{
+					vars.split_Flags[6] = true;
+					return true;
+				}
+			}
+
+			if (posY > 247f)
+			{
+				if (vars.pointersFound && !vars.helperActive) return (vars.finalLeftIsGrabbed == 0 && vars.finalRightIsGrabbed == 0);
+				else if (vars.helperActive) return (!current.leftHandGrabbed && !current.rightHandGrabbed);
+			}
 		}
 	}
 }
