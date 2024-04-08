@@ -48,6 +48,8 @@ startup
 
 	vars.allowedToSplit = true;
 	vars.finalPosition = new Vector3f(0, 0, 0);
+	vars.oldHelperPosX = 0;
+	vars.oldHelperPosY = 0;
 
 	// -----------------------------------
 
@@ -88,6 +90,10 @@ update
 
 		if (!foundErrors)
         {
+			vars.Helper["leftHandGrabbed"] = vars.classic.Make<bool>("leftHandGrabbed");
+			vars.Helper["rightHandGrabbed"] = vars.classic.Make<bool>("rightHandGrabbed");
+			vars.Helper["position"] = vars.classic.MakeArray<float>("position");
+
 			vars.helperFinished = true;
 			vars.helperActive = true;
         }
@@ -95,14 +101,6 @@ update
 		vars.helperCounter += 1;
 		vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
 		if (vars.helperCounter == vars.helperIterations) vars.helperFinished = true;
-	}
-
-	if (vars.helperActive)
-	{
-		vars.Helper["leftHandGrabbed"] = vars.classic.Make<bool>("leftHandGrabbed");
-		vars.Helper["rightHandGrabbed"] = vars.classic.Make<bool>("rightHandGrabbed");
-		vars.Helper["position"] = vars.classic.MakeArray<float>("position");
-		vars.helperFinished = true;
 	}
 
 	if (!vars.helperActive)
@@ -157,6 +155,12 @@ update
 				vars.passCounterPosition += 1;
 			}
 		}
+	}
+	else
+    {
+		float xDifference = Math.Abs(current.position[0] - old.position[0]);
+		float yDifference = Math.Abs(current.position[1] - old.position[1]);
+		if (xDifference > 5 || yDifference > 5) vars.allowedToSplit = false;
 	}
 
 	// -----------------------------------
