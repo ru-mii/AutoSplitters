@@ -213,7 +213,7 @@ start
 		if (current.position[1] < 2f && (current.leftHandGrabbed || current.rightHandGrabbed))
 		{
 			for (int i = 0; i < vars.split_Flags.Length; i++)
-				vars.split_Flags[i] = false; ;
+				vars.split_Flags[i] = false;
 
 			vars.allowedToSplit = true;
 			return true;
