@@ -92,7 +92,7 @@ reset
 
 split
 {
-    if (current.State == 0 && old.State == 4)
+    if ((current.State == 0 || current.State == 7) && old.State == 4)
     {
         if (current.Level == 0 && settings["split_Level1"] ||
         current.Level == 1 && settings["split_Level2"] ||
