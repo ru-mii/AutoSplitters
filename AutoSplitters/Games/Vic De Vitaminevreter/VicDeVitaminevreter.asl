@@ -10,10 +10,11 @@ startup
     settings.Add("split_Level4", true, "Level 4", "group_Splits");
     settings.Add("split_Level5", true, "Level 5", "group_Splits");
 
+    vars.bState = 0;
     vars.State = 0;
     vars.Level = 0;
     vars.Dummy = 0;
-} 
+}
 
 init
 {
@@ -55,53 +56,50 @@ init
             }
             else if (foundBytes[0] == 0xE9 && foundBytes[5] == 0x90)
             {
+                vars.Dummy = gameStateFunction;
                 uint relative = memory.ReadValue<uint>((IntPtr)gameStateFunction + 1);
                 vars.StateAddress = (gameStateFunction + relative + 5) + 0x100;
             }
         }
     }
-
-    current.State = 0;
-    current.Level = 0;
-}
-
-onStart
-{
-    current.State = 0;
-    current.Level = 0;
 }
 
 update
 {
+    if (vars.bState != vars.State) vars.bState = vars.State;
     if (vars.StateAddress != 0)
     {
         uint resolvePointer = memory.ReadValue<uint>((IntPtr)(vars.StateAddress));
-        if (resolvePointer != 0) current.State = memory.ReadValue<uint>((IntPtr)(resolvePointer + 0xAC));
+        if (resolvePointer != 0) vars.State = memory.ReadValue<uint>((IntPtr)(resolvePointer + 0xAC));
     }
 }
 
 start
 {
-    if (current.State == 0 && old.State == 1) return true;
+    if (vars.State == 0 && vars.bState == 1)
+    {
+        vars.Level = 0;
+        return true;
+    }
 }
 
 reset
 {
-    return current.State == 1 && old.State != 1;
+    return vars.State == 1 && vars.bState != 1;
 }
 
 split
 {
-    if ((current.State == 0 || current.State == 7) && old.State == 4)
+    if ((vars.State != vars.bState) && vars.bState == 4)
     {
-        if (current.Level == 0 && settings["split_Level1"] ||
-        current.Level == 1 && settings["split_Level2"] ||
-        current.Level == 2 && settings["split_Level3"] || 
-        current.Level == 3 && settings["split_Level4"] || 
-        current.Level == 4 && settings["split_Level5"]
+        if (vars.Level == 0 && settings["split_Level1"] ||
+        vars.Level == 1 && settings["split_Level2"] ||
+        vars.Level == 2 && settings["split_Level3"] ||
+        vars.Level == 3 && settings["split_Level4"] ||
+        vars.Level == 4 && settings["split_Level5"]
         && memory.ReadValue<byte>((IntPtr)vars.Dummy) != 0)
         {
-            current.Level += 1;
+            vars.Level += 1;
             return true;
         }
     }
