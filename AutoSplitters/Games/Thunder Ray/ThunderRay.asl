@@ -17,11 +17,6 @@ init
 
 update
 {
-	if (vars.HelperActive)
-    {
-		
-    }
-
 	if (!vars.HelperFinished && vars.HelperCatchTime <= DateTimeOffset.UtcNow.ToUnixTimeSeconds())
 	{
 		bool foundErrors = false;
