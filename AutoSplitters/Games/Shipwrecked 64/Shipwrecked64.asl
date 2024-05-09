@@ -119,8 +119,7 @@ split
 
 start
 {
-	bool flag = old.ControlCamera.Y != current.ControlCamera.Y && current.ControlCamera.Y == 100.000145f &&
-		current.ControlCamera.X + current.ControlCamera.Z == 0 && vars.CameraFaded < 1.0f;
+	bool flag = current.LevelName == "Layer1" && vars.CompletedSplits.Add("Layer1");
 
 	// --------------------
 	vars.UpdateOldVars();
