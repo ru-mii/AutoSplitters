@@ -6,26 +6,47 @@ startup
 	vars.AllSplits = new HashSet<string>()
 	{
 		"Layer2",
-		//"GardenPrototype",
-		//"Cabin",
-		//"Cabin2",
-		//"Layer3",
+		"GardenPrototype",			// +
+		"Cabin",					// +
+		"Cabin2",					// +
+		"Layer3",					// +
 		"Layer3Depths",
 		"Layer4",
-		//"Layer4Museum",
-		//"FleshCave",
-		//"disclaimer",
-		//"Layer4Ending",
+		"Layer4Museum",				// +
+		"FleshCave",				// +
+		"disclaimer",				// +
+		"Layer4Ending",				// +
 		"Layer4Remnants",
 		"FightEnd",
-		//"Balcony",
+		"Balcony",					// +
 	};
+
+	settings.Add("group_DefaultSplits", true, "Default Splits");
+	settings.SetToolTip("group_DefaultSplits", "Currently only \"True Ending\" category is fully supported.");
+	settings.Add("split_Layer2", true, "Layer2", "group_DefaultSplits");
+	settings.Add("split_Layer3Depths", true, "Layer3Depths", "group_DefaultSplits");
+	settings.Add("split_Layer4", true, "Layer4", "group_DefaultSplits");
+	settings.Add("split_Layer4Remnants", true, "Layer4Remnants", "group_DefaultSplits");
+	settings.Add("split_FightEnd", true, "FightEnd", "group_DefaultSplits");
+
+	settings.Add("group_ExtraSplits", false, "Extra Splits");
+	settings.Add("split_GardenPrototype", false, "GardenPrototype", "group_ExtraSplits");
+	settings.Add("split_Cabin", false, "Cabin", "group_ExtraSplits");
+	settings.Add("split_Cabin2", false, "Cabin2", "group_ExtraSplits");
+	settings.Add("split_Layer3", false, "Layer3", "group_ExtraSplits");
+	settings.Add("split_Layer4Museum", false, "Layer4Museum", "group_ExtraSplits");
+	settings.Add("split_FleshCave", false, "FleshCave", "group_ExtraSplits");
+	settings.Add("split_disclaimer", false, "disclaimer", "group_ExtraSplits");
+	settings.Add("split_Layer4Ending", false, "Layer4Ending", "group_ExtraSplits");
+	settings.Add("split_Balcony", false, "Balcony", "group_ExtraSplits");
+
+	settings.Add("group_ResetIn", true, "Reset In");
+	settings.Add("reset_Selection", true, "Selection", "group_ResetIn");
+	settings.Add("reset_SaveRoom", true, "SaveRoom", "group_ResetIn");
+	settings.Add("reset_Menu", true, "Menu", "group_ResetIn");
 }
 
-onStart
-{
-	vars.CompletedSplits.Clear();
-}
+onStart { vars.CompletedSplits.Clear(); }
 
 init
 {
@@ -86,10 +107,14 @@ update
 split
 {
 	foreach (string split in vars.AllSplits)
-		if (current.LevelName == split && vars.CompletedSplits.Add(split))
+    {
+		if (current.LevelName == split && vars.CompletedSplits.Add(split) && settings["split_" + split])
+		{
 			return true;
+		}
+	}
 
-	if (current.CameraLocationZ == -5370.0f) return vars.CompletedSplits.Add("TheEnd");
+	return current.CameraLocationZ == -5370.0f && vars.CompletedSplits.Add("TheEnd");
 }
 
 start
@@ -104,4 +129,11 @@ start
 isLoading
 {
 	return vars.LoadingNow;
+}
+
+reset
+{
+	return (current.LevelName == "Selection" && settings["reset_Selection"]) ||
+		(current.LevelName == "SaveRoom" && settings["reset_SaveRoom"]) ||
+		(current.LevelName == "Menu" && settings["reset_Menu"]);
 }
