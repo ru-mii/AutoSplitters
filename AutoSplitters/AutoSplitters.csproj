@@ -51,9 +51,9 @@
     <None Include="Games\A Difficult Game About Climbing\ADifficultGameAboutClimbing.asl" />
     <None Include="Games\Capybro\Capybro.asl" />
     <None Include="Games\Dolphin Spirit Ocean Mission\DolphinSpiritOceanMission.asl" />
+    <None Include="Games\Shipwrecked 64\Shipwrecked64.asl" />
     <None Include="Games\Thunder Ray\ThunderRay.asl" />
     <None Include="Games\Vic De Vitaminevreter\VicDeVitaminevreter.asl" />
-    <None Include="Prototypes\AITD2024\aitd2024.asl" />
     <None Include="Prototypes\Takashi\Takashi.asl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
