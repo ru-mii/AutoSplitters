@@ -17,7 +17,7 @@ startup
 		"disclaimer",				// +
 		"Layer4Ending",				// +
 		"Layer4Remnants",
-		"FightEnd",					// +
+		"FightEnd",					
 		"Balcony",					// +
 	};
 
