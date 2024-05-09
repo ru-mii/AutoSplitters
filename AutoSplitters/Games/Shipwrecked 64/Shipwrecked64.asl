@@ -109,7 +109,6 @@ split
     {
 		if (current.LevelName == split && vars.CompletedSplits.Add(split) && settings["split_" + split])
 		{
-			print("SPLIT AT: " + current.LevelName);
 			return true;
 		}
 	}
