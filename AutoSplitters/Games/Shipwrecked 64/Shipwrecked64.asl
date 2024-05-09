@@ -22,21 +22,21 @@ startup
 	};
 
 	settings.Add("group_DefaultSplits", true, "Default Splits");
-	settings.Add("split_Cabin2", false, "Cabin2", "group_DefaultSplits");
 	settings.Add("split_Layer2", true, "Layer2", "group_DefaultSplits");
 	settings.Add("split_Layer3Depths", true, "Layer3Depths", "group_DefaultSplits");
+	settings.Add("split_Layer4", true, "Layer4", "group_DefaultSplits");
 	settings.Add("split_Layer4Remnants", true, "Layer4Remnants", "group_DefaultSplits");
+	settings.Add("split_FightEnd", true, "FightEnd", "group_DefaultSplits");
 
 	settings.Add("group_ExtraSplits", false, "Extra Splits");
+	settings.Add("split_Cabin2", false, "Cabin2", "group_ExtraSplits");
 	settings.Add("split_GardenPrototype", false, "GardenPrototype", "group_ExtraSplits");
 	settings.Add("split_Cabin", false, "Cabin", "group_ExtraSplits");
 	settings.Add("split_Layer3", false, "Layer3", "group_ExtraSplits");
-	settings.Add("split_Layer4", true, "Layer4", "group_ExtraSplits");
 	settings.Add("split_Layer4Museum", false, "Layer4Museum", "group_ExtraSplits");
 	settings.Add("split_FleshCave", false, "FleshCave", "group_ExtraSplits");
 	settings.Add("split_disclaimer", false, "disclaimer", "group_ExtraSplits");
 	settings.Add("split_Layer4Ending", false, "Layer4Ending", "group_ExtraSplits");
-	settings.Add("split_FightEnd", true, "FightEnd", "group_ExtraSplits");
 	settings.Add("split_Balcony", false, "Balcony", "group_ExtraSplits");
 
 	settings.Add("group_ResetIn", true, "Reset In");
