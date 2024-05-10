@@ -76,16 +76,6 @@ init
 		return number == 0 ? name : name + "_" + number;
 	});
 
-	vars.UpdateOldVars = new Action(() =>
-	{
-		old.PlayerController = current.PlayerController;
-		old.ControlCamera = current.ControlCamera;
-		old.CameraFade = current.CameraFade;
-		old.CameraLocationZ = current.CameraLocationZ;
-		old.GWorld = current.GWorld;
-		old.LevelName = current.LevelName;
-	});
-
 	old.ControlCamera = new Vector3f(0, 0, 0);
 	old.LevelName = "";
 }
@@ -118,12 +108,8 @@ split
 
 start
 {
-	bool flag = old.ControlCamera.Y != current.ControlCamera.Y && current.ControlCamera.Y == 100.000145f &&
+	return old.ControlCamera.Y != current.ControlCamera.Y && current.ControlCamera.Y == 100.000145f &&
 		current.ControlCamera.X + current.ControlCamera.Z == 0 && current.CameraFade < 1.0f;
-
-	// --------------------
-	vars.UpdateOldVars();
-	return flag;
 }
 
 isLoading
