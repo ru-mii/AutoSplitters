@@ -80,7 +80,7 @@ init
 	{
 		old.PlayerController = current.PlayerController;
 		old.ControlCamera = current.ControlCamera;
-		old.CameraFaded = current.CameraFaded;
+		old.CameraFade = current.CameraFade;
 		old.CameraLocationZ = current.CameraLocationZ;
 		old.GWorld = current.GWorld;
 		old.LevelName = current.LevelName;
@@ -94,13 +94,13 @@ update
 {
 	current.PlayerController = new DeepPointer(vars.GEngine, 0xDE8, 0x38, 0x0, 0x30).Deref<IntPtr>(game);
 	current.ControlCamera = new DeepPointer(current.PlayerController + 0x288).Deref<Vector3f>(game);
-	current.CameraFaded = new DeepPointer(current.PlayerController + 0x2B8, 0x25C).Deref<float>(game);
+	current.CameraFade = new DeepPointer(current.PlayerController + 0x2B8, 0x25C).Deref<float>(game);
 	current.CameraLocationZ = new DeepPointer(current.PlayerController + 0x2B8, 0xE88).Deref<float>(game);
 	current.GWorld = new DeepPointer(vars.GEngine, 0x780, 0x78).Deref<IntPtr>(game);
 	current.LevelName = vars.GetObjectName(current.GWorld);
 
-	if (current.CameraFaded == 1.0f || current.PlayerController == IntPtr.Zero) vars.LoadingNow = true;
-	else if (current.CameraFaded != 1.0f && current.PlayerController != IntPtr.Zero) vars.LoadingNow = false;
+	if (current.CameraFade == 1.0f || current.PlayerController == IntPtr.Zero) vars.LoadingNow = true;
+	else if (current.CameraFade != 1.0f && current.PlayerController != IntPtr.Zero) vars.LoadingNow = false;
 }
 
 split
@@ -119,7 +119,7 @@ split
 start
 {
 	bool flag = old.ControlCamera.Y != current.ControlCamera.Y && current.ControlCamera.Y == 100.000145f &&
-		current.ControlCamera.X + current.ControlCamera.Z == 0 && current.CameraFaded < 1.0f;
+		current.ControlCamera.X + current.ControlCamera.Z == 0 && current.CameraFade < 1.0f;
 
 	// --------------------
 	vars.UpdateOldVars();
