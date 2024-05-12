@@ -3,8 +3,9 @@ state("A Difficult Game About Climbing") {}
 startup
 {
 	refreshRate = 60; vars.helperActive = false;
+	timer.CurrentTimingMethod = TimingMethod.GameTime;
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	
+
 	// -----------------------------------
 
 	vars.pointersFound = false;
@@ -38,11 +39,11 @@ startup
 
 	vars.list_Segments = new string[]
 	{
-		"Jungle", "Gears", "Pool", "Construction", "Cave", "Ice", "Ending"
+		"Jungle", "Gears", "Pool", "Construction", "Cave", "Ice", "Ending", "Void"
 	};
-	
+
 	vars.split_Flags = new bool[vars.list_Segments.Length];
-	
+
 	for (int i = 0; i < vars.split_Flags.Length; i++)
 		vars.split_Flags[i] = true;
 
@@ -74,7 +75,32 @@ init
 	vars.helperCounter = 0;
 	vars.helperFinished = false;
 	vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
-	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono => { vars.monoGlobal = mono; return true; });
+
+	vars.Helper.TryLoad = (Func<dynamic, bool>)(mono =>
+	{
+		vars.Helper["timeFromSave"] = mono.Make<float>("SaveSystemJ", "timeFromSave");
+		vars.Helper["timeStart"] = mono.Make<float>("SaveSystemJ", "startTime");
+		vars.Helper["timeCompleted"] = mono.Make<float>("SaveSystemJ", "timeCompleted");
+		vars.monoGlobal = mono; return true;
+
+		return true;
+	});
+
+	vars.GetTimeTime = (Func<float>)(() =>
+	{
+		ulong t1 = ((ulong)(new DeepPointer("UnityPlayer.dll", 0x1B4AE10).Deref<IntPtr>(game))) + 0xC8;
+		return memory.ReadValue<float>((IntPtr)(t1));
+	});
+
+	vars.SyncTime = (Func<float, bool>)(tTime =>
+	{
+		if (tTime != 0 && current.timeStart != 0)
+		{
+			timer.SetGameTime(TimeSpan.FromSeconds(tTime + current.timeFromSave - current.timeStart));
+			return true;
+		}
+		else return false;
+	});
 }
 
 
@@ -89,14 +115,14 @@ update
 		catch { foundErrors = true; }
 
 		if (!foundErrors)
-        {
+		{
 			vars.Helper["leftHandGrabbed"] = vars.classic.Make<bool>("leftHandGrabbed");
 			vars.Helper["rightHandGrabbed"] = vars.classic.Make<bool>("rightHandGrabbed");
 			vars.Helper["position"] = vars.classic.MakeArray<float>("position");
 
 			vars.helperFinished = true;
 			vars.helperActive = true;
-        }
+		}
 
 		vars.helperCounter += 1;
 		vars.helperCatchTime = DateTimeOffset.UtcNow.ToUnixTimeSeconds() + vars.helperDelay;
@@ -104,8 +130,9 @@ update
 	}
 
 	if (!vars.helperActive)
-    {
+	{
 		bool firstPassed = false;
+		bool secondPassed = false;
 		vars.passCounterHand = 0;
 		vars.passCounterPosition = 0;
 
@@ -131,7 +158,7 @@ update
 		// -----------------------------------
 
 		if (firstPassed)
-        {
+		{
 			foreach (KeyValuePair<DeepPointer, int> positionObjectPointer in vars.positionObjectPList)
 			{
 				ulong positionObject = positionObjectPointer.Key.Deref<ulong>(game) + (ulong)positionObjectPointer.Value;
@@ -157,16 +184,23 @@ update
 		}
 	}
 	else
-    {
+	{
 		float xDifference = Math.Abs(current.position[0] - old.position[0]);
 		float yDifference = Math.Abs(current.position[1] - old.position[1]);
 		if (xDifference > 5 || yDifference > 5) vars.allowedToSplit = false;
 	}
 
+	vars.timeTime = vars.GetTimeTime();
+	if (vars.timeTime != 0)
+	{
+		vars.SyncTime(vars.timeTime);
+		vars.pointersFound = true;
+	}
+
 	// -----------------------------------
 
 	if (settings["debug_All"])
-    {
+	{
 		string fullLog = "";
 		if (vars.pointersFound)
 		{
@@ -191,40 +225,20 @@ update
 
 start
 {
-	if (vars.pointersFound && !vars.helperActive)
-    {
-		bool grabbingSomething = (vars.finalLeftIsGrabbed == 1 || vars.finalLeftIsGrabbed == 2 || 
-			vars.finalRightIsGrabbed == 1 || vars.finalRightIsGrabbed == 2);
+	if (old.timeStart != current.timeStart)
+	{
+		for (int i = 0; i < vars.split_Flags.Length; i++)
+			vars.split_Flags[i] = false;
 
-		bool positionStartable = (vars.finalPosition.Y < 2f);
-		bool inputsAllowed = vars.finalLeftListen;
-
-		if (grabbingSomething && positionStartable && inputsAllowed)
-        {
-			for (int i = 0; i < vars.split_Flags.Length; i++)
-				vars.split_Flags[i] = false;
-
-			vars.allowedToSplit = true;
-			return true;
-		}
-	}
-	else if (vars.helperActive)
-    {
-		if (current.position[1] < 2f && (current.leftHandGrabbed || current.rightHandGrabbed))
-		{
-			for (int i = 0; i < vars.split_Flags.Length; i++)
-				vars.split_Flags[i] = false;
-
-			vars.allowedToSplit = true;
-			return true;
-		}
+		vars.allowedToSplit = true;
+		return true;
 	}
 }
 
 reset
 {
 	if (vars.pointersFound && !vars.helperActive)
-    {
+	{
 		bool positionFlag = vars.finalPosition.Y < -3f;
 		bool handFlag = (vars.finalLeftForce == 0 && !vars.finalLeftListen);
 
@@ -321,10 +335,14 @@ split
 				}
 			}
 
-			if (posY > 247f)
+			if (old.timeCompleted != current.timeCompleted && !vars.split_Flags[7])
 			{
-				if (vars.pointersFound && !vars.helperActive) return (vars.finalLeftIsGrabbed == 0 && vars.finalRightIsGrabbed == 0);
-				else if (vars.helperActive) return (!current.leftHandGrabbed && !current.rightHandGrabbed);
+				print(current.timeCompleted.ToString());
+				vars.split_Flags[7] = true;
+
+				double milliseconds = current.timeCompleted * 1000.0;
+				timer.SetGameTime(TimeSpan.FromMilliseconds(milliseconds));
+				return true;
 			}
 		}
 	}
