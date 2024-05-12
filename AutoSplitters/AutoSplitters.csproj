@@ -47,7 +47,6 @@
     <Content Include="Games\A Difficult Game About Climbing\image1.JPG" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Games\A Difficult Game About Climbing\old.asl" />
     <None Include="Games\A Difficult Game About Climbing\README.md" />
     <None Include="Games\A Difficult Game About Climbing\ADifficultGameAboutClimbing.asl" />
     <None Include="Games\Capybro\Capybro.asl" />
