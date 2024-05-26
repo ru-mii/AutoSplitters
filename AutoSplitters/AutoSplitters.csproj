@@ -49,6 +49,7 @@
   <ItemGroup>
     <None Include="Games\A Difficult Game About Climbing\README.md" />
     <None Include="Games\A Difficult Game About Climbing\ADifficultGameAboutClimbing.asl" />
+    <None Include="Games\Baby Sniper In Vietnam\BabySniperInVietnam.asl" />
     <None Include="Games\Capybro\Capybro.asl" />
     <None Include="Games\Dolphin Spirit Ocean Mission\DolphinSpiritOceanMission.asl" />
     <None Include="Games\Shipwrecked 64\Shipwrecked64.asl" />
