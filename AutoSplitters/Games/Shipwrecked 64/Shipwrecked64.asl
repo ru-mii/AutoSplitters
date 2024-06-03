@@ -23,7 +23,7 @@ startup
 
 	settings.Add("group_DefaultSplits", true, "Default Splits");
 	settings.Add("split_Layer2", true, "Layer2", "group_DefaultSplits");
-	settings.Add("split_Layer3", false, "Layer3", "group_DefaultSplits");
+	settings.Add("split_Layer3", true, "Layer3", "group_DefaultSplits");
 	settings.Add("split_Layer3Depths", true, "Layer3Depths", "group_DefaultSplits");
 	settings.Add("split_Layer4", true, "Layer4", "group_DefaultSplits");
 	settings.Add("split_Layer4Remnants", true, "Layer4Remnants", "group_DefaultSplits");
@@ -84,10 +84,18 @@ update
 {
 	current.PlayerController = new DeepPointer(vars.GEngine, 0xDE8, 0x38, 0x0, 0x30).Deref<IntPtr>(game);
 	current.ControlCamera = new DeepPointer(current.PlayerController + 0x288).Deref<Vector3f>(game);
+	current.CameraCap1 = new DeepPointer(current.PlayerController + 0x2B8, 0x24C).Deref<float>(game);
+	current.CameraCap2 = new DeepPointer(current.PlayerController + 0x2B8, 0x250).Deref<float>(game);
+	current.CameraCap3 = new DeepPointer(current.PlayerController + 0x2B8, 0x254).Deref<float>(game);
+	current.CameraCap4 = new DeepPointer(current.PlayerController + 0x2B8, 0x258).Deref<float>(game);
 	current.CameraFade = new DeepPointer(current.PlayerController + 0x2B8, 0x25C).Deref<float>(game);
 	current.CameraLocationZ = new DeepPointer(current.PlayerController + 0x2B8, 0xE88).Deref<float>(game);
 	current.GWorld = new DeepPointer(vars.GEngine, 0x780, 0x78).Deref<IntPtr>(game);
 	current.LevelName = vars.GetObjectName(current.GWorld);
+
+	if (current.LevelName == "Layer3Depths" && current.CameraCap1 == 1.0f && current.CameraCap2 == 1.0f &&
+		current.CameraCap3 == 1.0f && current.CameraCap4 == 1.0f) vars.CameraCap = true;
+	else vars.CameraCap = false;
 
 	if (current.CameraFade == 1.0f || current.PlayerController == IntPtr.Zero) vars.LoadingNow = true;
 	else if (current.CameraFade != 1.0f && current.PlayerController != IntPtr.Zero) vars.LoadingNow = false;
@@ -95,6 +103,8 @@ update
 
 split
 {
+	print(current.LevelName);
+
 	foreach (string split in vars.AllSplits)
     {
 		if (current.LevelName == split && vars.CompletedSplits.Add(split) && settings["split_" + split])
@@ -114,7 +124,7 @@ start
 
 isLoading
 {
-	return vars.LoadingNow;
+	return vars.LoadingNow && !vars.CameraCap;
 }
 
 reset
