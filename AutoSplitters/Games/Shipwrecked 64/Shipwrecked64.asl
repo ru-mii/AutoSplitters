@@ -93,7 +93,7 @@ update
 	current.GWorld = new DeepPointer(vars.GEngine, 0x780, 0x78).Deref<IntPtr>(game);
 	current.LevelName = vars.GetObjectName(current.GWorld);
 
-	if (current.LevelName == "Layer3Depths" && current.CameraCap1 == 1.0f && current.CameraCap2 == 1.0f &&
+	if (current.CameraCap1 == 1.0f && current.CameraCap2 == 1.0f &&
 		current.CameraCap3 == 1.0f && current.CameraCap4 == 1.0f) vars.CameraCap = true;
 	else vars.CameraCap = false;
 
