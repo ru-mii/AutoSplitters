@@ -103,7 +103,7 @@ update
 
 split
 {
-	print(current.LevelName);
+	//print(current.LevelName);
 
 	foreach (string split in vars.AllSplits)
     {
