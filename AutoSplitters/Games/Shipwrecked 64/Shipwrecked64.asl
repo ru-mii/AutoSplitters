@@ -3,31 +3,32 @@
 startup
 {
 	vars.CompletedSplits = new HashSet<string>();
-	vars.AllSplits = new HashSet<string>()
+	vars.TrueEndingSplits = new HashSet<string>()
 	{
-		"GardenPrototype",			// +
-		"Cabin",					// +
-		"Cabin2",					// +
-		"Layer2",
-		"Layer3",
-		"Layer3Depths",
-		"Layer4",
-		"Layer4Museum",				// +
-		"FleshCave",				// +
-		"disclaimer",				// +
-		"Layer4Ending",				// +
-		"Layer4Remnants",
-		"FightEnd",					
-		"Balcony",					// +
+		"GardenPrototype", "Cabin", "Cabin2", "Layer2",
+		"Layer3", "Layer3Depths", "Layer4", "Layer4Museum",
+		"FleshCave", "disclaimer", "Layer4Ending", "Layer4Remnants",
+		"FightEnd","Balcony",
 	};
 
-	settings.Add("group_DefaultSplits", true, "Default Splits");
-	settings.Add("split_Layer2", true, "Layer2", "group_DefaultSplits");
-	settings.Add("split_Layer3", true, "Layer3", "group_DefaultSplits");
-	settings.Add("split_Layer3Depths", true, "Layer3Depths", "group_DefaultSplits");
-	settings.Add("split_Layer4", true, "Layer4", "group_DefaultSplits");
-	settings.Add("split_Layer4Remnants", true, "Layer4Remnants", "group_DefaultSplits");
-	settings.Add("split_FightEnd", true, "FightEnd", "group_DefaultSplits");
+	vars.OhHiOliviaSplits = new HashSet<string>()
+	{
+		"WulfDeath", "WulfSpook", "WulfDone", "Boat"
+	};
+
+	settings.Add("group_OhHiOlivia", false, "Oh. (Hi Olivia!)");
+	settings.Add("split_WulfDeath", false, "Wulf Death", "group_OhHiOlivia");
+	settings.Add("split_WulfSpook", false, "Wulf Spook", "group_OhHiOlivia");
+	settings.Add("split_WulfDone", false, "Wulf Done", "group_OhHiOlivia");
+	settings.Add("split_Boat", false, "Boat", "group_OhHiOlivia");
+
+	settings.Add("group_TrueEnding", true, "True Ending");
+	settings.Add("split_Layer2", true, "Layer2", "group_TrueEnding");
+	settings.Add("split_Layer3", true, "Layer3", "group_TrueEnding");
+	settings.Add("split_Layer3Depths", true, "Layer3Depths", "group_TrueEnding");
+	settings.Add("split_Layer4", true, "Layer4", "group_TrueEnding");
+	settings.Add("split_Layer4Remnants", true, "Layer4Remnants", "group_TrueEnding");
+	settings.Add("split_FightEnd", true, "FightEnd", "group_TrueEnding");
 
 	settings.Add("group_ExtraSplits", false, "Extra Splits");
 	settings.Add("split_Cabin2", false, "Cabin2", "group_ExtraSplits");
@@ -82,7 +83,8 @@ init
 
 update
 {
-	current.PlayerController = new DeepPointer(vars.GEngine, 0xDE8, 0x38, 0x0, 0x30).Deref<IntPtr>(game);
+	current.GameInstance = new DeepPointer(vars.GEngine, 0xDE8).Deref<IntPtr>(game);
+	current.PlayerController = new DeepPointer(current.GameInstance + 0x38, 0x0, 0x30).Deref<IntPtr>(game);
 	current.ControlCamera = new DeepPointer(current.PlayerController + 0x288).Deref<Vector3f>(game);
 	current.CameraCap1 = new DeepPointer(current.PlayerController + 0x2B8, 0x24C).Deref<float>(game);
 	current.CameraCap2 = new DeepPointer(current.PlayerController + 0x2B8, 0x250).Deref<float>(game);
@@ -92,6 +94,10 @@ update
 	current.CameraLocationZ = new DeepPointer(current.PlayerController + 0x2B8, 0xE88).Deref<float>(game);
 	current.GWorld = new DeepPointer(vars.GEngine, 0x780, 0x78).Deref<IntPtr>(game);
 	current.LevelName = vars.GetObjectName(current.GWorld);
+
+	current.WulfDeath = new DeepPointer(current.GameInstance + 0x1CC).Deref<byte>(game);
+	current.WulfSpook = new DeepPointer(current.GameInstance + 0x1CD).Deref<byte>(game);
+	current.WulfDone = new DeepPointer(current.GameInstance + 0x1CE).Deref<byte>(game);
 
 	if (current.CameraCap1 == 1.0f && current.CameraCap2 == 1.0f &&
 		current.CameraCap3 == 1.0f && current.CameraCap4 == 1.0f) vars.CameraCap = true;
@@ -103,15 +109,31 @@ update
 
 split
 {
-	//print(current.LevelName);
+	print(current.LevelName);
 
-	foreach (string split in vars.AllSplits)
-    {
+	// true ending
+	foreach (string split in vars.TrueEndingSplits)
 		if (current.LevelName == split && vars.CompletedSplits.Add(split) && settings["split_" + split])
-		{
 			return true;
+
+	// oh, hi olivia
+	foreach (string split in vars.OhHiOliviaSplits)
+    {
+		if (settings["split_" + split])
+        {
+			if (split == "WulfDeath" && old.WulfDeath == 0 && current.WulfDeath == 1 &&
+				vars.CompletedSplits.Add(split)) return true;
+
+			else if (split == "WulfSpook" && old.WulfSpook == 0 && current.WulfSpook == 1 &&
+				vars.CompletedSplits.Add(split)) return true;
+
+			else if (split == "WulfDone" && current.WulfDone == 1 && old.LevelName != current.LevelName &&
+				current.LevelName == "Crevace2" && vars.CompletedSplits.Add(split)) return true;
+
+			else if (split == "Boat" && old.LevelName != current.LevelName &&
+				current.LevelName == "ending1" && vars.CompletedSplits.Add(split)) return true;
 		}
-	}
+    }
 
 	return current.CameraLocationZ == -5370.0f && vars.CompletedSplits.Add("TheEnd");
 }
