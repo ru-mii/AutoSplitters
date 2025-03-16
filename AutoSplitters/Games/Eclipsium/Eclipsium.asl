@@ -18,7 +18,6 @@ init
 update
 {
 	current.activeScene = vars.Helper.Scenes.Active.Name ?? current.activeScene;
-	print(current.activeScene);
 }
 
 start
