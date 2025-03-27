@@ -52,11 +52,13 @@
     <None Include="Games\A Difficult Game About Climbing\ADifficultGameAboutClimbing.asl" />
     <None Include="Games\Baby Sniper In Vietnam\BabySniperInVietnam.asl" />
     <None Include="Games\Capybro\Capybro.asl" />
+    <None Include="Games\Coffee At Night\CoffeeAtNight.asl" />
     <None Include="Games\Dolphin Spirit Ocean Mission\DolphinSpiritOceanMission.asl" />
     <None Include="Games\Eclipsium\Eclipsium.asl" />
     <None Include="Games\Shipwrecked 64\Shipwrecked64.asl" />
     <None Include="Games\Thunder Ray\ThunderRay.asl" />
     <None Include="Games\Vic De Vitaminevreter\VicDeVitaminevreter.asl" />
+    <None Include="Games\Yasuke Simulator\YasukeSimulator.asl" />
     <None Include="Prototypes\Takashi\Takashi.asl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
