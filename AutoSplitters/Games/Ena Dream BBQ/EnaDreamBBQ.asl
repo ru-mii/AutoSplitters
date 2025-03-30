@@ -8,9 +8,6 @@ startup
 	vars.Helper.LoadSceneManager = true;
 	vars.Helper.AlertLoadless();
 	vars.NowLoading = false;
-	
-	settings.Add("group_Splits", true, "Splits");
-	settings.Add("split_USBright", true, "USBright", "group_Splits");
 }
 
 init
@@ -51,12 +48,12 @@ update
 	if (current.LoadEnd != old.LoadEnd) vars.NowLoading = false;
 	if (current.LoadStart == 0) vars.NowLoading = false;
 	
-	print(current.ActiveScene.ToString());
+	//print(current.ActiveScene.ToString());
 }
 
 split
 {
-	return current.ActiveScene != old.ActiveScene && settings[current.ActiveScene];
+	return current.ActiveScene != old.ActiveScene;
 }
 
 isLoading
