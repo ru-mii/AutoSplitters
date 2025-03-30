@@ -74,5 +74,5 @@ isLoading
 
 reset
 {
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "Menu";
+	//return current.ActiveScene != old.ActiveScene && current.ActiveScene == "Menu";
 }
