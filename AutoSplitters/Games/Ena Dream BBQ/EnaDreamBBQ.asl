@@ -17,14 +17,20 @@ init
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.UI");
 	IntPtr BootSettingsOverlay = vars.JitSave.AddInst("BootSettingsOverlay");
+	IntPtr PlayingVideo = vars.JitSave.AddFlag("ScreenSpaceVideoPlayableDirector", "Awake");
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
 	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "OnEnable");
 	IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnDisable");
 	
+	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.Locations");
+	//IntPtr TetrahedralAttacher = vars.JitSave.AddInst("TetrahedralAttacher", "Start");
+	
 	vars.Helper["HeadFade"] = vars.Helper.Make<float>(BootSettingsOverlay, 0x80, 0x74);
 	vars.Helper["LoadStart"] = vars.Helper.Make<int>(LoadStart);
 	vars.Helper["LoadEnd"] = vars.Helper.Make<int>(LoadEnd);
+	//vars.Helper["Targets"] = vars.Helper.Make<int>(TetrahedralAttacher, 0x20, 0x1C);
+	vars.Helper["PlayingVideo"] = vars.Helper.Make<int>(PlayingVideo);
 	
 	vars.NowLoading = false;
 }
@@ -48,12 +54,13 @@ update
 	if ((current.LoadStart != old.LoadStart)) vars.NowLoading = true;
 	if (current.LoadEnd != old.LoadEnd) vars.NowLoading = false;
 	if (current.LoadStart == 0) vars.NowLoading = false;
-	
-	//print(current.ActiveScene.ToString());
 }
 
 split
 {
+	//if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && current.Targets >= 16) return true;
+	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey") return true;
+	
 	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub";
 }
 
