@@ -9,6 +9,9 @@ startup
 	vars.Helper.LoadSceneManager = true;
 	vars.Helper.AlertLoadless();
 	vars.NowLoading = false;
+	
+	settings.Add("gr_Splits", true, "Splits");
+	settings.Add("sp_DontSplit", false, "Don't split", "gr_Splits");
 }
 
 init
@@ -60,8 +63,7 @@ split
 {
 	//if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && current.Targets >= 16) return true;
 	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey") return true;
-	
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub";
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && !settings["sp_DontSplit"];
 }
 
 isLoading
