@@ -2,7 +2,7 @@
 
 startup
 {
-	//timer.CurrentTimingMethod = TimingMethod.GameTime;
+	timer.CurrentTimingMethod = TimingMethod.GameTime;
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
 	Assembly.Load(File.ReadAllBytes("Components/uhara3")).CreateInstance("Main");
 	vars.Helper.GameName = "ENA: Dream BBQ";
@@ -25,15 +25,15 @@ init
 	IntPtr ResetTimer = vars.JitSave.AddFlag("BootSettingsOverlay");
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
-	//IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "OnEnable");
-	//IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "CompleteEffect");
+	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "OnEnable");
+	IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnLevelFinishedLoading", 2, 0, 15);
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.Locations");
 	//IntPtr TetrahedralAttacher = vars.JitSave.AddInst("TetrahedralAttacher", "Start");
 	
 	vars.Helper["HeadFade"] = vars.Helper.Make<float>(BootSettingsOverlay, 0x80, 0x74);
-	//vars.Helper["LoadStart"] = vars.Helper.Make<int>(LoadStart);
-	//vars.Helper["LoadEnd"] = vars.Helper.Make<int>(LoadEnd);
+	vars.Helper["LoadStart"] = vars.Helper.Make<int>(LoadStart);
+	vars.Helper["LoadEnd"] = vars.Helper.Make<int>(LoadEnd);
 	//vars.Helper["Targets"] = vars.Helper.Make<int>(TetrahedralAttacher, 0x20, 0x1C);
 	vars.Helper["PlayingVideo"] = vars.Helper.Make<int>(PlayingVideo);
 	vars.Helper["ResetTimer"] = vars.Helper.Make<int>(ResetTimer);
@@ -71,7 +71,7 @@ split
 
 isLoading
 {
-	//return vars.NowLoading;
+	return vars.NowLoading;
 }
 
 reset
