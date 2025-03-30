@@ -53,7 +53,7 @@ update
 
 split
 {
-	return current.ActiveScene != old.ActiveScene;
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub";
 }
 
 isLoading
