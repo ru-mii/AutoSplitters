@@ -26,7 +26,8 @@ init
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
 	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "CommitToScene");
-	IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnLevelFinishedLoading", 2, 0, 15);
+	//IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnLevelFinishedLoading", 2, 0, 15);
+	IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnDisable");
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.Locations");
 	//IntPtr TetrahedralAttacher = vars.JitSave.AddInst("TetrahedralAttacher", "Start");
