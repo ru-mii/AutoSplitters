@@ -22,6 +22,7 @@ init
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.UI");
 	IntPtr BootSettingsOverlay = vars.JitSave.AddInst("BootSettingsOverlay");
 	IntPtr PlayingVideo = vars.JitSave.AddFlag("ScreenSpaceVideoPlayableDirector", "Awake");
+	IntPtr ResetTimer = vars.JitSave.AddFlag("BootSettingsOverlay");
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
 	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "OnEnable");
@@ -35,6 +36,7 @@ init
 	vars.Helper["LoadEnd"] = vars.Helper.Make<int>(LoadEnd);
 	//vars.Helper["Targets"] = vars.Helper.Make<int>(TetrahedralAttacher, 0x20, 0x1C);
 	vars.Helper["PlayingVideo"] = vars.Helper.Make<int>(PlayingVideo);
+	vars.Helper["ResetTimer"] = vars.Helper.Make<int>(ResetTimer);
 	
 	vars.NowLoading = false;
 }
@@ -64,7 +66,7 @@ split
 {
 	//if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && current.Targets >= 16) return true;
 	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && settings["sp_EndSplit"]) return true;
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && current.ActiveScene != "Menu" && settings["sp_SceneSplits"];
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && current.ActiveScene != "Menu" && old.ActiveScene != "Menu" && settings["sp_SceneSplits"];
 }
 
 isLoading
@@ -74,5 +76,5 @@ isLoading
 
 reset
 {
-	//return current.ActiveScene != old.ActiveScene && current.ActiveScene == "Menu";
+	return current.ResetTimer != old.ResetTimer;
 }
