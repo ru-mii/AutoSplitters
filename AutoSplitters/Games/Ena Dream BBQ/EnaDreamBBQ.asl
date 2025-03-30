@@ -2,7 +2,7 @@
 
 startup
 {
-	timer.CurrentTimingMethod = TimingMethod.GameTime;
+	//timer.CurrentTimingMethod = TimingMethod.GameTime;
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
 	Assembly.Load(File.ReadAllBytes("Components/uhara3")).CreateInstance("Main");
 	vars.Helper.GameName = "ENA: Dream BBQ";
