@@ -27,7 +27,6 @@ init
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
 	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "OnEnable");
 	IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "CompleteEffect");
-	IntPtr CanMove = vars.JitSave.Add("PlayerRandomBlink", "get_CanBlink", 0, 0x1E, 15, 
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.Locations");
 	//IntPtr TetrahedralAttacher = vars.JitSave.AddInst("TetrahedralAttacher", "Start");
