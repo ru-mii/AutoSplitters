@@ -59,9 +59,9 @@ update
 	
 	current.ActiveScene = vars.Helper.Scenes.Active.Name ?? current.ActiveScene;
 	
-	if ((current.LoadStart != old.LoadStart)) vars.NowLoading = true;
-	if (current.LoadEnd != old.LoadEnd) vars.NowLoading = false;
-	if (current.LoadStart == 0) vars.NowLoading = false;
+	//if ((current.LoadStart != old.LoadStart)) vars.NowLoading = true;
+	//if (current.LoadEnd != old.LoadEnd) vars.NowLoading = false;
+	//if (current.LoadStart == 0) vars.NowLoading = false;
 }
 
 split
