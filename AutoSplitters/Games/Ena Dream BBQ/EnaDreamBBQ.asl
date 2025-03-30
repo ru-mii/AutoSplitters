@@ -25,7 +25,8 @@ init
 	IntPtr ResetTimer = vars.JitSave.AddFlag("BootSettingsOverlay");
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
-	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "CommitToScene");
+	//IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "CommitToScene");
+	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "OnEnable");
 	//IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnLevelFinishedLoading", 2, 0, 15);
 	IntPtr LoadEnd = vars.JitSave.AddFlag("SceneTransition", "OnDisable");
 	
