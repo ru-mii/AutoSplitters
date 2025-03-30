@@ -64,7 +64,7 @@ split
 {
 	//if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && current.Targets >= 16) return true;
 	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && settings["sp_EndSplit"]) return true;
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && settings["sp_SceneSplits"];
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && current.ActiveScene != "Menu" && settings["sp_SceneSplits"];
 }
 
 isLoading
