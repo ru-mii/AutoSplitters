@@ -11,7 +11,8 @@ startup
 	vars.NowLoading = false;
 	
 	settings.Add("gr_Splits", true, "Splits");
-	settings.Add("sp_DontSplit", false, "Don't split", "gr_Splits");
+	settings.Add("sp_SceneSplits", true, "Scene splits", "gr_Splits");
+	settings.Add("sp_EndSplit", true, "End split", "gr_Splits");
 }
 
 init
@@ -62,8 +63,8 @@ update
 split
 {
 	//if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && current.Targets >= 16) return true;
-	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey") return true;
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && !settings["sp_DontSplit"];
+	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && settings["sp_EndSplit"]) return true;
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && settings["sp_SceneSplits"];
 }
 
 isLoading
