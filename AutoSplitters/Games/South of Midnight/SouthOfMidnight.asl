@@ -22,6 +22,9 @@ init
 	// split
 	vars.ChapterCount = 1;
 	vars.Helper["ChapterNumber"] = vars.Helper.Make<int>(GEngine, 0xD58, 0x30, 0x280, 0x538, 0x8, 0x1E8, 0x68, 0x38);
+	
+	// finish
+	vars.Helper["Credits"] = vars.Helper.Make<ulong>(GEngine, 0xD58, 0x38, 0x0, 0x30, 0x360, 0x170, 0xF70, 0x28);
 }
 
 update
@@ -29,7 +32,7 @@ update
 	vars.Helper.Update();
 	vars.Helper.MapPointers();
 	
-	//print(current.ChapterNumber.ToString());
+	print(current.Credits.ToString("X"));
 }
 
 onStart
@@ -58,6 +61,8 @@ split
 				return true;
 		}
 	}
+	
+	return current.Credits != old.Credits && current.Credits != 0;
 }
 
 isLoading
