@@ -55,9 +55,9 @@ split
 {
 	if (current.ChapterNumber != old.ChapterNumber)
 	{
-		if (current.ChapterNumber - vars.ChapterCount == 1)
+		if (current.ChapterNumber > vars.ChapterCount)
 		{
-				vars.ChapterCount++;
+				vars.ChapterCount = current.ChapterNumber;
 				return true;
 		}
 	}
