@@ -69,3 +69,8 @@ isLoading
 {
 	return current.NowLoading == 0;
 }
+
+exit
+{
+	timer.IsGameTimePaused = true;
+}
