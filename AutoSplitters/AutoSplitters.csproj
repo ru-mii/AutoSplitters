@@ -57,6 +57,7 @@
     <None Include="Games\Dolphin Spirit Ocean Mission\DolphinSpiritOceanMission.asl" />
     <None Include="Games\Eclipsium\Eclipsium.asl" />
     <None Include="Games\Shipwrecked 64\Shipwrecked64.asl" />
+    <None Include="Games\South of Midnight\SouthOfMidnight.asl" />
     <None Include="Games\Thunder Ray\ThunderRay.asl" />
     <None Include="Games\Vic De Vitaminevreter\VicDeVitaminevreter.asl" />
     <None Include="Games\Yasuke Simulator\YasukeSimulator.asl" />
