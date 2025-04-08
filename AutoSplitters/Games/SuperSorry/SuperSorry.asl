@@ -28,28 +28,21 @@ update
 	vars.Helper.Update();
 	vars.Helper.MapPointers();
 	current.ActiveScene = vars.Helper.Scenes.Active.Name ?? null;
-	
-	print(current.StageText.ToString());
-	//print(current.ActiveScene.ToString());
 }
 
 split
 {
-	// Tutorial -> Office -> Home -> Park -> Mall -> City -> Station -> Police Station -> Court -> Prison
 	if (current.ClearPanel != old.ClearPanel) return true;
-	else
-	{
-		return
-			(old.StageText.StartsWith("Tutorial") && current.StageText.StartsWith("Office")) ||
-			(old.StageText.StartsWith("Office") && current.StageText.StartsWith("Home")) ||
-			(old.StageText.StartsWith("Home") && current.StageText.StartsWith("Park")) ||
-			(old.StageText.StartsWith("Park") && current.StageText.StartsWith("Mall")) ||
-			(old.StageText.StartsWith("Mall") && current.StageText.StartsWith("City")) ||
-			(old.StageText.StartsWith("City") && current.StageText.StartsWith("Station")) ||
-			(old.StageText.StartsWith("Station") && current.StageText.StartsWith("Police")) ||
-			(old.StageText.StartsWith("Police") && current.StageText.StartsWith("Court")) ||
-			(old.StageText.StartsWith("Court") && current.StageText.StartsWith("Prison"));
-	}
+	else return
+		(old.StageText.StartsWith("Tutorial") && current.StageText.StartsWith("Office")) ||
+		(old.StageText.StartsWith("Office") && current.StageText.StartsWith("Home")) ||
+		(old.StageText.StartsWith("Home") && current.StageText.StartsWith("Park")) ||
+		(old.StageText.StartsWith("Park") && current.StageText.StartsWith("Mall")) ||
+		(old.StageText.StartsWith("Mall") && current.StageText.StartsWith("City")) ||
+		(old.StageText.StartsWith("City") && current.StageText.StartsWith("Station")) ||
+		(old.StageText.StartsWith("Station") && current.StageText.StartsWith("Police")) ||
+		(old.StageText.StartsWith("Police") && current.StageText.StartsWith("Court")) ||
+		(old.StageText.StartsWith("Court") && current.StageText.StartsWith("Prison"));
 }
 
 reset
