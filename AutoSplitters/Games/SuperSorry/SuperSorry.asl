@@ -12,7 +12,7 @@ init
 {
 	vars.JitSave = vars.Uhara.CreateTool("UnityCS", "JitSave");
 	IntPtr InGameSceneVM = vars.JitSave.AddInst("InGameSceneVM", "Update", 16);
-	IntPtr ClearPanel = vars.JitSave.AddFlag("ClearPanel", "Show", 15);
+	IntPtr ClearPanel = vars.JitSave.AddFlag("ClearPanel", "Show");
 	
 	vars.Helper["StageText"] = vars.Helper.MakeString(InGameSceneVM, 0x30, 0x48, 0xC0, 0x14);
 	vars.Helper["ClearPanel"] = vars.Helper.Make<int>(ClearPanel);

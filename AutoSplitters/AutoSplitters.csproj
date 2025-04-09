@@ -56,6 +56,7 @@
     <None Include="Games\Coffee At Night\CoffeeAtNight.asl" />
     <None Include="Games\Dolphin Spirit Ocean Mission\DolphinSpiritOceanMission.asl" />
     <None Include="Games\Eclipsium\Eclipsium.asl" />
+    <None Include="Games\jarlson\jarlson.asl" />
     <None Include="Games\Shipwrecked 64\Shipwrecked64.asl" />
     <None Include="Games\South of Midnight\SouthOfMidnight.asl" />
     <None Include="Games\SuperSorry\SuperSorry.asl" />
