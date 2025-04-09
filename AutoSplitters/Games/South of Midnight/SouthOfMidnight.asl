@@ -16,8 +16,7 @@ init
 	vars.Helper["RelativeRotationPitch"] = vars.Helper.Make<float>(GEngine, 0xD58, 0x38, 0x0, 0x30, 0x270, 0x128);
 	
 	// isLoading
-	IntPtr NowLoading = vars.Helper.ScanRel(2, "8B 3D ?? ?? ?? ?? 48 8B 1D F9 FD 58 01 85 FF 74 1D ?? ?? ?? ?? 00 48 8B CB E8 C?");
-	vars.Helper["NowLoading"] = vars.Helper.Make<int>(NowLoading);
+	vars.Helper["NowLoading"] = vars.Helper.Make<int>(GEngine, 0xD58, 0x198, 0x1C0, 0x370, 0x28, 0x10, 0x118, 0xD8, 0xB0, 0xA08);
 	
 	// split
 	vars.ChapterCount = 1;
@@ -65,7 +64,7 @@ split
 
 isLoading
 {
-	return current.NowLoading == 0;
+	return current.NowLoading == 0 || current.NowLoading == 1;
 }
 
 exit
