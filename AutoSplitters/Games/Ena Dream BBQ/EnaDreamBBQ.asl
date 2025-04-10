@@ -26,7 +26,7 @@ init
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4");
 	IntPtr LoadStart = vars.JitSave.AddFlag("SceneTransition", "CommitToScene");
-	IntPtr LoadEnd1 = vars.JitSave.Add("SceneTransition", "OnLevelFinishedLoading", 2, 0, 15, new byte[] { 0x48, 0x83, 0x05, 0xF0, 0xFF, 0xFF, 0xFF, 0x01 } );
+	IntPtr LoadEnd1 = vars.JitSave.Add("SceneTransition", "OnLevelFinishedLoading", 2, 1, 14, new byte[] { 0x48, 0x83, 0x05, 0xF0, 0xFF, 0xFF, 0xFF, 0x01 } );
 	IntPtr LoadEnd2 = vars.JitSave.AddFlag("SceneTransition", "CompleteEffect");
 	
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.Locations");
