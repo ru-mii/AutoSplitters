@@ -10,7 +10,6 @@ init
 {
     vars.JitSave = vars.Uhara.CreateTool("UnityCS", "JitSave");
     IntPtr GameManagerScript = vars.JitSave.AddInst("GameManagerScript");
-    IntPtr GetKey = vars.JitSave.AddInst("GetKey");;
 	vars.JitSave.ProcessQueue();
     
     vars.Helper["hasFinished"] = vars.Helper.Make<bool>(GameManagerScript, 0x31);
@@ -22,6 +21,4 @@ update
 {
     vars.Helper.Update();
     vars.Helper.MapPointers();
-	
-	print(current.igt.ToString());
 }
