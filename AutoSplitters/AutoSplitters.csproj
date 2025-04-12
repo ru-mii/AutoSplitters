@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Games\Awaria\Awaria.asl" />
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
