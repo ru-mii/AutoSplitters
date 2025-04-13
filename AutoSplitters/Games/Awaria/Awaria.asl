@@ -39,8 +39,3 @@ reset
 {
 	return current.CurrentMenu != old.CurrentMenu && current.CurrentMenu == 1;
 }
-
-update
-{
-	//print(current.CurrentMenu.ToString());
-}
