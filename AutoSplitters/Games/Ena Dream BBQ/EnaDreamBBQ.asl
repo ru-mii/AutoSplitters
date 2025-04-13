@@ -2,7 +2,6 @@
 
 startup
 {
-	//timer.CurrentTimingMethod = TimingMethod.GameTime;
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
 	Assembly.Load(File.ReadAllBytes("Components/uhara3")).CreateInstance("Main");
 	vars.Helper.GameName = "ENA: Dream BBQ";
@@ -73,7 +72,8 @@ split
 {
 	//if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && current.Targets >= 16) return true;
 	if (current.PlayingVideo != old.PlayingVideo && current.ActiveScene == "D1Grey" && settings["sp_EndSplit"]) return true;
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && current.ActiveScene != "Menu" && old.ActiveScene != "Menu" && settings["sp_SceneSplits"];
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene != "Hub" && current.ActiveScene != "Menu" &&
+		old.ActiveScene != "Menu" && settings["sp_SceneSplits"];
 }
 
 isLoading
