@@ -3,7 +3,7 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	Assembly.Load(File.ReadAllBytes("Components/uhara3")).CreateInstance("Main");
+	Assembly.Load(File.ReadAllBytes("Components/uhara5")).CreateInstance("Main");
 	vars.Helper.GameName = "ENA: Dream BBQ";
 	vars.Helper.LoadSceneManager = true;
 	vars.Helper.AlertLoadless();
