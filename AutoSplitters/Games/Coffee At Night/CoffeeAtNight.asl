@@ -6,7 +6,6 @@ startup
 	Assembly.Load(File.ReadAllBytes("Components/uhara3")).CreateInstance("Main");
 	vars.Helper.GameName = "Coffee at night";
 	vars.Helper.LoadSceneManager = true;
-	vars.Helper.AlertLoadless();
 	vars.Starts = 0;
 }
 

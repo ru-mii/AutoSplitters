@@ -3,7 +3,7 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	Assembly.Load(File.ReadAllBytes("Components/uhara4")).CreateInstance("Main");
+	Assembly.Load(File.ReadAllBytes("Components/uhara5")).CreateInstance("Main");
 	vars.Helper.LoadSceneManager = true;
 	vars.Helper.GameName = "SuperSorry";
 }
@@ -13,6 +13,7 @@ init
 	vars.JitSave = vars.Uhara.CreateTool("UnityCS", "JitSave");
 	IntPtr InGameSceneVM = vars.JitSave.AddInst("InGameSceneVM", 15);
 	IntPtr ClearPanel = vars.JitSave.AddFlag("ClearPanel", "Show");
+	vars.JitSave.ProcessQueue();
 	
 	vars.Helper["StageText"] = vars.Helper.MakeString(InGameSceneVM, 0x30, 0x48, 0xC0, 0x14);
 	vars.Helper["ClearPanel"] = vars.Helper.Make<int>(ClearPanel);
