@@ -32,6 +32,8 @@ init
 	vars.JitSave.SetOuter("JoelG.ENA4.dll", "JoelG.ENA4.Locations");
 	//IntPtr TetrahedralAttacher = vars.JitSave.AddInst("TetrahedralAttacher", "Start");
 	
+	//vars.JitSave.ProcessQueue();
+	
 	vars.Helper["HeadFade"] = vars.Helper.Make<float>(BootSettingsOverlay, 0x80, 0x74);
 	vars.Helper["LoadStart"] = vars.Helper.Make<int>(LoadStart);
 	vars.Helper["LoadEnd1"] = vars.Helper.Make<int>(LoadEnd1);
