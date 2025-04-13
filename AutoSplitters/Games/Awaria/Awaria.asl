@@ -9,9 +9,7 @@ startup
 init
 {
 	vars.JitSave = vars.Uhara.CreateTool("UnityCS", "JitSave");
-	IntPtr StartRun = vars.JitSave.Add("MenuScript", "NextLevel", 1, 1, 14,
-		new byte[] { 0x48, 0x81, 0x7C, 0x24, 0x10, 0x12, 0x00, 0x00, 0x00, 0x90,
-		0x90, 0x90, 0x83, 0x05, 0xE5, 0xFF, 0xFF, 0xFF, 0x01 } );
+	IntPtr StartRun = vars.JitSave.AddFlag("MenuScript", "NextLevel", 1, 1, 14);
 	IntPtr MenuScript = vars.JitSave.AddInst("MenuScript");
 	vars.JitSave.ProcessQueue();
 		
