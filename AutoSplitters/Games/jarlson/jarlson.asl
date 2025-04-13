@@ -21,4 +21,6 @@ update
 {
     vars.Helper.Update();
     vars.Helper.MapPointers();
+	
+	print(current.igt.ToString());
 }

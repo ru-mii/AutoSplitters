@@ -11,7 +11,7 @@ init
 	vars.JitSave = vars.Uhara.CreateTool("UnityCS", "JitSave");
 	IntPtr StartRun = vars.JitSave.Add("MenuScript", "NextLevel", 1, 1, 14,
 		new byte[] { 0x48, 0x81, 0x7C, 0x24, 0x10, 0x12, 0x00, 0x00, 0x00, 0x90,
-		0x75, 0x07, 0x83, 0x05, 0xE5, 0xFF, 0xFF, 0xFF, 0x01 } );
+		0x90, 0x90, 0x83, 0x05, 0xE5, 0xFF, 0xFF, 0xFF, 0x01 } );
 	IntPtr MenuScript = vars.JitSave.AddInst("MenuScript");
 	vars.JitSave.ProcessQueue();
 		
@@ -29,7 +29,7 @@ init
 
 start
 {
-	return current.StartRun != old.StartRun && current.NextLevel == 1;
+	return current.StartRun != old.StartRun && current.NextLevel == 1 && current.CurrentMenu == 7;
 }
 
 split
@@ -40,4 +40,9 @@ split
 reset
 {
 	return current.CurrentMenu != old.CurrentMenu && current.CurrentMenu == 1;
+}
+
+update
+{
+	//print(current.CurrentMenu.ToString());
 }
