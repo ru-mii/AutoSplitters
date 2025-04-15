@@ -24,6 +24,9 @@ init
 	
 	// finish
 	vars.Helper["Credits"] = vars.Helper.Make<ulong>(GEngine, 0xD58, 0x38, 0x0, 0x30, 0x360, 0x170, 0xF70, 0x28);
+	
+	vars.Helper.Update();
+	vars.Helper.MapPointers();
 }
 
 update
