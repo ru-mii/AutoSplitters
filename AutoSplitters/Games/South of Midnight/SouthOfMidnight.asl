@@ -1,7 +1,4 @@
-﻿state("SouthOfMidnight")
-{
-	byte NowLoading : 0x58FEAE8;
-}
+﻿state("SouthOfMidnight") { }
 
 startup
 {
@@ -19,7 +16,7 @@ init
 	vars.Helper["RelativeRotationPitch"] = vars.Helper.Make<float>(GEngine, 0xD58, 0x38, 0x0, 0x30, 0x270, 0x128);
 	
 	// isLoading
-	//vars.Helper["NowLoading"] = vars.Helper.Make<int>(GEngine, 0xD58, 0x198, 0x1C0, 0x370, 0x28, 0x10, 0x118, 0xD8, 0xB0, 0xA08);
+	vars.Helper["NowLoading"] = vars.Helper.Make<int>(GEngine, 0xD58, 0x20, 0x10, 0x118, 0x608, 0x158, 0xB0, 0xA08);
 	
 	// split
 	vars.ChapterCount = 1;
