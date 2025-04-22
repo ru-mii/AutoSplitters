@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Games\Awaria\Awaria.asl" />
+    <None Include="Games\Biodacity The Mansion\BiodacityTheMansion.asl" />
     <None Include="Games\Bioshock\Bioshock.asl" />
+    <None Include="Games\CloverPit\CloverPit.asl" />
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
     <None Include="Games\Megabonk Demo\MegabonkDemo.asl" />
     <None Include="Games\realMyst Masterpiece Edition\realMystMasterpieceEdition.asl" />
