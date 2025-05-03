@@ -6,7 +6,7 @@ startup
 	Assembly.Load(File.ReadAllBytes("Components/uhara5")).CreateInstance("Main");
 	vars.Helper.GameName = "ENA: Dream BBQ";
 	vars.Helper.LoadSceneManager = true;
-	//vars.Helper.AlertLoadless();
+	vars.Helper.AlertLoadless();
 	vars.NowLoading = false;
 	
 	settings.Add("gr_Splits", true, "Splits");
