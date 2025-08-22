@@ -3,7 +3,8 @@
 startup
 {
     Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Basic");
-    Assembly.Load(File.ReadAllBytes("Components/uhara5")).CreateInstance("Main");
+    Assembly.Load(File.ReadAllBytes("Components/uhara8")).CreateInstance("Main");
+	vars.Uhara.EnableDebug();
 
     vars.Helper.GameName = "Jarlson";
     vars.Helper.AlertGameTime();
@@ -11,12 +12,12 @@ startup
 
 onStart
 {
-    print("has finished? " + current.hasFinished + "\nis playing? " + current.playing + "\nfull game time: " + current.igt);
+    //print("has finished? " + current.hasFinished + "\nis playing? " + current.playing + "\nfull game time: " + current.igt);
 }
 
 init // huge thanks to ru-mii for writing this init action and for the uhara5 component
 {
-    vars.JitSave = vars.Uhara.CreateTool("UnityCS", "JitSave");
+    vars.JitSave = vars.Uhara.CreateTool("Unity", "DotNet", "JitSave");
     IntPtr GameManagerScript = vars.JitSave.AddInst("GameManagerScript");
     vars.JitSave.ProcessQueue();
     
@@ -53,7 +54,7 @@ update
     vars.Helper.Update();
     vars.Helper.MapPointers();
 	
-	print(current.igt.ToString());
+	print(current.igt.ToString());;
 }
 
 isLoading

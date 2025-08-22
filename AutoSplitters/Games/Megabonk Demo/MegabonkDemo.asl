@@ -3,20 +3,25 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/asl-help")).CreateInstance("Unity");
-	Assembly.Load(File.ReadAllBytes("Components/megabonk-lib")).CreateInstance("Main");
+    Assembly.Load(File.ReadAllBytes("Components/uhara8")).CreateInstance("Main");
+	vars.Uhara.EnableDebug();
+	
 	vars.Helper.GameName = "Megabonk Demo";
 	vars.Helper.LoadSceneManager = true;
 }
 
 init
 {
-	IntPtr Address = vars.Megabonk.Start();
+	vars.JitSave = vars.Uhara.CreateTool("Unity", "IL2CPP", "JitSave");
+    IntPtr OnPortalClose = vars.JitSave.AddFlag("UiManager", "OnPortalClose");
+    IntPtr OnBossDefeated = vars.JitSave.AddFlag("ObjectiveUi", "OnBossDefeated");
+    vars.JitSave.ProcessQueue();
 	
-	if (Address != IntPtr.Zero)
-	{
-		vars.Helper["StartTimer"] = vars.Helper.Make<ulong>(Address);
-		vars.Helper["SplitTimer"] = vars.Helper.Make<ulong>(Address + 0x8);
-	}
+	vars.Helper["OnPortalClose"] = vars.Helper.Make<int>(OnPortalClose);
+	vars.Helper["OnBossDefeated"] = vars.Helper.Make<int>(OnBossDefeated);
+	
+	vars.Helper.Update();
+	vars.Helper.MapPointers();
 }
 
 update
@@ -28,16 +33,16 @@ update
 
 start
 {
-	return current.StartTimer != old.StartTimer;
+	return current.OnPortalClose != old.OnPortalClose;
 }
 
 split
 {
-	return current.SplitTimer != old.SplitTimer;
+	return current.OnBossDefeated != old.OnBossDefeated;
 }
 
 reset
 {
-	if (current.StartTimer != old.StartTimer) return true;
+	if (current.OnPortalClose != old.OnPortalClose) return true;
 	return current.ActiveScene != old.ActiveScene && current.ActiveScene == 0;
 }

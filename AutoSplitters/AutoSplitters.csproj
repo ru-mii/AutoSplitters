@@ -47,11 +47,18 @@
     <None Include="Games\Biodacity The Mansion\BiodacityTheMansion.asl" />
     <None Include="Games\Bioshock\Bioshock.asl" />
     <None Include="Games\CloverPit\CloverPit.asl" />
+    <None Include="Games\Dead Take\DeadTake.asl" />
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
+    <None Include="Games\Escape Simulator\EscapeSimulator.asl" />
+    <None Include="Games\Fretless - The Wrath of Riffson\FretlessTheWrathofRiffson.asl" />
+    <None Include="Games\Harry Potter and the Prisoner of Azkaban %28PC%29\HarryPotterandthePrisonerofAzkaban%28PC%29.asl" />
     <None Include="Games\Lunacid\Lunacid.asl" />
+    <None Include="Games\Luto\Luto.asl" />
+    <None Include="Games\Madagascar\Madagascar.asl" />
     <None Include="Games\Megabonk Demo\MegabonkDemo.asl" />
     <None Include="Games\realMyst Masterpiece Edition\realMystMasterpieceEdition.asl" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Games\SHINOBI Art of Vengeance\SHINOBIArtOfVengeance.asl" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Games\A Difficult Game About Climbing\image1.JPG" />
@@ -70,6 +77,7 @@
     <None Include="Games\SuperSorry\SuperSorry.asl" />
     <None Include="Games\Thunder Ray\ThunderRay.asl" />
     <None Include="Games\Vic De Vitaminevreter\VicDeVitaminevreter.asl" />
+    <None Include="Games\WUCHANG Fallen Feathers\WUCHANGFallenFeathers.asl" />
     <None Include="Games\Yasuke Simulator\YasukeSimulator.asl" />
     <None Include="Prototypes\Takashi\Takashi.asl" />
   </ItemGroup>
