@@ -30,7 +30,7 @@ onStart
 
 start
 {
-	return current.StartGame != old.StartGame;
+	return current.StartGame != old.StartGame && current.StartGame != 0;
 }
 
 update
