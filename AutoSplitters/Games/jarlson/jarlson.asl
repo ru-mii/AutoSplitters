@@ -23,7 +23,7 @@ init // huge thanks to ru-mii for writing this init action and for the uhara5 co
     
     vars.Helper["hasFinished"] = vars.Helper.Make<bool>(GameManagerScript, 0x31);
     vars.Helper["playing"] = vars.Helper.Make<bool>(GameManagerScript, 0x18, 0x2C);
-    vars.Helper["igt"] = vars.Helper.Make<float>(GameManagerScript, 0x18, 0x1C);
+    vars.Helper["igt"] = vars.Helper.Make<float>(GameManagerScript, 0x18, 0x1C);;
 	
 	vars.Helper.Update();
     vars.Helper.MapPointers();
