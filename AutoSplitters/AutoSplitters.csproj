@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Games\Alien Rogue Incursion Evolved Edition\AlienRogueIncursionEvolvedEdition.asl" />
     <None Include="Games\ALTF42\ALTF42.asl" />
     <None Include="Games\Creepy Tale\CreepyTale.asl" />
     <None Include="Games\Awaria\Awaria.asl" />
@@ -52,6 +53,7 @@
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
     <None Include="Games\Escape Simulator\EscapeSimulator.asl" />
     <None Include="Games\Fretless - The Wrath of Riffson\FretlessTheWrathofRiffson.asl" />
+    <None Include="Games\Ghostly Gumshoe\GhostlyGumshoe.asl" />
     <None Include="Games\Harry Potter and the Prisoner of Azkaban %28PC%29\HarryPotterandthePrisonerofAzkaban%28PC%29.asl" />
     <None Include="Games\Lunacid\Lunacid.asl" />
     <None Include="Games\Luto\Luto.asl" />
