@@ -61,6 +61,7 @@
     <None Include="Games\Megabonk Demo\MegabonkDemo.asl" />
     <None Include="Games\realMyst Masterpiece Edition\realMystMasterpieceEdition.asl" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Games\REANIMAL\REANIMAL.asl" />
     <None Include="Games\SHINOBI Art of Vengeance\SHINOBIArtOfVengeance.asl" />
   </ItemGroup>
   <ItemGroup>
