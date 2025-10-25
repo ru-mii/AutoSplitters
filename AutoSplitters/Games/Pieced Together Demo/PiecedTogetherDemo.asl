@@ -14,7 +14,7 @@ init
 update
 {
 	current.ActiveScene = vars.Tool.GetActiveSceneName() ?? current.ActiveScene;
-	current.LoadingScene = vars.Tool.GetLoadingSceneName() ?? current.ActiveScene;
+	current.LoadingScene = vars.Tool.GetLoadingSceneName() ?? current.LoadingScene;
 }
 
 start
