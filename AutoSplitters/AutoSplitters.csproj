@@ -59,6 +59,7 @@
     <None Include="Games\Luto\Luto.asl" />
     <None Include="Games\Madagascar\Madagascar.asl" />
     <None Include="Games\Megabonk Demo\MegabonkDemo.asl" />
+    <None Include="Games\Pieced Together Demo\PiecedTogetherDemo.asl" />
     <None Include="Games\realMyst Masterpiece Edition\realMystMasterpieceEdition.asl" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Games\REANIMAL\REANIMAL.asl" />
