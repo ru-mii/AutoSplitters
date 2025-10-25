@@ -80,6 +80,7 @@
     <None Include="Games\Shipwrecked 64\Shipwrecked64.asl" />
     <None Include="Games\South of Midnight\SouthOfMidnight.asl" />
     <None Include="Games\SuperSorry\SuperSorry.asl" />
+    <None Include="Games\Terpenie\Terpenie.asl" />
     <None Include="Games\Thunder Ray\ThunderRay.asl" />
     <None Include="Games\Vic De Vitaminevreter\VicDeVitaminevreter.asl" />
     <None Include="Games\WUCHANG Fallen Feathers\WUCHANGFallenFeathers.asl" />
