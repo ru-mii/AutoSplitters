@@ -23,12 +23,14 @@ init
 	// ---
 	{
 		vars.Resolver.Watch<byte>("InputMap", gEngine, 0x11F8, 0x510);
+		vars.Resolver.Watch<ulong>("LoadChange", vars.Uhara.CodeHKFlag("4C8BC84C896424204D8BC7498BD6488BCFFFD3"));
 		vars.Resolver.Watch<uint>("GWorldName", gWorld, 0x18);
 		vars.Resolver.WatchString("LevelName", ReadStringType.UTF16, gEngine, 0x11F8, 0x260, 0x0);
 	}
 	
 	// ---
 	vars.StartAllowed = false;
+	vars.NowLoading = false;
 }
 
 
@@ -42,6 +44,14 @@ update
 
 	if (old.LevelName == "opening_cinematic_b")
 		vars.StartAllowed = true;
+	
+	print(current.LoadChange.ToString());
+	
+	if (current.LoadChange != old.LoadChange && current.LoadChange != 0 && current.InputMap == 0)
+		vars.NowLoading = true;
+	
+	if (current.InputMap != 0)
+		vars.NowLoading = false;
 }
 
 start
@@ -55,7 +65,7 @@ start
 
 isLoading
 {
-	//return current.InputMap == 0;
+	return vars.NowLoading;
 }
 
 reset
