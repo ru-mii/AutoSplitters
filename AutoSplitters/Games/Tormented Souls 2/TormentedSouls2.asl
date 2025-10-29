@@ -29,6 +29,7 @@ init
 	}
 	
 	// ---
+	current.GWorldName = 0;
 	vars.StartAllowed = false;
 	vars.NowLoading = false;
 }
@@ -45,13 +46,17 @@ update
 	if (old.LevelName == "opening_cinematic_b")
 		vars.StartAllowed = true;
 	
-	print(current.LoadChange.ToString());
-	
 	if (current.LoadChange != old.LoadChange && current.LoadChange != 0 && current.InputMap == 0)
+	{
+		if (!vars.NowLoading) vars.Uhara.Log("start loading");
 		vars.NowLoading = true;
+	}
 	
 	if (current.InputMap != 0)
+	{
+		if (vars.NowLoading) vars.Uhara.Log("end loading");
 		vars.NowLoading = false;
+	}
 }
 
 start
