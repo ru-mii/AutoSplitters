@@ -55,7 +55,7 @@ start
 
 isLoading
 {
-	return current.InputMap == 0;
+	//return current.InputMap == 0;
 }
 
 reset
