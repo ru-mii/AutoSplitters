@@ -3,6 +3,7 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
+	vars.Uhara.AlertLoadless();
 	vars.Uhara.EnableDebug();
 }
 
@@ -48,29 +49,11 @@ update
 	
 	if (current.LoadChange != old.LoadChange && current.LoadChange != 0 && current.InputMap == 0)
 	{
-		if (!vars.NowLoading)
-		{
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("---------------");
-		}
-		vars.NowLoading = true;
+		vars.NowLoading = !vars.NowLoading;
 	}
 	
 	if (current.InputMap != 0)
 	{
-		if (vars.NowLoading)
-		{
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("AAAAAAAAAAAAAAA");
-			vars.Uhara.Log("---------------");
-		}
 		vars.NowLoading = false;
 	}
 }
