@@ -3,34 +3,21 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
-	vars.Uhara.AlertLoadless();
-	vars.Uhara.EnableDebug();
+	vars.Uhara.AlertLoadless(); vars.Uhara.EnableDebug();
 }
 
 init
 {
-	IntPtr gWorld = vars.Uhara.ScanRel(3, "48 8B 1D ?? ?? ?? ?? 48 85 DB 74 ?? 41 B0 01");
-	IntPtr gEngine = vars.Uhara.ScanRel(3, "48 8B 0D ?? ?? ?? ?? 66 0F 5A C9 E8");
-	IntPtr fNames = vars.Uhara.ScanRel(7, "8B D9 74 ?? 48 8D 15 ?? ?? ?? ?? EB");
-
-	if (gWorld == IntPtr.Zero || gEngine == IntPtr.Zero || fNames == IntPtr.Zero)
-		throw new Exception("Not all required addresses could be found by scanning.");
-	
-	// ---
+	vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
 	vars.Tool = vars.Uhara.CreateTool("UnrealEngine", "Events");
-	//vars.Resolver.Watch<ulong>("StartLoad", vars.Tool.FunctionParentPtr("W_BlackScreen_C", "", "PreConstruct"));
-	//vars.Resolver.Watch<ulong>("EndLoad", vars.Tool.FunctionParentPtr("W_BlackScreen_C", "", "PreConstruct"));
 	
 	// ---
-	{
-		vars.Resolver.Watch<byte>("InputMap", gEngine, 0x11F8, 0x510);
-		vars.Resolver.Watch<ulong>("LoadChange", vars.Uhara.CodeHKFlag("4C8BC84C896424204D8BC7498BD6488BCFFFD3"));
-		vars.Resolver.Watch<uint>("GWorldName", gWorld, 0x18);
-		vars.Resolver.WatchString("LevelName", ReadStringType.UTF16, gEngine, 0x11F8, 0x260, 0x0);
-	}
+	vars.Resolver.Watch<byte>("InputMap", vars.Utils.GEngine, 0x11F8, 0x510);
+	vars.Resolver.Watch<ulong>("LoadChange", vars.Uhara.CodeHKFlag("4C8BC84C896424204D8BC7498BD6488BCFFFD3"));
+	vars.Resolver.Watch<uint>("GWorldName", vars.Utils.GWorld, 0x18);
+	vars.Resolver.WatchString("LevelName", ReadStringType.UTF16, vars.Utils.GEngine, 0x11F8, 0x260, 0x0);
 	
 	// ---
-	current.GWorldName = 0;
 	vars.StartAllowed = false;
 	vars.NowLoading = false;
 }
@@ -40,7 +27,7 @@ update
 {
 	vars.Uhara.Update();
 	
-	var world = vars.Tool.FNameToString(current.GWorldName);
+	var world = vars.Utils.FNameToString(current.GWorldName);
 	if (!string.IsNullOrEmpty(world) && world != "None")
 		current.World = world;
 
