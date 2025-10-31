@@ -13,6 +13,7 @@ init
 	
 	// ---
 	vars.Resolver.Watch<byte>("InputMap", vars.Utils.GEngine, 0x11F8, 0x510);
+	vars.Resolver.Watch<byte>("StopGameTime", vars.Utils.GEngine, 0x11F8, 0x52B);
 	vars.Resolver.Watch<ulong>("LoadChange", vars.Uhara.CodeHKFlag("4C8BC84C896424204D8BC7498BD6488BCFFFD3"));
 	vars.Resolver.Watch<uint>("GWorldName", vars.Utils.GWorld, 0x18);
 	vars.Resolver.WatchString("LevelName", ReadStringType.UTF16, vars.Utils.GEngine, 0x11F8, 0x260, 0x0);
@@ -36,13 +37,23 @@ update
 	
 	if (current.LoadChange != old.LoadChange && current.LoadChange != 0 && current.InputMap == 0)
 	{
-		vars.NowLoading = !vars.NowLoading;
+		vars.NowLoading = true;
 	}
 	
-	if (current.InputMap != 0)
+	if (current.StopGameTime != old.StopGameTime && current.StopGameTime == 1)
+	{
+		vars.NowLoading = true;
+	}
+	
+	if (current.InputMap != 0 && current.StopGameTime != 1)
 	{
 		vars.NowLoading = false;
 	}
+}
+
+onStart
+{
+	vars.NowLoading = false;
 }
 
 start
