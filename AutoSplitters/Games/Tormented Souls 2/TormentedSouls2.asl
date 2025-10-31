@@ -35,7 +35,7 @@ update
 	if (old.LevelName == "opening_cinematic_b")
 		vars.StartAllowed = true;
 	
-	if (current.LoadChange != old.LoadChange && current.LoadChange != 0 && current.InputMap == 0)
+	if (current.LoadChange != old.LoadChange && current.LoadChange != 0)
 	{
 		vars.NowLoading = true;
 	}
@@ -45,7 +45,7 @@ update
 		vars.NowLoading = true;
 	}
 	
-	if (current.InputMap != 0 && current.StopGameTime != 1)
+	if (current.InputMap != 0)
 	{
 		vars.NowLoading = false;
 	}
