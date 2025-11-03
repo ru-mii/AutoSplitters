@@ -8,8 +8,6 @@ startup
 
 init
 {
-	vars.Uhara.FileLogger.Start("Components\\TS2_UHARA_LOG.txt");
-	
 	vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
 	vars.Tool = vars.Uhara.CreateTool("UnrealEngine", "Events");
 	
@@ -28,13 +26,6 @@ init
 update
 {
 	vars.Uhara.Update();
-	
-	// ---
-	if (current.LevelName != old.LevelName)
-	{
-		vars.Uhara.FileLogger.Log("LEVEL: " + current.LevelName);
-		vars.Uhara.Log("LEVEL: " + current.LevelName);
-	}
 	
 	// ---
 	var world = vars.Utils.FNameToString(current.GWorldName);
