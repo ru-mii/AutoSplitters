@@ -8,11 +8,10 @@ startup
 
 init
 {
-	vars.Tool = vars.Uhara.CreateTool("Unity", "IL2CPP", "Instance");
+	var Tool = vars.Uhara.CreateTool("Unity", "IL2CPP", "Instance");
 	
 	// ---
-	var LoadingUI = vars.Tool.Get("Scene.Loading:LoadingUI", "_fieldLoadScreenShotImage", "m_Canvas");
-	vars.Resolver.Watch<ulong>("NowLoading", LoadingUI.Base, LoadingUI.Offsets);
+	Tool.Watch<ulong>("NowLoading", "Scene.Loading:LoadingUI", "_fieldLoadScreenShotImage", "m_Canvas");
 	vars.Uhara["NowLoading"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
 	
 	// ---
