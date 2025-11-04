@@ -13,6 +13,7 @@ init
 	// ---
 	var LoadingUI = vars.Tool.Get("Scene.Loading:LoadingUI", "_fieldLoadScreenShotImage", "m_Canvas");
 	vars.Resolver.Watch<ulong>("NowLoading", LoadingUI.Base, LoadingUI.Offsets);
+	vars.Uhara["NowLoading"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
 	
 	// ---
 	current.NowLoading = 0;
