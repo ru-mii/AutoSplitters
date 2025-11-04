@@ -3,7 +3,7 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
-	vars.Uhara.EnableDebug();
+	vars.Uhara.EnableDebug(); vars.Uhara.AlertLoadless();
 }
 
 init
