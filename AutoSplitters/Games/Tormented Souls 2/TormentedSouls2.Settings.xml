@@ -1,0 +1,136 @@
+﻿<Settings>
+	<Setting Label="Levels" State="true">
+		<Setting Id="Opening_Cinematic_B" Label="Opening Cinematic B" State="true" />
+		<Setting Id="Church_NunChamber_cinematic_night" Label="Church NunChamber cinematic night" State="true" />
+		<Setting Id="Church_Corridor_N_cinematic" Label="Church Corridor N cinematic" State="true" />
+		<Setting Id="LadyChapel_cinematic" Label="LadyChapel cinematic" State="true" />
+		<Setting Id="Church_Infirmary" Label="Church Infirmary" State="true" />
+		<Setting Id="Church_Corridor_2F" Label="Church Corridor 2F" State="true" />
+		<Setting Id="Church_WareHouse" Label="Church WareHouse" State="true" />
+		<Setting Id="Church_Tower" Label="Church Tower" State="true" />
+		<Setting Id="Church_Library" Label="Church Library" State="true" />
+		<Setting Id="Church_Corridor_N" Label="Church Corridor N" State="true" />
+		<Setting Id="Church_Basement" Label="Church Basement" State="true" />
+		<Setting Id="Church_WorkShop" Label="Church WorkShop" State="true" />
+		<Setting Id="Church_Joseph" Label="Church Joseph" State="true" />
+		<Setting Id="Claustro" Label="Claustro" State="true" />
+		<Setting Id="Church_Corridor_S" Label="Church Corridor S" State="true" />
+		<Setting Id="Church_Kitchen" Label="Church Kitchen" State="true" />
+		<Setting Id="Refectory" Label="Refectory" State="true" />
+		<Setting Id="Calefactorio" Label="Calefactorio" State="true" />
+		<Setting Id="Prision_B" Label="Prision B" State="true" />
+		<Setting Id="JailOffice" Label="JailOffice" State="true" />
+		<Setting Id="Prision" Label="Prision" State="true" />
+		<Setting Id="Museum" Label="Museum" State="true" />
+		<Setting Id="TortureChamber" Label="TortureChamber" State="true" />
+		<Setting Id="TortureChamber_Bad" Label="TortureChamber Bad" State="true" />
+		<Setting Id="Museum_Bad" Label="Museum Bad" State="true" />
+		<Setting Id="Chapterhouse" Label="Chapterhouse" State="true" />
+		<Setting Id="LadyChapel" Label="LadyChapel" State="true" />
+		<Setting Id="Church_Yard" Label="Church Yard" State="true" />
+		<Setting Id="Town_A" Label="Town A" State="true" />
+		<Setting Id="Town_F" Label="Town F" State="true" />
+		<Setting Id="Town_F2" Label="Town F2" State="true" />
+		<Setting Id="Town_Mall" Label="Town Mall" State="true" />
+		<Setting Id="Pharmacy" Label="Pharmacy" State="true" />
+		<Setting Id="Town_Mall_B" Label="Town Mall B" State="true" />
+		<Setting Id="Town_Mall_Videoclub" Label="Town Mall Videoclub" State="true" />
+		<Setting Id="Mall_Arcade" Label="Mall Arcade" State="true" />
+		<Setting Id="Town_D" Label="Town D" State="true" />
+		<Setting Id="O_Corridor_1F" Label="O Corridor 1F" State="true" />
+		<Setting Id="O_Room" Label="O Room" State="true" />
+		<Setting Id="O_Corridor_2F" Label="O Corridor 2F" State="true" />
+		<Setting Id="O_SurveillanceRoom" Label="O SurveillanceRoom" State="true" />
+		<Setting Id="O_SurveillanceRoom2" Label="O SurveillanceRoom2" State="true" />
+		<Setting Id="O_ChangingRoom" Label="O ChangingRoom" State="true" />
+		<Setting Id="O_ChangingRoomBath" Label="O ChangingRoomBath" State="true" />
+		<Setting Id="O_Corridor_B" Label="O Corridor B" State="true" />
+		<Setting Id="O_Freezer" Label="O Freezer" State="true" />
+		<Setting Id="O_Freezer_Past" Label="O Freezer Past" State="true" />
+		<Setting Id="O_ReceptionArea" Label="O ReceptionArea" State="true" />
+		<Setting Id="Sewer_A2" Label="Sewer A2" State="true" />
+		<Setting Id="O_DiningRoom" Label="O DiningRoom" State="true" />
+		<Setting Id="O_Office" Label="O Office" State="true" />
+		<Setting Id="O_Kitchen2" Label="O Kitchen2" State="true" />
+		<Setting Id="O_Kitchen" Label="O Kitchen" State="true" />
+		<Setting Id="O_Corridor_B2" Label="O Corridor B2" State="true" />
+		<Setting Id="Sewer_G" Label="Sewer G" State="true" />
+		<Setting Id="O_WasteDisposal" Label="O WasteDisposal" State="true" />
+		<Setting Id="O_Factory" Label="O Factory" State="true" />
+		<Setting Id="O_Factory_Bad" Label="O Factory Bad" State="true" />
+		<Setting Id="O_WasteDisposal_Bad" Label="O WasteDisposal Bad" State="true" />
+		<Setting Id="O_SlaughterRoom" Label="O SlaughterRoom" State="true" />
+		<Setting Id="Sewer_A" Label="Sewer A" State="true" />
+		<Setting Id="Cementery_A" Label="Cementery A" State="true" />
+		<Setting Id="Cementery_office" Label="Cementery office" State="true" />
+		<Setting Id="Cementery_D" Label="Cementery D" State="true" />
+		<Setting Id="Cementery_A2" Label="Cementery A2" State="true" />
+		<Setting Id="Cementery_I" Label="Cementery I" State="true" />
+		<Setting Id="Cementery_C" Label="Cementery C" State="true" />
+		<Setting Id="Cementery_D1" Label="Cementery D1" State="true" />
+		<Setting Id="Cementery_D2" Label="Cementery D2" State="true" />
+		<Setting Id="Sewer_D" Label="Sewer D" State="true" />
+		<Setting Id="Sewer_B" Label="Sewer B" State="true" />
+		<Setting Id="Sewer_F" Label="Sewer F" State="true" />
+		<Setting Id="Town_B" Label="Town B" State="true" />
+		<Setting Id="School_Lobby" Label="School Lobby" State="true" />
+		<Setting Id="School_Library" Label="School Library" State="true" />
+		<Setting Id="School_Corridor_East_B" Label="School Corridor East B" State="true" />
+		<Setting Id="School_KinderGarten_2" Label="School KinderGarten 2" State="true" />
+		<Setting Id="School_Corridor_West_1F" Label="School Corridor West 1F" State="true" />
+		<Setting Id="School_Class_5" Label="School Class 5" State="true" />
+		<Setting Id="School_Yard" Label="School Yard" State="true" />
+		<Setting Id="School_ElectricalRoom" Label="School ElectricalRoom" State="true" />
+		<Setting Id="School_Elevator" Label="School Elevator" State="true" />
+		<Setting Id="School_ChimestryClass" Label="School ChimestryClass" State="true" />
+		<Setting Id="School_SewingClass" Label="School SewingClass" State="true" />
+		<Setting Id="School_Corridor_Basement" Label="School Corridor Basement" State="true" />
+		<Setting Id="School_ComputerRoom" Label="School ComputerRoom" State="true" />
+		<Setting Id="School_JanitorRoom" Label="School JanitorRoom" State="true" />
+		<Setting Id="School_Corridor_East_A" Label="School Corridor East A" State="true" />
+		<Setting Id="School_Garden" Label="School Garden" State="true" />
+		<Setting Id="School_Class_6" Label="School Class 6" State="true" />
+		<Setting Id="School_ClassStorage_1" Label="School ClassStorage 1" State="true" />
+		<Setting Id="School_Class_2" Label="School Class 2" State="true" />
+		<Setting Id="School_ArtRoom" Label="School ArtRoom" State="true" />
+		<Setting Id="School_Garden_Past" Label="School Garden Past" State="true" />
+		<Setting Id="School_Class_3" Label="School Class 3" State="true" />
+		<Setting Id="School_ClassStorage_2" Label="School ClassStorage 2" State="true" />
+		<Setting Id="School_Toilet_Women" Label="School Toilet Women" State="true" />
+		<Setting Id="School_Toilet_Women_Hell_Bad" Label="School Toilet Women Hell Bad" State="true" />
+		<Setting Id="School_Yard_Bad_Hell" Label="School Yard Bad Hell" State="true" />
+		<Setting Id="School_Class_4_Bad_Hell" Label="School Class 4 Bad Hell" State="true" />
+		<Setting Id="School_CorridorWest_Bad" Label="School CorridorWest Bad" State="true" />
+		<Setting Id="School_Lobby_Bad" Label="School Lobby Bad" State="true" />
+		<Setting Id="School_DirectorOffice_Bad" Label="School DirectorOffice Bad" State="true" />
+		<Setting Id="School_Class_7_Bad_Hell" Label="School Class 7 Bad Hell" State="true" />
+		<Setting Id="School_Class_4" Label="School Class 4" State="true" />
+		<Setting Id="School_DirectorOffice" Label="School DirectorOffice" State="true" />
+		<Setting Id="School_Archive" Label="School Archive" State="true" />
+		<Setting Id="HiddenSchool_ClassRoom" Label="HiddenSchool ClassRoom" State="true" />
+		<Setting Id="TrainStation" Label="TrainStation" State="true" />
+		<Setting Id="Train" Label="Train" State="true" />
+		<Setting Id="Church_Chapel" Label="Church Chapel" State="true" />
+		<Setting Id="WeakRoom" Label="WeakRoom" State="true" />
+		<Setting Id="WeakRoom_Storage" Label="WeakRoom Storage" State="true" />
+		<Setting Id="Sacristy" Label="Sacristy" State="true" />
+		<Setting Id="FatherOffice" Label="FatherOffice" State="true" />
+		<Setting Id="Church_Chapel_Bad" Label="Church Chapel Bad" State="true" />
+		<Setting Id="Crypt_Bad" Label="Crypt Bad" State="true" />
+		<Setting Id="Crypt" Label="Crypt" State="true" />
+		<Setting Id="Bunker_Entrance" Label="Bunker Entrance" State="true" />
+		<Setting Id="Bunker_Corridor_B1" Label="Bunker Corridor B1" State="true" />
+		<Setting Id="Bunker_Office" Label="Bunker Office" State="true" />
+		<Setting Id="Bunker_Elevator" Label="Bunker Elevator" State="true" />
+		<Setting Id="Bunker_Generator" Label="Bunker Generator" State="true" />
+		<Setting Id="Bunker_Horticulture" Label="Bunker Horticulture" State="true" />
+		<Setting Id="Bunker_Corridor_B3" Label="Bunker Corridor B3" State="true" />
+		<Setting Id="Bunker_Angelica_Laboratory" Label="Bunker Angelica Laboratory" State="true" />
+		<Setting Id="Bunker_BedRooms_M" Label="Bunker BedRooms M" State="true" />
+		<Setting Id="Bunker_Angelica_Laboratory_Past" Label="Bunker Angelica Laboratory Past" State="true" />
+		<Setting Id="Bunker_BedRooms_W" Label="Bunker BedRooms W" State="true" />
+		<Setting Id="Bunker_Final_Save_PreFinal" Label="Bunker Final Save PreFinal" State="true" />
+		<Setting Id="Temple_Save" Label="Temple Save" State="true" />
+		<Setting Id="Bunker_FinalBoos" Label="Bunker FinalBoos" State="true" />
+	</Setting>
+</Settings>
