@@ -50,6 +50,7 @@
     <None Include="Games\Bioshock\Bioshock.asl" />
     <None Include="Games\CloverPit\CloverPit.asl" />
     <None Include="Games\Dead Take\DeadTake.asl" />
+    <None Include="Games\Dragon Quest Monsters The Dark Prince\DragonQuestMonstersTheDarkPrince.asl" />
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
     <None Include="Games\Escape Simulator\EscapeSimulator.asl" />
     <None Include="Games\Fretless - The Wrath of Riffson\FretlessTheWrathofRiffson.asl" />

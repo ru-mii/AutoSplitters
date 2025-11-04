@@ -36,19 +36,13 @@ update
 		vars.StartAllowed = true;
 	
 	if (current.LoadChange != old.LoadChange && current.LoadChange != 0)
-	{
 		vars.NowLoading = true;
-	}
 	
 	if (current.StopGameTime != old.StopGameTime && current.StopGameTime == 1)
-	{
 		vars.NowLoading = true;
-	}
 	
 	if (current.InputMap != 0)
-	{
 		vars.NowLoading = false;
-	}
 }
 
 onStart
@@ -58,7 +52,8 @@ onStart
 
 start
 {
-	if (vars.StartAllowed && current.InputMap > 0 && old.InputMap == 0 && current.LevelName == "Church_NunChamber_cinematic_night")
+	if (vars.StartAllowed && current.InputMap > 0 && old.InputMap == 0 &&
+	current.LevelName == "Church_NunChamber_cinematic_night")
 	{
 		vars.StartAllowed = false;
 		return true;
@@ -72,5 +67,6 @@ isLoading
 
 reset
 {
-	return current.LevelName != old.LevelName && current.LevelName == "Opening_Cinematic_B";
+	return current.LevelName != old.LevelName &&
+		current.LevelName == "Opening_Cinematic_B";
 }
