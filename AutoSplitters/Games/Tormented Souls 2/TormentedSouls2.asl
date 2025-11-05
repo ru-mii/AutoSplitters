@@ -3,13 +3,16 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
+	vars.Uhara.Settings.CreateFromXml("Components/TormentedSouls2.Settings.xml");
 	vars.Uhara.AlertLoadless(); vars.Uhara.EnableDebug();
 }
 
 init
 {
 	vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
-	vars.Tool = vars.Uhara.CreateTool("UnrealEngine", "Events");
+	vars.Tool = vars.Uhara.CreateTool("UnrealEngine", "Events");;
+	
+	// ---
 	
 	// ---
 	vars.Resolver.Watch<byte>("InputMap", vars.Utils.GEngine, 0x11F8, 0x510);
@@ -21,6 +24,7 @@ init
 	// ---
 	vars.StartAllowed = false;
 	vars.NowLoading = false;
+	vars.CompletedSplits = new HashSet<string>();
 }
 
 update
@@ -48,6 +52,7 @@ update
 onStart
 {
 	vars.NowLoading = false;
+	vars.CompletedSplits.Clear();
 }
 
 start
@@ -63,6 +68,12 @@ start
 isLoading
 {
 	return vars.NowLoading;
+}
+
+split
+{
+	return current.LevelName != old.LevelName &&
+		settings[current.LevelName] && vars.CompletedSplits.Add(current.LevelName);
 }
 
 reset
