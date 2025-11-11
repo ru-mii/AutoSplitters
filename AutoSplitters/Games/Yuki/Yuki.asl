@@ -8,7 +8,8 @@ startup
 	dynamic[,] _settings =
 	{
 		{ "GRP_Splits", true, "Splits", null },
-			{ "GRP_OnEnter", false, "On Enter", "GRP_Splits" },
+			{ "GRP_OnEnter", true, "On Enter", "GRP_Splits" },
+				{ "GRP_TitleScreen1", false, "TitleScreen", "GRP_OnEnter" },
 				{ "GRP_IntroRoom1", false, "IntroRoom", "GRP_OnEnter" },
 				{ "GRP_Exterior1", false, "Exterior", "GRP_OnEnter" },
 				{ "GRP_Closet1", false, "Closet", "GRP_OnEnter" },
@@ -23,8 +24,9 @@ startup
 				{ "GRP_Garden1", false, "Garden", "GRP_OnEnter" },
 				{ "GRP_Library1", false, "Library", "GRP_OnEnter" },
 				{ "GRP_Ending_Hatred1", false, "Ending_Hatred", "GRP_OnEnter" },
-				{ "GRP_Ending_Credits1", false, "Ending_Credits", "GRP_OnEnter" },
+				{ "GRP_Ending_Credits1", true, "Ending_Credits", "GRP_OnEnter" },
 			{ "GRP_OnLeave", false, "On Leave", "GRP_Splits" },
+				{ "GRP_TitleScreen2", false, "TitleScreen", "GRP_OnLeave" },
 				{ "GRP_IntroRoom2", false, "IntroRoom", "GRP_OnLeave" },
 				{ "GRP_Exterior2", false, "Exterior", "GRP_OnLeave" },
 				{ "GRP_Closet2", false, "Closet", "GRP_OnLeave" },
@@ -43,12 +45,29 @@ startup
 	};
 	
 	vars.Uhara.Settings.Create(_settings);
+	vars.CompletedSplits = new HashSet<string>();
 }
 
 init
 {
 	vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
+	vars.Events = vars.Uhara.CreateTool("UnrealEngine", "Events");
+	
+	vars.Resolver.Watch<ulong>("StartTimer", vars.Events.FunctionFlag("WBP_Yuki_Button_Main_C", "WBP_Yuki_Button_MainNEWGAME", "BP_OnClicked"));
 	vars.Resolver.Watch<uint>("WorldFName", vars.Utils.GWorld, 0x18);
+	
+	// ---
+	current.WorldName = "";
+}
+
+start
+{
+	return current.StartTimer != old.StartTimer && current.StartTimer != 0;
+}
+
+onStart
+{
+	vars.CompletedSplits.Clear();
 }
 
 update
@@ -58,12 +77,23 @@ update
 	string tempWorldName = vars.Utils.FNameToString(current.WorldFName);
 	if (!string.IsNullOrEmpty(tempWorldName) && tempWorldName != "None")
 		current.WorldName = tempWorldName;
-	
+}
+
+split
+{
 	if (current.WorldName != old.WorldName)
 	{
 		string enter = "GRP_" + current.WorldName + "1";
 		string leave = "GRP_" + old.WorldName + "2";
 		
-		return settings[enter] || settings[leave];
+		return
+			(settings[enter] && vars.CompletedSplits.Add(enter)) ||
+			(settings[leave] && vars.CompletedSplits.Add(leave));
 	}
+}
+
+reset
+{
+	return current.WorldName != old.WorldName &&
+		current.WorldName == "TitleScreen";
 }
