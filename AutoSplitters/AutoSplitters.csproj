@@ -87,6 +87,7 @@
     <None Include="Games\Vic De Vitaminevreter\VicDeVitaminevreter.asl" />
     <None Include="Games\WUCHANG Fallen Feathers\WUCHANGFallenFeathers.asl" />
     <None Include="Games\Yasuke Simulator\YasukeSimulator.asl" />
+    <None Include="Games\Yuki\Yuki.asl" />
     <None Include="Prototypes\Takashi\Takashi.asl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
