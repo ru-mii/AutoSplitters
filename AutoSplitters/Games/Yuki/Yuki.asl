@@ -5,8 +5,7 @@ startup
 	Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
     vars.Uhara.EnableDebug(); vars.Uhara.AlertLoadless();
 	
-	vars.Uhara.Settings.Create(
-	new dynamic[,]
+	vars.Uhara.Settings.Create(new dynamic[,]
 	{
 		{ "GRP_Splits", true, "Splits", null },
 			{ "GRP_OnEnter", true, "On Enter", "GRP_Splits" },
