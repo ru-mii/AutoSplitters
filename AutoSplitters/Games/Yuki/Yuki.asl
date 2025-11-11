@@ -3,9 +3,10 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara9")).CreateInstance("Main");
-    vars.Uhara.EnableDebug();
+    vars.Uhara.EnableDebug(); vars.Uhara.AlertLoadless();
 	
-	dynamic[,] _settings =
+	vars.Uhara.Settings.Create(
+	new dynamic[,]
 	{
 		{ "GRP_Splits", true, "Splits", null },
 			{ "GRP_OnEnter", true, "On Enter", "GRP_Splits" },
@@ -42,9 +43,8 @@ startup
 				{ "GRP_Library2", false, "Library", "GRP_OnLeave" },
 				{ "GRP_Ending_Hatred2", false, "Ending_Hatred", "GRP_OnLeave" },
 				{ "GRP_Ending_Credits2", false, "Ending_Credits", "GRP_OnLeave" },
-	};
+	});
 	
-	vars.Uhara.Settings.Create(_settings);
 	vars.CompletedSplits = new HashSet<string>();
 }
 
@@ -55,6 +55,7 @@ init
 	
 	vars.Resolver.Watch<ulong>("StartTimer", vars.Events.FunctionFlag("WBP_Yuki_Button_Main_C", "WBP_Yuki_Button_MainNEWGAME", "BP_OnClicked"));
 	vars.Resolver.Watch<uint>("WorldFName", vars.Utils.GWorld, 0x18);
+	vars.Resolver.Watch<int>("NowLoading", vars.Utils.GSync);
 	
 	// ---
 	current.WorldName = "";
@@ -77,6 +78,11 @@ update
 	string tempWorldName = vars.Utils.FNameToString(current.WorldFName);
 	if (!string.IsNullOrEmpty(tempWorldName) && tempWorldName != "None")
 		current.WorldName = tempWorldName;
+}
+
+isLoading
+{
+	return current.NowLoading > 0;
 }
 
 split
