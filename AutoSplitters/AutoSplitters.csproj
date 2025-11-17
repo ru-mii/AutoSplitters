@@ -58,6 +58,7 @@
     <None Include="Games\Fretless - The Wrath of Riffson\FretlessTheWrathofRiffson.asl" />
     <None Include="Games\Ghostly Gumshoe\GhostlyGumshoe.asl" />
     <None Include="Games\Harry Potter and the Prisoner of Azkaban %28PC%29\HarryPotterandthePrisonerofAzkaban%28PC%29.asl" />
+    <None Include="Games\Leaf it Alone\LeafitAlone.asl" />
     <None Include="Games\Lunacid\Lunacid.asl" />
     <None Include="Games\Luto\Luto.asl" />
     <None Include="Games\Madagascar\Madagascar.asl" />
