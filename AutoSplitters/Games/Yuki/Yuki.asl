@@ -52,7 +52,7 @@ init
 	vars.Utils = vars.Uhara.CreateTool("UnrealEngine", "Utils");
 	vars.Events = vars.Uhara.CreateTool("UnrealEngine", "Events");
 	
-	vars.Events.FunctionFlag("StartTimer", "WBP_Yuki_Button_Main_C", "WBP_Yuki_Button_MainNEWGAME", "BP_OnClicked");
+	vars.Resolver.Watch<ulong>("StartTimer", vars.Events.FunctionFlag("WBP_Yuki_Button_Main_C", "WBP_Yuki_Button_MainNEWGAME", "BP_OnClicked"));
 	vars.Resolver.Watch<uint>("WorldFName", vars.Utils.GWorld, 0x18);
 	vars.Resolver.Watch<int>("NowLoading", vars.Utils.GSync);
 	
