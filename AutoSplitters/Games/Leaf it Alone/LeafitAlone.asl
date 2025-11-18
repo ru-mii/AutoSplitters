@@ -20,11 +20,6 @@ init
 	// ---
 	Instance.SetDefaultNames("Eternity.Gameplay", "Eternity.Gameplay.Progress.UI");
 	
-	var ABB = Instance.Get("ProgressEntry", "titleText", "m_text").Offsets;
-	var KNE = "0x" + ABB[0].ToString("X"); var GSU = "0x" + ABB[1].ToString("X");
-	var PJH = Instance.Get("ProgressView", "currentArea + 0x8", KNE, GSU, "0x14");
-	vars.Resolver.WatchString("Ground", PJH.Base, PJH.Offsets);
-	
 	var ATG = Instance.Get("ProgressView", "leafAreaBehaviour", "dataModel", "<CollectedLeavesByPlotArea>k__BackingField");
 	vars.Resolver.WatchList<int>("CollectedLeaves", ATG.Base, ATG.Offsets);
 	
@@ -35,34 +30,21 @@ init
 	JitSave.SetOuter("Eternity.Gameplay.dll", "Eternity.Gameplay.Ending");
 	vars.Resolver.Watch<ulong>("SayCheese", JitSave.AddFlag("EndingTimelineBehaviour", "OnTakePhoto"));
 	JitSave.ProcessQueue();
-	
-	// ---
-	vars.StartAllowed = false;
 }
 
 start
 {
-	return current.InGameTime != old.InGameTime &&
-		current.InGameTime < 1;
-	
-	//return 
-	//vars.StartAllowed && 
-	//(current.Ground == "Entrance" || current.Ground == "Porch")
-	//&& string.IsNullOrEmpty(old.Ground);
+	return current.InGameTime < 1 && current.InGameTime != 0 && old.InGameTime == 0;
 }
 
 onStart
 {
 	vars.CompletedSplits.Clear();
-	vars.StartAllowed = false;
 }
 
 update
 {
     vars.Uhara.Update();
-	
-	if (string.IsNullOrEmpty(current.Ground))
-		vars.StartAllowed = true;
 }
 
 split
