@@ -14,10 +14,11 @@ init
 	var JitSave = vars.Uhara.CreateTool("Unity", "DotNet", "JitSave");
 	
 	// ---
-	Instance.SetDefaultNames("Eternity.Gameplay", "Eternity.Gameplay.Progress.UI");
+	Instance.SetDefaultNames("Eternity.Gameplay", "Eternity.Gameplay");
+	Instance.Watch<double>("InGameTime", "GameplayApplication", "<GameSave>k__BackingField", "<PlayTime>k__BackingField");
 	
-	//var YME = "0x" + Instance.Get("ProgressEntry", "lastProgress").Offsets[0].ToString("X");
-	//Instance.Watch<float>("Progress", "ProgressView", "currentArea + 0x8", YME);
+	// ---
+	Instance.SetDefaultNames("Eternity.Gameplay", "Eternity.Gameplay.Progress.UI");
 	
 	var ABB = Instance.Get("ProgressEntry", "titleText", "m_text").Offsets;
 	var KNE = "0x" + ABB[0].ToString("X"); var GSU = "0x" + ABB[1].ToString("X");
@@ -41,10 +42,13 @@ init
 
 start
 {
-	return 
-	vars.StartAllowed && 
-	(current.Ground == "Entrance" || current.Ground == "Porch")
-	&& string.IsNullOrEmpty(old.Ground);
+	return current.InGameTime != old.InGameTime &&
+		current.InGameTime < 1;
+	
+	//return 
+	//vars.StartAllowed && 
+	//(current.Ground == "Entrance" || current.Ground == "Porch")
+	//&& string.IsNullOrEmpty(old.Ground);
 }
 
 onStart
