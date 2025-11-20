@@ -20,13 +20,8 @@ init
 	if (questTotalOffset < 0x30) throw new Exception("Quest offset read failed");
 	
 	vars.Resolver.Watch<int>("QuestTotal", vars.Events.InstancePtr("QuestStatsTrackerRuntimeState", "QuestStatsTrackerRuntimeState"), questTotalOffset);
-	vars.Resolver["QuestTotal"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
-	
 	vars.Resolver.Watch<int>("Loading", vars.Events.InstancePtr("TextChatTutorialHelper", "TextChatTutorialHelper"), 0x68);
-	vars.Resolver["Loading"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
-	
 	vars.Resolver.Watch<int>("InCutscene", vars.Events.InstancePtr("InputMapperActionFilterInstance", "ActionFilterInstance_Cutscene"), 0x48);
-	vars.Resolver["InCutscene"].FailAction = MemoryWatcher.ReadFailAction.SetZeroOrNull;
 }
 
 update
@@ -37,9 +32,9 @@ update
 start
 {
 	return
-	current.InCutscene != old.InCutscene && current.InCutscene == 0 &&
 	current.QuestTotal == 0 &&
-	current.ActiveMission == "MQ01 (WIP) DEATH FLIGHT 71";
+	current.InCutscene != old.InCutscene && current.InCutscene == 0 &&
+	!string.IsNullOrEmpty(current.ActiveMission) && current.ActiveMission == "MQ01 (WIP) DEATH FLIGHT 71";
 }
 
 isLoading
