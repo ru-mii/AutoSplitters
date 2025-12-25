@@ -25,14 +25,20 @@ update
     vars.Uhara.Update();
 	
 	string worldName = vars.Utils.FNameToString(current.WorldFName);
-	if (!string.IsNullOrEmpty(worldName)) current.WorldName = worldName;
+	if (!string.IsNullOrEmpty(worldName) && worldName != "None")
+		current.WorldName = worldName;
 	
-	vars.Uhara.Log(worldName);
+	//if (current.WorldName != old.WorldName) vars.Uhara.Log(worldName);
 }
 
 start
 {
-	return vars.Resolver.CheckFlag("StartTimer") && current.WorldName == "Tomb";
+	return
+	vars.Resolver.CheckFlag("StartTimer") &&
+	current.WorldName != "SPobby" &&
+	current.WorldName != "Entry" &&
+	current.WorldName != "Startup" &&
+	current.WorldName != "Introduction";
 }
 
 onStart
