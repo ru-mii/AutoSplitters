@@ -56,6 +56,7 @@
     <None Include="Games\Dragon Quest Monsters The Dark Prince\DragonQuestMonstersTheDarkPrince.asl" />
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
     <None Include="Games\Escape Simulator\EscapeSimulator.asl" />
+    <None Include="Games\Fallout 4\Fallout4.asl" />
     <None Include="Games\Fretless - The Wrath of Riffson\FretlessTheWrathofRiffson.asl" />
     <None Include="Games\Ghostly Gumshoe\GhostlyGumshoe.asl" />
     <None Include="Games\Harry Potter and the Prisoner of Azkaban %28PC%29\HarryPotterandthePrisonerofAzkaban%28PC%29.asl" />
