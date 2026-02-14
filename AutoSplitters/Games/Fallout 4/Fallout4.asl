@@ -144,6 +144,11 @@ update
 	//print(current.IsWaiting.ToString());
 }
 
+onStart
+{
+	timer.IsGameTimePaused = false;
+}
+
 isLoading
 {
 	return
@@ -155,5 +160,9 @@ isLoading
 
 exit
 {
-	timer.IsGameTimePaused = true;
+	Time currTime = timer.CurrentTime;
+	if (currTime.GameTime.HasValue && currTime.GameTime.Value.TotalMilliseconds > 0)
+	{
+		timer.IsGameTimePaused = true;
+	}
 }
