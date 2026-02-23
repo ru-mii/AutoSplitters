@@ -54,6 +54,7 @@
     <None Include="Games\Dragon Quest I HD-2D Remake\DragonQuestIHD2DRemake.asl" />
     <None Include="Games\Dragon Quest II HD-2D Remake\DragonQuestIIHD2DRemake.asl" />
     <None Include="Games\Dragon Quest Monsters The Dark Prince\DragonQuestMonstersTheDarkPrince.asl" />
+    <None Include="Games\DRAGON QUEST VII Reimagined\DRAGONQUESTVIIReimagined.asl" />
     <None Include="Games\Ena Dream BBQ\EnaDreamBBQ.asl" />
     <None Include="Games\Escape Simulator\EscapeSimulator.asl" />
     <None Include="Games\Fallout 4\Fallout4.asl" />
