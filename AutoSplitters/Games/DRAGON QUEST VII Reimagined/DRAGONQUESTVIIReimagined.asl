@@ -16,8 +16,8 @@ init
 	vars.Events.FunctionFlag("EndLoading1_2", "BP_MapStateFieldStart_C", "BP_MapStateFieldStart_C", "Finalize");
 	
 	vars.Events.FunctionFlag("StartLoading2_1", "BP_MapStateLoading_C", "BP_MapStateLoading_C", "Initialize");
-	vars.Events.FunctionFlag("EndLoading2_1", "BP_MapStateLoading_C", "BP_MapStateLoading_C", "Finalize");
-	vars.Events.FunctionFlag("EndLoading2_2", "BP_MapStateLoading_C", "BP_MapStateLoading_C", "FactoryNextMapState");
+	vars.Events.FunctionFlag("EndLoading2_1", "BP_MapStateLoading_C", "BP_MapStateLoading_C", "FactoryNextMapState");
+	vars.Events.FunctionFlag("EndLoading2_2", "BP_MapStateLoading_C", "BP_MapStateLoading_C", "Finalize");
 	
 	current.NowLoading1 = false;
 	current.NowLoading2 = false;
