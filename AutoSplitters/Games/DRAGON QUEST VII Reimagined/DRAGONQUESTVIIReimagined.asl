@@ -1,4 +1,5 @@
 ﻿state("DQ7R_DEMO-Win64-Shipping"){}
+state("DQ7R-Win64-Shipping"){}
 
 startup
 {
