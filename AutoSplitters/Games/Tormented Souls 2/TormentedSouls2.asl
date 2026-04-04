@@ -13,8 +13,6 @@ init
 	vars.Tool = vars.Uhara.CreateTool("UnrealEngine", "Events");;
 	
 	// ---
-	
-	// ---
 	vars.Resolver.Watch<byte>("InputMap", vars.Utils.GEngine, 0x11F8, 0x510);
 	vars.Resolver.Watch<byte>("StopGameTime", vars.Utils.GEngine, 0x11F8, 0x52B);
 	vars.Resolver.Watch<ulong>("LoadChange", vars.Uhara.CodeHKFlag("4C8BC84C896424204D8BC7498BD6488BCFFFD3"));
