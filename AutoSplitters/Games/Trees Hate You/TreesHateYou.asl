@@ -23,6 +23,11 @@ start
 	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "1-1_picnic";
 }
 
+isLoading
+{
+	return current.ActiveScene != current.LoadingScene;
+}
+
 split
 {
 	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "end";
