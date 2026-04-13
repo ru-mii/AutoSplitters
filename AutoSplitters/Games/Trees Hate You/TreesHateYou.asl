@@ -5,7 +5,11 @@ startup
 	Assembly.Load(File.ReadAllBytes("Components/uhara10")).CreateInstance("Main");
 	
 	settings.Add("ResetMainMenu", true, "Reset on MainMenu");
-	settings.Add("SplitCheckpoints", true, "Split on Checkpoints");
+	settings.Add("GRP_Splits", true, "Checkpoints", null);
+		settings.Add("SPL_0", true, "0", "GRP_Splits");
+		settings.Add("SPL_1", true, "1", "GRP_Splits");
+		settings.Add("SPL_2", true, "2", "GRP_Splits");
+		settings.Add("SPL_3", true, "3", "GRP_Splits");
 }
 
 init
@@ -36,13 +40,8 @@ isLoading
 
 split
 {
-	if (settings["SplitCheckpoints"])
-	{
-		if (current.CheckpointNum - old.CheckpointNum == 1 && current.CheckpointNum > 0) return true;
-		else if (current.CheckpointNum == 1 && old.CheckpointNum == -1) return true;
-	}
-		
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "end";
+	if (current.CheckpointNum > old.CheckpointNum && settings["SPL_" + current.CheckpointNum.ToString()]) return true;
+	else if (current.ActiveScene != old.ActiveScene && current.ActiveScene == "end") return true;
 }
 
 reset
