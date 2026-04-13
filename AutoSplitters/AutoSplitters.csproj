@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Games\1348 Ex Voto\P1348ExVoto.asl" />
+    <None Include="Games\AI Limit\AILimit.asl" />
     <None Include="Games\Alien Rogue Incursion Evolved Edition\AlienRogueIncursionEvolvedEdition.asl" />
     <None Include="Games\ALTF42\ALTF42.asl" />
     <None Include="Games\Creepy Tale\CreepyTale.asl" />
