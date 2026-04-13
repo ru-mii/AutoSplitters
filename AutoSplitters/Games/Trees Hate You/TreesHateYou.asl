@@ -1,4 +1,4 @@
-﻿state("Trees Hate You"){}
+﻿state("Trees Hate You") {}
 
 startup
 {
