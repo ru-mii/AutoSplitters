@@ -11,6 +11,7 @@ startup
 
 init
 {
+	Thread.Sleep(5000);
     vars.Instance = vars.Uhara.CreateTool("Unity", "IL2CPP", "Instance");
 	
 	vars.Instance.Watch<bool>("mainMenuActive", "SenseGame.Logic::TitleView", "_ISActive");
