@@ -8,6 +8,9 @@ startup
 init
 {
     vars.Utils = vars.Uhara.CreateTool("Unity", "Utils");
+    vars.Instance = vars.Uhara.CreateTool("Unity", "DotNet", "Instance");
+	
+	vars.Instance.Watch<int>("CheckpointNum", "PlayerData", "activeFile", "checkpoint");
 }
 
 update
@@ -30,5 +33,13 @@ isLoading
 
 split
 {
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "end";
+	return
+		(current.CheckpointNum - old.CheckpointNum == 1 && current.CheckpointNum > 0) ||
+		(current.CheckpointNum == 1 && old.CheckpointNum == -1) ||
+		(current.ActiveScene != old.ActiveScene && current.ActiveScene == "end");
+}
+
+reset
+{
+	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "start";
 }
