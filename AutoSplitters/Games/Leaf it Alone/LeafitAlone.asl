@@ -1,4 +1,4 @@
-﻿state("Leaf it Alone"){}
+﻿state("Leaf it Alone") {}
 
 startup
 {
