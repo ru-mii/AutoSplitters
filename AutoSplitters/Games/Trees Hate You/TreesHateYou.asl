@@ -3,6 +3,7 @@
 startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara10")).CreateInstance("Main");
+	vars.Uhara.AlertLoadless();
 	
 	vars.CompletedSplits = new HashSet<int>();
 	settings.Add("ResetMainMenu", true, "Reset on MainMenu");
