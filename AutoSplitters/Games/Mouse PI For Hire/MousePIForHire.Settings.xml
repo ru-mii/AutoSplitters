@@ -1,0 +1,46 @@
+<Settings>
+	<Setting Id="GRP_Splits" Label="Splits" State="true">
+		<Setting Id="GRP_Main" Label="Main" State="true">
+			<Setting Id="SPL_Zeppelin23MainQuest" Label="Big Mouse, Little Hope" State="true" />	
+			<Setting Id="SPL_Vaudeville01MainQuest" Label="The Vanishing Act" State="true" />	
+			<Setting Id="SPL_Opera06MainQuest" Label="Gumshoe in the Opera" State="true" />
+			<Setting Id="SPL_Lab18MainQuest" Label="Bandel's Laboratory" State="true" />
+			<Setting Id="SPL_Streets02MainQuest" Label="A Bit of a Scene" State="true" />
+			<Setting Id="SPL_SewersSubway10MainQuest" Label="Cheeseball Sub" State="true" />
+			<Setting Id="SPL_FilmGates03MainQuest" Label="&quot;Once upon a time...&quot; by Tinsel Bros." State="true" />
+			<Setting Id="SPL_OperaBurned07MainQuest" Label="A Bit of Curd and Pepper" State="true" />
+			<Setting Id="SPL_Marina08MainQuest" Label="Saltwater Cam Bozo" State="true" />
+			<Setting Id="SPL_Moonshiners13MainQuest" Label="Damp Evidence" State="true" />
+			<Setting Id="SPL_SpookyVillage20MainQuest" Label="White Lies and Dark Secrets" State="true" />
+			<Setting Id="SPL_SewersTunnels11MainQuest" Label="Shrewd Shrews" State="true" />
+			<Setting Id="SPL_Carnival1516MainQuest" Label="It All Points Here, Right?" State="true" />
+			<Setting Id="SPL_FilmChase04MainQuest" Label="&quot;The Bookkeeper&quot; by Tinsel Bros." State="true" />
+			<Setting Id="SPL_FilmSets05MainQuest" Label="&quot;Fatal Repulsion&quot; by Tinsel Bros." State="true" />
+			<Setting Id="SPL_Swamps12MainQuest" Label="Swamp Oddity" State="true" />
+			<Setting Id="SPL_Steamboat14MainQuest" Label="To Catch a Mockingmouse" State="true" />
+			<Setting Id="SPL_Asylum21MainQuest" Label="One Flew" State="true" />
+			<Setting Id="SPL_Hell17MainQuest" Label="?lednaB evetS si lleh eht erehW" State="true" />
+			<Setting Id="SPL_Underwater09MainQuest" Label="Gluging From The Deep" State="true" />
+			<Setting Id="SPL_BurnedOfficeMainQuest" Label="Jack Squat" State="true" />
+			<Setting Id="SPL_Mansion19MainQuest" Label="The House of the Empty Mouse" State="true" />
+			<Setting Id="SPL_FairGrounds22MainQuest" Label="Fair Enough" State="true" />
+		</Setting>
+		<Setting Id="GRP_Extra" Label="Extra" State="false">
+			<Setting Id="SPL_Moonshiners13SubQuestPerfectBogFondue" Label="Perfect Bog Fondue" State="false" />
+			<Setting Id="SPL_Opera06SubQuestPopculture" Label="Show Some Culture, Jack" State="false" />
+			<Setting Id="SPL_OperaBurned07SubQuestBurger" Label="They Call it “Azurro Burgerro”" State="false" />
+			<Setting Id="SPL_Steamboat14SideQuest_Cheating_Wife" Label="Love is a Multi-Headed beast" State="false" />
+			<Setting Id="SPL_Steamboat14SideQuest_BMP_Photo" Label="Big Mouse Propagandists" State="false" />
+			<Setting Id="SPL_FilmGates03SubQuestLocket" Label="The Things We Keep" State="false" />
+			<Setting Id="SPL_SewersSubway10SubQuestBlueprints" Label="Blueprints, Please" State="false" />
+			<Setting Id="SPL_FilmChase04SubQuestPoster" Label="TBD_SideQuestPoster" State="false" />
+			<Setting Id="SPL_Underwater09SubQuestSeaSnail" Label="TBD_SideQuestSeaSnail" State="false" />
+			<Setting Id="SPL_Underwater09SubQuestSleepsWithFishes" Label="TBD_SideQuestSleepsWithFishes" State="false" />
+			<Setting Id="SPL_Carnival1516SubQuestBalloons" Label="TBD_SideQuestBalloons" State="false" />
+			<Setting Id="SPL_HUB00_SubQuest_WeaponUpgrade" Label="TBD_SideQuestGift" State="false" />
+			<Setting Id="SPL_Marina08SubQuestCheeseSticks" Label="TBD_SideQuestCheeseSticks" State="false" />
+			<Setting Id="SPL_Marina08SubQuestLutefisk" Label="TBD_SideQuestLutefisk" State="false" />
+			<Setting Id="SPL_Asylum21SubQuestAsylumPicture" Label="TBD_SideQuestAsylumPicture" State="false" />
+		</Setting>
+	</Setting>
+</Settings>
