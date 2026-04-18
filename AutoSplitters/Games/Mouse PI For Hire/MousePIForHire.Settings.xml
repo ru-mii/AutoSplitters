@@ -1,4 +1,8 @@
 <Settings>
+	<Setting Id="GRP_Misc" Label="Misc" State="false">
+		<Setting Id="MSC_MainMenuReset" Label="Reset in MainMenu" State="false" />
+		<Setting Id="MSC_ShowPlayerPosition" Label="Show player position" State="false" />
+	</Setting>
 	<Setting Id="GRP_Splits" Label="Splits" State="true">
 		<Setting Id="GRP_Main" Label="Main" State="true">
 			<Setting Id="SPL_Zeppelin23MainQuest" Label="Big Mouse, Little Hope" State="true" />	
