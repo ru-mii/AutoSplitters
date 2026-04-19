@@ -6,6 +6,7 @@ startup
 	vars.Uhara.Settings.CreateFromXml("Components/MousePIForHire.Settings.xml");
 	vars.CompletedQuests = new HashSet<string>();
 	vars.AllowedToStart = false;
+	vars.AllowedEndSplit = false;
 	
 	vars.lcCache = new Dictionary<string, LiveSplit.UI.Components.ILayoutComponent>();
 	vars.SetText = (Action<string, object>)((text1, text2) =>
@@ -82,11 +83,16 @@ onStart
 {
 	vars.CompletedQuests = new HashSet<string>();
 	vars.AllowedToStart = false;
+	vars.AllowedEndSplit = false;
 }
 
 start
 {
-	return vars.AllowedToStart && old.PlayerStunned == 1 && current.PlayerStunned == 0 && current.SolidScene == "S_Zeppelin23";
+	return
+		vars.AllowedToStart &&
+		old.PlayerStunned == 1 &&
+		current.PlayerStunned == 0 &&
+		current.SolidScene == "S_Zeppelin23";
 }
 
 update
@@ -97,23 +103,30 @@ update
 	current.SolidScene = vars.Utils.GetActiveSceneName2() ?? current.SolidScene;
 	current.LoadingScene = vars.Utils.GetLoadingSceneName() ?? current.LoadingScene;
 	
-	//if (current.SolidScene != old.SolidScene)
+	if (current.SolidScene != old.SolidScene)
+	{
 		//print(current.SolidScene);
+		if (vars.AllowedEndSplit && current.SolidScene != "Loading" && current.SolidScene != "Cutscenes")
+			vars.AllowedEndSplit = false;
+	}
 	
 	// ---
 	if (current.IsNewGameOpen == 1 || old.IsNewGameOpen == 0) vars.AllowedToStart = true;
 	else if (current.IsNewGameOpen == 0 || old.IsNewGameOpen == 1) vars.AllowedToStart = false;
 	
 	// ---
-	float[] playerPosition = vars.GetPlayerPosition();
-	if (playerPosition == null) playerPosition = new float[] { 0, 0, 0 };
-	vars.SetTextIfEnabled("MSC_ShowPlayerPosition", "XYZ: ", 
+	if (settings["MSC_ShowPlayerPosition"])
+	{
+		float[] playerPosition = vars.GetPlayerPosition();
+		if (playerPosition == null) playerPosition = new float[] { 0, 0, 0 };
+		vars.SetTextIfEnabled("MSC_ShowPlayerPosition", "XYZ: ", 
 		playerPosition[0].ToString("N3") + " | " + playerPosition[1].ToString("N3") + " | " + playerPosition[2].ToString("N3"));
+	}
 }
 
 isLoading
 {
-	return current.IsLoadingNative == 1 || current.IsLoadingScene == 1;
+	return current.IsLoadingNative == 1 || current.IsLoadingScene == 1 || current.SolidScene == "Loading";
 }
 
 split
@@ -126,23 +139,31 @@ split
 		string questId = vars.Resolver.ReadString(64, ReadStringType.UTF8, questState + 0x10, 0x14);
 		if (string.IsNullOrEmpty(questId)) continue;
 		
-		byte raceQuestCompleted = vars.Resolver.Read<byte>(questState + 0x20);
-		if (raceQuestCompleted != 1) continue;
-		
-		string raceQuestId = vars.Resolver.ReadString(64, ReadStringType.UTF8, questState + 0x10, 0x14);
-		if (string.IsNullOrEmpty(raceQuestId) || raceQuestId != questId) continue;
-		
-		if (!settings["SPL_" + questId]) continue;
 		if (!vars.CompletedQuests.Add(questId)) continue;
 		
-		//print(questState.ToString("X") + " | " + questId + " | " + questCompleted.ToString());
+		print(questState.ToString("X") + " | " + questId + " | " + questCompleted.ToString());
+		
+		if (questId == "Zeppelin23MainQuestWS2")
+		{
+			if (settings["SPL_FinalEndSplit"]) vars.AllowedEndSplit = true;
+			return false;
+		}
+		
+		if (!settings["SPL_" + questId]) continue;
+		return true;
+	}
+	
+	if (vars.AllowedEndSplit && current.SolidScene != old.SolidScene && current.SolidScene == "Cutscenes")
+	{
+		vars.AllowedEndSplit = false;
 		return true;
 	}
 }
 
 reset
 {
-	return current.SolidScene != old.SolidScene &&
-	current.SolidScene == "MainMenu" &&
-	settings["MSC_MainMenuReset"];
+	return
+		current.SolidScene != old.SolidScene &&
+		current.SolidScene == "MainMenu" &&
+		settings["MSC_MainMenuReset"];
 }
