@@ -28,6 +28,7 @@
 			<Setting Id="SPL_BurnedOfficeMainQuest" Label="Jack Squat" State="true" />
 			<Setting Id="SPL_Mansion19MainQuest" Label="The House of the Empty Mouse" State="true" />
 			<Setting Id="SPL_FairGrounds22MainQuest" Label="Fair Enough" State="true" />
+			<Setting Id="SPL_FinalEndSplit" Label="Final End Split" State="true" />
 		</Setting>
 		<Setting Id="GRP_Extra" Label="Extra" State="false">
 			<Setting Id="SPL_Moonshiners13SubQuestPerfectBogFondue" Label="Perfect Bog Fondue" State="false" />
