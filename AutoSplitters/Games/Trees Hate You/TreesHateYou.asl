@@ -20,6 +20,7 @@ init
     vars.Instance = vars.Uhara.CreateTool("Unity", "DotNet", "Instance");
 	
 	vars.Instance.Watch<int>("CheckpointNum", "PlayerData", "activeFile", "checkpoint");
+	vars.Instance.Watch<byte>("Transitioning", "GameManager", "instance", "transitioning");
 }
 
 update
@@ -37,7 +38,7 @@ onStart
 
 start
 {
-	return current.ActiveScene != old.ActiveScene && current.ActiveScene == "1-1_picnic";
+	return current.Transitioning == 0 && old.Transitioning == 1 && (current.ActiveScene == "1-1_picnic" || current.LoadingScene == "1-1_picnic");
 }
 
 isLoading
