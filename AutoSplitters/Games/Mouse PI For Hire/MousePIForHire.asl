@@ -4,6 +4,8 @@ startup
 {
 	Assembly.Load(File.ReadAllBytes("Components/uhara10")).CreateInstance("Main");
 	vars.Uhara.Settings.CreateFromXml("Components/MousePIForHire.Settings.xml");
+	vars.Uhara.AlertLoadless();
+	
 	vars.CompletedQuests = new HashSet<string>();
 	vars.AllowedToStart = false;
 	vars.AllowedEndSplit = false;
